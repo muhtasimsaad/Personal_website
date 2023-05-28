@@ -13,7 +13,6 @@ const admin = require("firebase-admin");
 // const logger = require("firebase-functions/lib/logger");
 
 const {onRequest} = require("firebase-functions/v2/https");
-const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
 // Create and deploy your first functions

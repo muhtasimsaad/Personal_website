@@ -12,8 +12,18 @@ function Projects() {
   const personal = [
     {
       id: 1,
-      title: "Business Startup",
+      title: "Personal 1",
       description: "Design & Development",
+      backend:['asd1','asd2','asd32'],
+      frontend:['asd1','asd32','asd3'],
+      img: img1,
+    },
+    {
+      id: 2,
+      title: "Personal 2",
+      description: "Design & Development",
+      backend:['asd1','asd2','asd32'],
+      frontend:['asd1','asd32','asd3'],
       img: img1,
     },
     
@@ -22,8 +32,18 @@ function Projects() {
   const professional = [
     {
       id: 1,
-      title: "Business Startup",
+      title: "Genofax",
       description: "Design & Development",
+      backend:['asd1','asd2','asd32'],
+      frontend:['asd1','asd32','asd3'],
+      img: img1,
+    },
+    {
+      id: 1,
+      title: "Anfactor",
+      description: "Design & Development",
+      backend:['asd1','asd2','asd32'],
+      frontend:['asd1','asd32','asd3'],
       img: img1,
     },
     
@@ -34,11 +54,10 @@ function Projects() {
     <>
       <div id="projects" className="p-6 bg-theme bg-opacity-90 mx-2 py-10 w-full lg:w-4/5 mx-auto rounded-lg">
         <h1 className="text-center text-white text-4xl font-bold py-6">Projects</h1>
-        <p className="text-center max-w-[1000px] lg:px-6 mx-auto text-[#939191]">
-          lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur,
-          cupiditate! Molestiae placeat architecto nihil obcaecati illum minima
-          incidunt dolores? Officia consectetur optio non totam cum eos soluta
-          ipsa et quod.
+        <p className="text-center max-w-[1000px] lg:px-6 mx-auto text-gray-200">
+            On this website, you'll find a showcase of my projects that demonstrate my skills, problem-solving abilities, and attention to
+            detail. I invite you to explore my work and see how I can bring your ideas to life. If you're looking for a dedicated
+            professional who is passionate about delivering high-quality solutions.  
         </p>
         <div className="flex justify-center items-center gap-4 mt-12 mb-2 ">
         <div
@@ -63,12 +82,50 @@ function Projects() {
           </div>
           
         </div>
-        <div className="grid grid-cols-3 p-10 justify-center items-center gap-8 lg:grid-cols-2 tl:grid-cols-1  ">
+        <div className="grid grid-cols-1 bg-red-400 p-10 justify-center items-center gap-8 lg:grid-cols-1
+         tl:grid-cols-1  ">
+          
           {durum === 1
-            ? personal.map((item, i) => <ProjectCard key={i} item={item} />)
+            ? personal.map((item, i) => 
+
+              <div className='block md:flex  px-1 lg:px-6 rounded-lg bg-theme rounded-2xl bg-opacity-90 w-full lg:w-5/6 py-6 mx-auto'>
+
+                <div className="content w-full lg:w-2/5 mx-auto flex">
+                    <div className="m-auto">
+                      <ProjectCard key={i} item={item} />
+                    </div>
+                </div>
+                <div className="content lg:text-center w-full my-auto px-4 bg-opacity-90 
+                py-16 lg:py-14">
+                    <h1 className='text-white text-2xl font-bold'>{item.title}</h1>
+                    <p className='text-white py-4 max-w-lg mx-auto'>Welcome to my website! I'm Saad, a passionate full stack developer with a
+                    strong background in software development. With expertise in designing and developing web applications, I 
+                    love creating seamless user experiences and tackling complex challenges.</p>
+                </div>
+
+              </div>
+
+            )
             : null}
             {durum === 2
-            ? professional.map((item, i) => <ProjectCard key={i} item={item} />)
+            ? professional.map((item, i) => 
+              <div className='block md:flex  px-1 lg:px-6 rounded-lg bg-theme rounded-2xl bg-opacity-90 w-full lg:w-5/6 py-6 mx-auto'>
+
+                <div className="content w-full lg:w-2/5 mx-auto flex">
+                    <div className="m-auto">
+                      <ProjectCard key={i} item={item} />
+                    </div>
+                </div>
+                <div className="content lg:text-center w-full my-auto px-4 bg-opacity-90 
+                py-16 lg:py-14">
+                    <h1 className='text-white text-2xl font-bold'>{item.title}</h1>
+                    <p className='text-white py-4 max-w-lg mx-auto'>Welcome to my website! I'm Saad, a passionate full stack developer with a
+                    strong background in software development. With expertise in designing and developing web applications, I 
+                    love creating seamless user experiences and tackling complex challenges.</p>
+                </div>
+
+              </div>
+            )
             : null}
         </div>
          

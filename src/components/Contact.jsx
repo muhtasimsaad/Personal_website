@@ -49,7 +49,7 @@ const Contact = () => {
 
   return (
     <>
-      <section class="bg-theme bg-opacity-95 mx-6 mt-12 ">
+      <section class="bg-theme bg-opacity-95 mt-12 w-4/5 mx-auto rounded-lg">
         <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-white">Lets Talk</h2>
             <p class="mb-8 lg:mb-16 font-light text-center text-whie sm:text-xl w-full">Getting in touch has never been easier!</p>
