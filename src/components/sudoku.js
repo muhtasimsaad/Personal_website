@@ -171,10 +171,10 @@ export const Sudoku = () => {
       <div class='w-full'>
         
          
-        <ParticleBackground  >
+        <ParticleBackground/>
           
         
-        </ParticleBackground>
+         
          
         
         <div class="flex w-full">
