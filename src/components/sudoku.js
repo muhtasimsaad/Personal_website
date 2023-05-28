@@ -52,7 +52,7 @@ export const Sudoku = () => {
   
           setLoading(true);
   
-          const response = await fetch('http://127.0.0.1:5001/portfolio-cec85/us-central1/solverApi', {
+          const response = await fetch('https://solverapi-n4bhsztn2a-uc.a.run.app', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
