@@ -27,7 +27,7 @@ function Navbar() {
     <>
       <div className="navbarcon flex justify-between items-center px-20 py-6 bg-transparent z-40 text-white lg:px-6 fixed w-full">
         <h1 className="text-4xl  font-bold ">Saad's</h1>
-        <div className="flex gap-10">
+        <div className="gap-10 hidden lg:flex">
           <h1 className="text-lg font-bold cursor-pointer hover:text-gray-600">Projects</h1>
           <h1 className="text-lg font-bold cursor-pointer hover:text-gray-600">Skills</h1>
           <h1 className="text-lg font-bold cursor-pointer hover:text-gray-600">Let's Connect</h1>

@@ -32,7 +32,7 @@ function Projects() {
 
   return (
     <>
-      <div id="projects" className="p-6 projects bg-theme bg-opacity-90 mx-6 py-10">
+      <div id="projects" className="p-6 bg-theme bg-opacity-90 mx-2 py-10 w-full lg:w-4/5 mx-auto rounded-lg">
         <h1 className="text-center text-white text-4xl font-bold py-6">Projects</h1>
         <p className="text-center max-w-[1000px] lg:px-6 mx-auto text-[#939191]">
           lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur,

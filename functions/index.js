@@ -13,7 +13,8 @@ const admin = require("firebase-admin");
 // const logger = require("firebase-functions/lib/logger");
 
 const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+const functions = require('firebase-functions');
+const nodemailer = require('nodemailer');
 
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
@@ -26,6 +27,36 @@ global.difficulty = 0;
 global.logicalArray = '';
 global.startTime = 0;
 global.responseVariable = '';
+
+
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'muhtasimsaad@gmail.com',
+    pass: 'mr.joker11!'
+  }
+});
+
+exports.sendEmail = functions.https.onRequest((request, response) => {
+  const { email, subject, message } = request.body;
+
+  const mailOptions = {
+    from: 'muhtasimsaad@gmail.com',
+    to: 'muhtasimsaad@gmail.com',
+    subject: subject,
+    text: `Email: ${email}\n\nMessage: ${message}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      response.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent:', info.response);
+      response.send('Email sent successfully');
+    }
+  });
+});
 
 exports.helloWorld = onRequest((request, response) => {
 

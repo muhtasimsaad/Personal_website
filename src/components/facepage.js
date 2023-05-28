@@ -4,7 +4,6 @@ import Contact from "./Contact"
 import Footer from "./Footer"
 import Projects from "./Projects"
 import Skills from "./Skills"
-import Navbar from './Navbar'
 import ParticleBackground from './ParticleBackground';
 
 
