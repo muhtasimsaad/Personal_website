@@ -56,30 +56,23 @@ const Contact = () => {
             <form action="#" class="space-y-8" onSubmit={handleSubmit}>
                 <div>
                     <label for="name" class="block mb-2 text-sm font-medium text-white mt-4">Your Name</label>
-                    <input type="name" id="email" class="shadow-sm border bg-theme border-white border-4 text-white text-sm 
-                     rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 
-                    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 
-                    dark:focus:border-primary-500 dark:shadow-sm-light" name="name" placeholder="name@example.com" onChange={handleChange} required/>
+                    <input type="name" id="email" class="shadow-sm bg-theme border border-white border-4 text-white text-sm 
+                    rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5" name="name" placeholder="name@example.com" onChange={handleChange} required/>
                  
                     <label for="email" class="block mb-2 text-sm font-medium text-white mt-4">Your email</label>
-                    <input type="email" id="email" class="shadow-sm border bg-theme border-white border-4 text-white text-sm 
-                    rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 
-                    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 
-                    dark:focus:border-primary-500 dark:shadow-sm-light" name="email" placeholder="name@example.com" onChange={handleChange} required/>
+                    <input type="email" id="email" class="shadow-sm bg-theme border border-white border-4 text-white text-sm 
+                    rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5"
+                     name="email" placeholder="name@example.com" onChange={handleChange} required/>
                  
                     <label for="message" class="block mb-2 text-sm font-medium text-white mt-4">Your message</label>
-                    <textarea id="message" rows="6" class="shadow-sm border bg-theme border-white border-4 text-white text-sm 
-                     rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 
-                    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 
-                    dark:focus:border-primary-500 dark:shadow-sm-light" name="message"
+                    <textarea id="message" rows="6" class="shadow-sm bg-theme border border-white border-4 text-white text-sm 
+                    rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5" name="message"
                     placeholder="Leave a comment..." onChange={handleChange} ></textarea>
                 </div>
                 <div className="w-2/3 lg:w-1/3 mx-auto ">
                   <button type="submit" class="shadow-sm border bg-[linear-gradient(90deg,#b004b0,#38097a)] 
                   border-white hover:border-gray-700 border-4 text-white text-sm
-                      rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-700 
-                      dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 
-                      dark:focus:border-primary-500 dark:shadow-sm-light ">Send message</button>
+                      rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5">Send message</button>
                 </div>
                 
                 
