@@ -1,22 +1,15 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 // const { onRequest } = require("firebase-functions/lib/providers/https");
 // const logger = require("firebase-functions/lib/logger");
-
 const {onRequest} = require("firebase-functions/v2/https");
 const nodemailer = require('nodemailer');
+const cors = require('cors');
+const express = require('express')
+const app = express();
+app.use(cors({ origin: true }));
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+
 
 
 global.nodesTraversed = 0;
@@ -36,73 +29,51 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-exports.sendEmail = functions.https.onRequest((request, response) => {
-  const { email, subject, message } = request.body;
+// exports.sendEmail = functions.https.onRequest((request, response) => {
+//   const { email, subject, message } = request.body;
 
-  const mailOptions = {
-    from: 'muhtasimsaad@gmail.com',
-    to: 'muhtasimsaad@gmail.com',
-    subject: subject,
-    text: `Email: ${email}\n\nMessage: ${message}`
-  };
+//   const mailOptions = {
+//     from: 'muhtasimsaad@gmail.com',
+//     to: 'muhtasimsaad@gmail.com',
+//     subject: subject,
+//     text: `Email: ${email}\n\nMessage: ${message}`
+//   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error(error);
-      response.status(500).send('Error sending email');
-    } else {
-      console.log('Email sent:', info.response);
-      response.send('Email sent successfully');
-    }
-  });
-});
+//   transporter.sendMail(mailOptions, (error, info) => {
+//     if (error) {
+//       console.error(error);
+//       response.status(500).send('Error sending email');
+//     } else {
+//       console.log('Email sent:', info.response);
+//       response.send('Email sent successfully');
+//     }
+//   });
+// });
 
-exports.helloWorld = onRequest((request, response) => {
 
-  response.set('Access-Control-Allow-Origin', '*');
-  response.set('Access-Control-Allow-Methods', 'GET, POST');
-  response.set('Access-Control-Allow-Headers', 'Content-Type');
 
-  const data = {
-    message: "Hello from Firebase!",
-  };
-  // Send the JSON response
-  response.json(data);
-});
-
-exports.solverApi = onRequest((request, response) => {
-
-  response.set('Access-Control-Allow-Origin', '*');
-  response.set('Access-Control-Allow-Methods', 'GET, POST');
-  response.set('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (request.headers.origin == 'https://portfolio-cec85.web.app' || request.headers.origin == 'http://localhost:3000') {
-    const mainArray = request.body.mainArray;
-    global.responseVariable = response;
+app.post('/solve', (req, res) => {
+  
+    const mainArray = req.body.mainArray;
+    global.responseVariable = res;
     global.startTime = performance.now();
 
-    // Perform the necessary operations with the mainArray
-    // ...
- 
-
+    
     $possibilitiesArray = convert_to_possibilities_array(mainArray);
 
     solve_sudoku($possibilitiesArray);
 
     const responseData = {
-      message: request.headers.origin,
-      // Add any other response data as needed
+      message: mainArray,
+     
     };
 
-    response.json(responseData);
-  } else {
-    const responseData = {
-      error: 'Invalid request.',
-    };
-
-    response.status(405).json(responseData);
-  }
+    res.status(200).json(responseData);
 });
+
+
+exports.api = functions.https.onRequest(app);
+
 
 function sendResults(mainArray, metadata) {
   const responseData = {

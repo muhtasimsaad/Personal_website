@@ -8,6 +8,16 @@ import { CountUp } from 'use-count-up';
 
 export const Sudoku = () => {
 
+   
+    let url = '';
+    if(window.location.hostname == 'localhost'){
+      url = 'https://localhost:5000/api/solve';
+    }
+    else{
+      url = 'https://us-central1-portfolio-cec85.cloudfunctions.net/api/solve';
+    }
+          
+
     const [logicallySolved,setLogicallySolved] = useState(10);
     const [solvedUsingBFS,setsolvedUsingBFS] = useState(10);
     const [nodesTraversed,setnodesTraversed] = useState(10);
@@ -51,8 +61,10 @@ export const Sudoku = () => {
           setQuestion(mainArray);
   
           setLoading(true);
+
+          
   
-          const response = await fetch('https://solverapi-n4bhsztn2a-uc.a.run.app', {
+          const response = await fetch('https://us-central1-portfolio-cec85.cloudfunctions.net/api/solve', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -131,6 +143,7 @@ export const Sudoku = () => {
       setLogicallySolved(metadata.logically_solved);
       setsolvedUsingBFS(metadata.solved_using_BFS);
       settimeRequired(metadata.time_required);
+      console.log(parseFloat(metadata.time_required, 10).toFixed(6));
       setDifficulty(metadata.difficulty);
       setlogicalArray(metadata.logical_array);
       
@@ -179,25 +192,34 @@ export const Sudoku = () => {
         
         <div class="flex w-full">
           <div class="mx-auto w-full flex">
-            <div class="mx-auto w-full xl:w-3/4 flex">
+            <div class="mx-auto w-full xl:w-5/6 flex">
               <div class="mx-auto m-4 rounded-md p-4 bg-gradient-to-r from-cyan-500 to-blue-500 w-full xl:w-3/5">
                 <div class="mt-4 bg-cyan-700 rounded-lg py-2">
                   <h1 class="text-white py-4 text-5xl  text-center font-bold" >Sudoku Solver</h1>
                 </div>
                 {solved && 
-                  <div class="mt-4 rounded-lg flex w-3/4 mx-auto"> 
-                      <p class="text-gray-700 py-1 text-md bg-green-500    mx-2 rounded-lg text-center font-bold w-1/3" >Given</p>
-                      <p class="text-gray-700 py-1 text-md bg-blue-300     mx-2 rounded-lg text-center font-bold w-1/3" >Solved Logically</p>
-                      <p class="text-gray-700 py-1 text-md bg-fuchsia-400  mx-2 rounded-lg text-center font-bold w-1/3" >Algorithm Applied</p>
+                  <div class="mt-4 rounded-lg flex w-4/5 mx-auto justify-between"> 
+                    <div className='bg-green-500 py-1 px-5 rounded-lg  mx-2 w-1/3 flex'>
+                      <p class="text-gray-700 py-1 text-md rounded-lg text-center font-bold m-auto" >Given</p>
+                    </div>
+                    <div className='bg-blue-300 py-1 px-5 rounded-lg  mx-2 w-1/3 flex'>
+                      <p class="text-gray-700 py-1 text-md rounded-lg text-center font-bold m-auto" >Solved Logically</p>
+                    </div>
+                    <div className='bg-fuchsia-400 py-1 px-5 rounded-lg mx-2 w-1/3 flex'>
+                      <p class="text-gray-700 py-1 text-md rounded-lg text-center font-bold m-auto" >Algorithm Applied</p>
+                    </div>
+                      
+                      {/* <p class="text-gray-700 py-1 text-md bg-blue-300     mx-2 rounded-lg text-center font-bold w-1/3" >Solved Logically</p>
+                      <p class="text-gray-700 py-1 text-md bg-fuchsia-400  mx-2 rounded-lg text-center font-bold w-1/3" >Algorithm Applied</p> */}
                   </div>
                 }
   
   
   
-                <div class='bg-cyan-300 px-10 py-4 mt-4 rounded-lg w-full '>
-                  <div class='bg-cyan-200 rounded-lg w-full lg:w-10/12 mx-auto p-2'>
-                    <div class="flex">
-                      <div class="flex rounded-t-lg w-full justify-between ">
+                <div class='bg-cyan-200 px-10 py-4 mt-4 rounded-lg w-full flex'>
+                  <div class='bg-red-200 rounded-lg w-full p-2'>
+                    <div class="flex mx-auto">
+                      <div class="flex rounded-t-lg w-full 2xl:w-4/5 mx-auto">
                         
                           <div class="grid grid-cols-3 gap-4 w-48 bg-red-400 p-2">
                             <div class="bg-gray-200 h-12">
@@ -346,8 +368,8 @@ export const Sudoku = () => {
                         
                       </div>
                     </div>
-                    <div class="flex mt-4">
-                      <div class="flex w-full justify-between ">
+                    <div class="flex mx-auto mt-4">
+                      <div class="flex rounded-t-lg w-full 2xl:w-4/5 mx-auto">
                         
                           <div class="grid grid-cols-3 gap-4 w-48 bg-red-400 p-2">
                             <div class="bg-gray-200 h-12">
@@ -496,8 +518,8 @@ export const Sudoku = () => {
                         
                       </div>
                     </div>
-                    <div class="flex mt-4">
-                      <div class="flex rounded-b-lg w-full justify-between ">
+                    <div class="flex mx-auto mt-4">
+                      <div class="flex rounded-t-lg w-full 2xl:w-4/5 mx-auto">
                         
                           <div class="grid grid-cols-3 gap-4 w-48 bg-red-400 p-2">
                             <div class="bg-gray-200 h-12">
@@ -674,12 +696,13 @@ export const Sudoku = () => {
                   </div>
                 </div>
               </div>
+              <div class="m-4 rounded-md p-1 flex transition-transform duration-500 transform translate-x-0 slide-out-div">
+                    <hr class='h-2/3 bg-red-100 w-1 my-auto' />
+              </div>
               {solved && 
                 <>
-                  <div class="m-4 rounded-md p-1 flex">
-                    <hr class='h-2/3 bg-red-100 w-1 my-auto' />
-                  </div>
-                  <div class="m-4 rounded-md p-4 bg-gradient-to-r from-cyan-500 to-blue-500 w-full lg:w-2/5 font-bold">
+                  
+                  <div class="my-4 rounded-md p-4 bg-gradient-to-r from-cyan-500 to-blue-500 w-full lg:w-2/5 2xl:w-1/4 font-bold">
                     <h1 class='text-7xl text-black text-center'>Solved!</h1>
                     <div>
                       <h3 class="text-lg leading-6 font-medium text-gray-900 mt-8 text-center">
@@ -824,7 +847,7 @@ export const Sudoku = () => {
                                 </dt>
                                 <dd class="flex items-baseline">
                                   <div class="text-2xl font-semibold text-gray-900">
-                                    <CountUp isCounting end={timeRequired} duration={2.5} /> m(s)
+                                  <CountUp isCounting end={timeRequired} duration={2.5} decimals={3} /> m(s)
                                   </div>
                                 </dd>
                               </div>
@@ -866,10 +889,8 @@ export const Sudoku = () => {
               }
               {!solved && 
                 <>
-                  <div class="m-4 rounded-md p-1 flex transition-transform duration-500 transform translate-x-0 slide-out-div">
-                    <hr class='h-2/3 bg-red-100 w-1 my-auto' />
-                  </div>
-                  <div class="m-4 rounded-md p-4 bg-gradient-to-r from-cyan-500 to-blue-500 w-full lg:w-2/5 font-bold">
+                 
+                 <div class="my-4 rounded-md p-4 bg-gradient-to-r from-cyan-500 to-blue-500 w-full lg:w-2/5 2xl:w-1/4 font-bold">
                     <h1 class='text-3xl text-gray-600 text-center bg-cyan-400 rounded-md my-4 py-2'>Sudoku Rules !</h1>
                       
                         <div class="w-full">
