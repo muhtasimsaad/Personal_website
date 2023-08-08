@@ -205,142 +205,148 @@ const Sudoku = () => {
 
 
 <div style={{
-    backgroundImage: `url(${background.src})`,
-    height: '100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    }}  className='w-full mx-auto pb-32 h-full'>
-
+        backgroundImage: `url(${background.src})`,
+        height: '100%',
+        width: '100%',
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'cover',
+    }}  className='min-h-screen w-full'>
 
       <div className='w-3/4 mx-auto'>
 
         
   
-        <div className='mx-auto pb-12 w-3/4 min-w-fit'>
-
+        <div className='mx-auto pb-12 w-3/4 min-w-fit pr-8 lg:pr-0'>
           <div className='mx-auto text-3xl text-white pt-10 mb-4'>
             <h1 className={montserrat_bold.className}>Sudoku Solver</h1>
             <p className='text-sm'>Made By Yours Truly</p>
           </div>
-          <div className='flex'>
+          <div className='block md:flex w-full '>
             <div className='min-w-fit'>
               <div className='max-w-fit bg-gradient-to-br from-white/[.3] to-white/[.2] border border-white/[.3] rounded-xl px-4 md:px-8 lg:px-16 pb-8'>
                 <div className='flex justify-end w-full mx-auto pt-6'>
-                  <p className='pt-8 text-white'>Algorithm Applied</p>
-                  <p class="w-4 h-4 rounded-full mt-auto bg-[#27374D] mb-1 ml-2 mr-6"></p>
-                  <p className='pt-8 text-white'>Logically Solved</p>
-                  <p class="w-4 h-4 rounded-full mt-auto bg-[#9DB2BF] mb-1 ml-2"></p>
+                  <div className='flex'>
+                    <p className='pt-8 text-xs md:text-lg text-white w-16 md:w-fit' >Algorithm Applied</p>
+                    <p class="w-4 h-4 rounded-full mt-auto bg-[#27374D] mb-1.5 ml-2 mr-6"></p>
+                  </div>
+                  <div className='flex'>
+                    <p className='pt-8 text-xs md:text-lg text-white w-14 md:w-fit'>Logically Solved</p>
+                    <p class="w-4 h-4 rounded-full mt-auto bg-[#9DB2BF] mb-1.5 ml-2"></p>
+                  </div>
+                  
+                  
                 </div>
                 <div className='flex '>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
                   </div>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
                   </div>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                  </div>   
                 </div>
                 <div className='flex '>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
                   </div>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
                   </div>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                  </div>   
                 </div>
                 <div className='flex '>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
                   </div>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
                   </div>
                   <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-16 h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
+                  </div>   
                 </div>
+                 
                 
               </div>
               
             </div>
-            <div className='w-fit bg-gradient-to-br ml-12 from-white/[.3] border border-white/[.3] to-none rounded-xl px-6'>
+            <div className='mt-12 md:mt-0 w-full md:w-fit bg-gradient-to-br ml-0 md:ml-12 from-white/[.3] border border-white/[.3] to-none rounded-xl px-6'>
                 <div className='w-full mx-auto'>
                   <p className='text-white text-xl font-bold mt-12'>Dashboard</p>
                   <p className='text-white text-sm mt-2'>Status: <span className='text-[#14FF00]'>Solved</span></p>
@@ -397,14 +403,12 @@ const Sudoku = () => {
                 <p class='text-sm text-white mt-6'>View on Github &#10230;</p>
 
                 <div>
-                  <p className='font-bold text-white bg-[#111111] text-center rounded-2xl py-2 my-4'> Reset </p>
+                  <p className='cursor-pointer font-bold text-white bg-[#111111] text-center rounded-2xl py-2 my-4'> Reset </p>
                 </div>
 
 
             </div>
           </div>
-          
-          
         </div>
       </div>
     
