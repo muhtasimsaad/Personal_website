@@ -17,9 +17,10 @@ global.difficulty = 0;
 global.logicalArray = "";
 global.startTime = 0;
 global.responseVariable = "";
+global.response = "";
 
 // Create an HTTP request function
-exports.halloworld = functions.https.onRequest((request, response) => {
+exports.solve = functions.https.onRequest((request, response) => {
   // Set CORS headers to allow requests from any domain
   response.set("Access-Control-Allow-Origin", "*");
   response.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
@@ -31,18 +32,31 @@ exports.halloworld = functions.https.onRequest((request, response) => {
     return;
   }
 
+  global.response = response;
+
   // Handle the main GET request
-  if (request.method === "POST") {
-    const mainArray = request.body.mainArray;
+  if (request.method === "GET") {
+    // const mainArray = request.body.mainArray;
+    const mainArray = [
+      ['6', '','', '8','', '','2', '7',''],
+      ['', '3','', '','', '','9', '4',''],
+      ['', '','', '','', '','6', '3',''],
+      ['4', '','6', '','7', '','', '','3'],
+      ['2', '1','8', '','', '9','7', '','4'],
+      ['7', '','', '2','', '8','', '6',''],
+      ['', '','2', '4','5', '' ,'', '',''],
+      ['1', '','', '','3', ''  ,'4', '9',''],
+      ['', '','4', '','', ''  ,'5', '1','6'],
+  ];
     global.responseVariable = response;
     global.startTime = performance.now();
 
     const possibilitiesArray = convertToPossibilitiesArray(mainArray);
 
-    solveSudoku(possibilitiesArray);
+    const solution = solveSudoku(possibilitiesArray);
 
     const responseData = {
-      message: mainArray,
+      message: solution,
     };
 
     response.status(200).json(responseData);
@@ -79,6 +93,7 @@ function convertToPossibilitiesArray(mainArray) {
       }
     }
   }
+
   return mainArray;
 }
 
