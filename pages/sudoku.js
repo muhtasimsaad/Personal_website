@@ -346,13 +346,13 @@ const Sudoku = () => {
               </div>
               
             </div>
-            <div className='mt-12 md:mt-0 w-full md:w-fit bg-gradient-to-br ml-0 md:ml-12 from-white/[.3] border border-white/[.3] to-none rounded-xl px-6'>
+              <div className='mt-12 md:mt-0 w-full md:w-fit bg-gradient-to-br ml-0 md:ml-12 from-white/[.3] border border-white/[.3] to-none rounded-xl px-6'>
                 <div className='w-full mx-auto'>
                   <p className='text-white text-xl font-bold mt-12'>Dashboard</p>
                   <p className='text-white text-sm mt-2'>Status: <span className='text-[#14FF00]'>Solved</span></p>
                 </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] border border-white/[.3] to-none rounded-md px-4 py-3 flex'>
+                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none  hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                   <Image src={table} className='h-8 w-8 mr-1'/>
                   <div class="flex justify-between items-center w-full">
                     <p class='text-sm text-white'>total Cells:</p>
@@ -360,7 +360,7 @@ const Sudoku = () => {
                   </div>
                 </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] border border-white/[.3] to-none rounded-md px-4 py-3 flex'>
+                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                   <Image src={logically_solved} className='h-8 w-8 mr-1'/>
                   <div class="flex justify-between items-center w-full">
                     <p class='text-sm text-white'>Logically Solved:</p>
@@ -368,7 +368,7 @@ const Sudoku = () => {
                   </div>
                 </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] border border-white/[.3] to-none rounded-md px-4 py-3 flex'>
+                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                   <Image src={solved_using_BFS} className='h-8 w-8 mr-1'/>
                   <div class="flex justify-between items-center w-full">
                     <p class='text-sm text-white min-w-fit'>Solved Using BFS:</p>
@@ -376,7 +376,7 @@ const Sudoku = () => {
                   </div>
                 </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] border border-white/[.3] to-none rounded-md px-4 py-3 flex'>
+                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3]  rounded-md px-4 py-3 flex'>
                   <Image src={nodes} className='h-8 w-8 mr-1'/>
                   <div class="flex justify-between items-center w-full">
                     <p class='text-sm text-white'>Nodes Traversed:</p>
@@ -384,7 +384,7 @@ const Sudoku = () => {
                   </div>
                 </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] border border-white/[.3] to-none rounded-md px-4 py-3 flex'>
+                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                   <Image src={time_taken} className='h-8 w-8 mr-1'/>
                   <div class="flex justify-between items-center w-full">
                     <p class='text-sm text-white'>Time Taken:</p>
@@ -392,7 +392,7 @@ const Sudoku = () => {
                   </div>
                 </div>
 
-                <div className='mt-6 bg-gradient-to-br from-white/[.3] border border-white/[.3] to-none rounded-md px-4 py-3 flex'>
+                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to none border border-white/[.3] rounded-md px-4 py-3 flex'>
                   <Image src={difficultys} className='h-10 w-10'/>
                   <div class="flex justify-between items-center w-full">
                     <p class='text-sm text-white'>Difficulty:</p>
@@ -400,10 +400,10 @@ const Sudoku = () => {
                   </div>
                 </div>
 
-                <p class='text-sm text-white mt-6'>View on Github &#10230;</p>
+                <p class='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
 
                 <div>
-                  <p className='cursor-pointer font-bold text-white bg-[#111111] text-center rounded-2xl py-2 my-4'> Reset </p>
+                  <p className='cursor-pointer font-bold text-white bg-[#111111] hover:bg-white/[.3] border-2 border-transparent hover:border-white/[.3] text-center rounded-2xl py-2 my-4 '> Reset </p>
                 </div>
 
 
