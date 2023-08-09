@@ -12,7 +12,9 @@ import solved_using_BFS from '../app/assets/images/solved_using_bfs.svg';
 import nodes from '../app/assets/images/nodes.svg';
 import time_taken from '../app/assets/images/Time.svg';
 import difficultys from '../app/assets/images/difficulty.svg';
-
+import cross from "../app/assets/images/close.svg";
+import information from "../app/assets/images/info.svg";
+import { Link } from "react-router-dom";
 
 const montserrat_bold = Montserrat({
   subsets:['latin'],
@@ -23,8 +25,9 @@ const montserrat_normal = Montserrat({
   weight:'400',
 });
 
-const Sudoku = () => {
 
+const Sudoku = () => {
+  
   
 
   let url = '';
@@ -45,6 +48,7 @@ const Sudoku = () => {
   const [buttonText,setButtonText] = useState('Solve');
   
   const [solved,setSolved] =useState(false);
+  const [info,setInfo] =useState(false);
   const [loading,setLoading] =useState(false);
    
   
@@ -137,7 +141,9 @@ const Sudoku = () => {
   };
 
 
-  
+  const setInfoModal = (key) => {
+    setInfo(key);
+  };
    
 
   const handleInputChange = (rowIndex, columnIndex, event) => {
@@ -169,6 +175,10 @@ const Sudoku = () => {
     setlogicalArray(metadata.logical_array);
     
   }
+
+  const routeToHome = () => {
+    history.push('/'); // Replace '/' with the actual path to your home page
+  };
 
 
   const computeInputColor = (row,column) => {
@@ -202,6 +212,38 @@ const Sudoku = () => {
 
   return <div className={montserrat_normal.className}>
 
+  {info &&
+    <div className="bg-gray-300">
+        
+      <div className="fixed z-10 inset-0 overflow-y-auto">
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="fixed inset-0 transition-opacity">
+            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+          </div>
+
+          {/* This element is to trick the browser into centering the modal contents. */}
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
+          <div className="inline-block align-bottom bg-[#1E1E1E] rounded-lg px-4 pt-5 pb-4 text-left
+            overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className='text-gray-100'>
+              <div className='flex'>
+              <p className={`${montserrat_bold.className} text-2xl h-fit my-auto`}>Instructions:</p>
+              <Image src={cross} className="h-6 w-6 ml-auto rounded-full cursor-pointer" onClick={() => setInfoModal(false)}/>
+              </div>
+              
+              <p className='mt-4'><span className={`${montserrat_bold.className} underline`}>Input Grid:</span> Enter the initial Sudoku puzzle by filling in the 9x9 grid. Click on each cell to input anumber from 1 to 9. Leave empty cells for the unknown numbers.</p>
+              <p className='mt-4'><span className={`${montserrat_bold.className} underline`}>Initial Setup:</span> Start with some cells pre-filled with numbers, providing a starting point forsolving.</p>
+              <p className='mt-4'><span className={`${montserrat_bold.className} underline`}>No Repetition:</span> Every row, column, and 3x3 subgrid must have unique numbers, with no digit repetition.</p>
+              <p className='mt-4'><span className={`${montserrat_bold.className} underline`}>Logical Deduction:</span> Use logic and process of elimination to determine where numbers fit based on existing placements.</p>
+              <p className='mt-4'><span className={`${montserrat_bold.className} underline`}>Iterative Solution:</span> Solve by gradually filling numbers, making deductions, and revising until the entire grid is correctly filled.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  }
 
 
 <div style={{
@@ -217,10 +259,22 @@ const Sudoku = () => {
         
   
         <div className='mx-auto pb-12 w-3/4 min-w-fit pr-8 lg:pr-0'>
-          <div className='mx-auto text-3xl text-white pt-10 mb-4'>
-            <h1 className={montserrat_bold.className}>Sudoku Solver</h1>
-            <p className='text-sm'>Made By Yours Truly</p>
+          <div className='flex'>
+            <div className='text-3xl text-white pt-10 mb-4'>
+              <h1 className={montserrat_bold.className}>Sudoku Solver</h1>
+              <p className='text-sm'>Made By Yours Truly</p>
+            </div>
+ 
+            
+            <div onClick={routeToHome} className='ml-auto text-3xl text-white pt-10 mb-4 justify-end'>
+              <a href="/"><p className="text-lg">&#8592; Back to Portfolio</p></a>
+              <div className='flex'>
+                <p className='text-sm ml-auto text-right mt-2'>About Sudoku</p>
+                <Image src={information} className="mt-auto ml-1 cursor-pointer" onClick={() => setInfoModal(true)}/>
+              </div>
+            </div>
           </div>
+          
           <div className='block md:flex w-full '>
             <div className='min-w-fit'>
               <div className='max-w-fit bg-gradient-to-br from-white/[.3] to-white/[.2] border border-white/[.3] rounded-xl px-4 md:px-8 lg:px-16 pb-8'>
@@ -346,64 +400,87 @@ const Sudoku = () => {
               </div>
               
             </div>
-              <div className='mt-12 md:mt-0 w-full md:w-fit bg-gradient-to-br ml-0 md:ml-12 from-white/[.3] border border-white/[.3] to-none rounded-xl px-6'>
-                <div className='w-full mx-auto'>
-                  <p className='text-white text-xl font-bold mt-12'>Dashboard</p>
-                  <p className='text-white text-sm mt-2'>Status: <span className='text-[#14FF00]'>Solved</span></p>
-                </div>
-
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none  hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                  <Image src={table} className='h-8 w-8 mr-1'/>
-                  <div class="flex justify-between items-center w-full">
-                    <p class='text-sm text-white'>total Cells:</p>
-                    <p class='text-3xl text-white font-bold'>81</p>
+              <div className='mt-12 md:mt-0 w-full md:w-fit bg-gradient-to-br ml-0 md:ml-12 from-white/[.3] border border-white/[.3] to-none rounded-xl px-8'>
+                 
+                  <div className='w-full mx-auto'>
+                    <p className='text-white text-xl font-bold mt-12'>Dashboard</p>
+                    <p className='text-white text-sm mt-2'>Status: 
+                      { solved &&<span className='text-[#14FF00] ml-2'>Solved</span>}
+                      {! solved &&<span className='text-yellow-300 ml-2'>Unsolved</span>}
+                    </p>
                   </div>
-                </div>
+                 
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                  <Image src={logically_solved} className='h-8 w-8 mr-1'/>
-                  <div class="flex justify-between items-center w-full">
-                    <p class='text-sm text-white'>Logically Solved:</p>
-                    <p class='text-3xl text-white font-bold'>81</p>
-                  </div>
-                </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                  <Image src={solved_using_BFS} className='h-8 w-8 mr-1'/>
-                  <div class="flex justify-between items-center w-full">
-                    <p class='text-sm text-white min-w-fit'>Solved Using BFS:</p>
-                    <p class='text-3xl text-white font-bold ml-6'>81</p>
-                  </div>
-                </div>
+                 
+                  <div>
+                    <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none  hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
+                      <Image src={table} className='h-8 w-8 mr-1'/>
+                      <div class="flex justify-between items-center w-full">
+                        <p class='text-sm text-white'>total Cells:</p>
+                        <p class='text-3xl text-white font-bold'>81</p>
+                      </div>
+                    </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3]  rounded-md px-4 py-3 flex'>
-                  <Image src={nodes} className='h-8 w-8 mr-1'/>
-                  <div class="flex justify-between items-center w-full">
-                    <p class='text-sm text-white'>Nodes Traversed:</p>
-                    <p class='text-3xl text-white font-bold'>81</p>
-                  </div>
-                </div>
+                    <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
+                      <Image src={logically_solved} className='h-8 w-8 mr-1'/>
+                      <div class="flex justify-between items-center w-full">
+                        <p class='text-sm text-white'>Logically Solved:</p>
+                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      </div>
+                    </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                  <Image src={time_taken} className='h-8 w-8 mr-1'/>
-                  <div class="flex justify-between items-center w-full">
-                    <p class='text-sm text-white'>Time Taken:</p>
-                    <p class='text-3xl text-white font-bold'>81</p>
-                  </div>
-                </div>
+                    <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
+                      <Image src={solved_using_BFS} className='h-8 w-8 mr-1'/>
+                      <div class="flex justify-between items-center w-full">
+                        <p class='text-sm text-white min-w-fit mr-4'>Solved Using BFS:</p>
+                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      </div>
+                    </div>
 
-                <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                  <Image src={difficultys} className='h-10 w-10'/>
-                  <div class="flex justify-between items-center w-full">
-                    <p class='text-sm text-white'>Difficulty:</p>
-                    <p class='text-3xl text-white font-bold'>81</p>
+                    <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3]  rounded-md px-4 py-3 flex'>
+                      <Image src={nodes} className='h-8 w-8 mr-1'/>
+                      <div class="flex justify-between items-center w-full">
+                        <p class='text-sm text-white'>Nodes Traversed:</p>
+                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      </div>
+                    </div>
+
+                    <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
+                      <Image src={time_taken} className='h-8 w-8 mr-1'/>
+                      <div class="flex justify-between items-center w-full">
+                        <p class='text-sm text-white'>Time Taken:</p>
+                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      </div>
+                    </div>
+
+                    <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to none border border-white/[.3] rounded-md px-4 py-3 flex'>
+                      <Image src={difficultys} className='h-10 w-10'/>
+                      <div class="flex justify-between items-center w-full">
+                        <p class='text-sm text-white'>Difficulty:</p>
+                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                 
+                
 
                 <p class='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
 
                 <div>
-                  <p className='cursor-pointer font-bold text-white bg-[#111111] hover:bg-white/[.3] border-2 border-transparent hover:border-white/[.3] text-center rounded-2xl py-2 my-4 '> Reset </p>
+                  {!solved && <p className='cursor-pointer font-bold text-white bg-[#111111] 
+                        hover:bg-white/[.3] border-2 border-transparent hover:border-white/[.3] text-center rounded-2xl py-2 my-4 '>
+                     Solve 
+                     </p>}
+                  {solved && <p className='cursor-pointer font-bold text-white bg-[#111111] 
+                  hover:bg-white/[.3] border-2 border-transparent hover:border-white/[.3] text-center rounded-2xl py-2 my-4 '>
+                  Reset 
+                  </p>}
                 </div>
 
 

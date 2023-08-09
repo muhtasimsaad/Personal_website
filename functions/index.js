@@ -35,7 +35,7 @@ exports.solve = functions.https.onRequest((request, response) => {
   global.response = response;
 
   // Handle the main GET request
-  if (request.method === "GET") {
+  if (request.method === "POST") {
     // const mainArray = request.body.mainArray;
     const mainArray = [
       ['6', '','', '8','', '','2', '7',''],
