@@ -14,8 +14,10 @@ import time_taken from '../app/assets/images/Time.svg';
 import difficultys from '../app/assets/images/difficulty.svg';
 import cross from "../app/assets/images/close.svg";
 import information from "../app/assets/images/info.svg";
-import { Link } from "react-router-dom";
+import Link from 'next/link'
 
+
+//  fonts
 const montserrat_bold = Montserrat({
   subsets:['latin'],
   weight:'700',
@@ -27,8 +29,6 @@ const montserrat_normal = Montserrat({
 
 
 const Sudoku = () => {
-  
-  
 
   let url = '';
 
@@ -45,8 +45,10 @@ const Sudoku = () => {
   const [nodesTraversed,setnodesTraversed] = useState(10);
   const [timeRequired,settimeRequired] = useState(10);
   const [difficulty,setDifficulty] = useState(.1);
-  const [buttonText,setButtonText] = useState('Solve');
+
   
+
+  // States
   const [solved,setSolved] =useState(false);
   const [info,setInfo] =useState(false);
   const [loading,setLoading] =useState(false);
@@ -80,13 +82,8 @@ const Sudoku = () => {
   const sendDataToAPI = async () => {
     if(!solved){
       try {
-    
         setQuestion(mainArray);
-
         setLoading(true);
-
-        
-
         const response = await fetch('https://us-central1-portfolio-cec85.cloudfunctions.net/api/solve', {
           method: 'POST',
           headers: {
@@ -113,25 +110,25 @@ const Sudoku = () => {
     }
     else{
       setmainArray([
-        // ['6', '','', '8','', '','2', '7',''],
-        // ['', '3','', '','', '','9', '4',''],
-        // ['', '','', '','', '','6', '3',''],
-        // ['4', '','6', '','7', '','', '','3'],
-        // ['2', '1','8', '','', '9','7', '','4'],
-        // ['7', '','', '2','', '8','', '6',''],
-        // ['', '','2', '4','5', '' ,'', '',''],
-        // ['1', '','', '','3', ''  ,'4', '9',''],
-        // ['', '','4', '','', ''  ,'5', '1','6'],
+        ['6', '','', '8','', '','2', '7',''],
+        ['', '3','', '','', '','9', '4',''],
+        ['', '','', '','', '','6', '3',''],
+        ['4', '','6', '','7', '','', '','3'],
+        ['2', '1','8', '','', '9','7', '','4'],
+        ['7', '','', '2','', '8','', '6',''],
+        ['', '','2', '4','5', '' ,'', '',''],
+        ['1', '','', '','3', ''  ,'4', '9',''],
+        ['', '','4', '','', ''  ,'5', '1','6'],
   
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '',''],
-      ['', '','', '','', '','', '','']
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '',''],
+      // ['', '','', '','', '','', '','']
        ]);
 
        setButtonText('Solve');
@@ -176,20 +173,15 @@ const Sudoku = () => {
     
   }
 
-  const routeToHome = () => {
-    history.push('/'); // Replace '/' with the actual path to your home page
-  };
-
 
   const computeInputColor = (row,column) => {
     // Your logic to compute the background color dynamically
      
     if(!solved ){
-
       if(mainArray[row][column] == ""){
         return '#e5e5e5';
       }
-      return '#22c55e';
+      return '#444444';
     }
 
     //solved state
@@ -266,8 +258,8 @@ const Sudoku = () => {
             </div>
  
             
-            <div onClick={routeToHome} className='ml-auto text-3xl text-white pt-10 mb-4 justify-end'>
-              <a href="/"><p className="text-lg">&#8592; Back to Portfolio</p></a>
+            <div className='ml-auto text-3xl text-white pt-10 mb-4 justify-end'>
+              <Link href="/"><p className="text-lg">&#8592; Back to Portfolio</p></Link>
               <div className='flex'>
                 <p className='text-sm ml-auto text-right mt-2'>About Sudoku</p>
                 <Image src={information} className="mt-auto ml-1 cursor-pointer" onClick={() => setInfoModal(true)}/>
@@ -277,124 +269,208 @@ const Sudoku = () => {
           
           <div className='block md:flex w-full '>
             <div className='min-w-fit'>
-              <div className='max-w-fit bg-gradient-to-br from-white/[.3] to-white/[.2] border border-white/[.3] rounded-xl px-4 md:px-8 lg:px-16 pb-8'>
-                <div className='flex justify-end w-full mx-auto pt-6'>
-                  <div className='flex'>
-                    <p className='pt-8 text-xs md:text-lg text-white w-16 md:w-fit' >Algorithm Applied</p>
-                    <p class="w-4 h-4 rounded-full mt-auto bg-[#27374D] mb-1.5 ml-2 mr-6"></p>
+              <div className='max-w-fit bg-gradient-to-br from-white/[.3] to-white/[.2] border border-white/[.3] rounded-xl px-4 md:px-8 lg:px-16 py-16'>
+                <div className=''>
+                  <div className='flex justify-end w-full mx-auto'>
+                    <div className='flex'>
+                      <p className='text-xs md:text-lg text-white w-16 md:w-fit' >Algorithm Applied</p>
+                      <p className="w-4 h-4 rounded-full mt-auto bg-[#27374D] mb-1.5 ml-2 mr-6"></p>
+                    </div>
+                    <div className='flex'>
+                      <p className='text-xs md:text-lg text-white w-14 md:w-fit'>Logically Solved</p>
+                      <p className="w-4 h-4 rounded-full mt-auto bg-[#9DB2BF] mb-1.5 ml-2"></p>
+                    </div>
+                    
+                    
                   </div>
-                  <div className='flex'>
-                    <p className='pt-8 text-xs md:text-lg text-white w-14 md:w-fit'>Logically Solved</p>
-                    <p class="w-4 h-4 rounded-full mt-auto bg-[#9DB2BF] mb-1.5 ml-2"></p>
+                  <div className='flex '>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[0][0]}
+                                onChange={(event) => handleInputChange(0, 0, event)} style={{ backgroundColor: computeInputColor(0,0) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][1]}
+                                onChange={(event) => handleInputChange(0, 1, event)} style={{ backgroundColor: computeInputColor(0,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][2]}
+                                onChange={(event) => handleInputChange(0, 2, event)} style={{ backgroundColor: computeInputColor(0,2) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][0]}
+                                onChange={(event) => handleInputChange(1, 0, event)} style={{ backgroundColor: computeInputColor(1,0) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][1]}
+                                onChange={(event) => handleInputChange(1, 1, event)} style={{ backgroundColor: computeInputColor(1,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][2]}
+                                onChange={(event) => handleInputChange(1, 2, event)} style={{ backgroundColor: computeInputColor(1,2) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][0]}
+                                onChange={(event) => handleInputChange(2, 0, event)} style={{ backgroundColor: computeInputColor(2,0) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][1]}
+                                onChange={(event) => handleInputChange(2, 1, event)} style={{ backgroundColor: computeInputColor(2,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][2]}
+                                onChange={(event) => handleInputChange(2, 2, event)} style={{ backgroundColor: computeInputColor(2,2) }}  />
+                    </div>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[0][3]}
+                                onChange={(event) => handleInputChange(0, 3, event)} style={{ backgroundColor: computeInputColor(0,3) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][3]}
+                                onChange={(event) => handleInputChange(1, 3, event)} style={{ backgroundColor: computeInputColor(1,3) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][3]}
+                                onChange={(event) => handleInputChange(2, 3, event)} style={{ backgroundColor: computeInputColor(2,3) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][4]}
+                                onChange={(event) => handleInputChange(0, 4, event)} style={{ backgroundColor: computeInputColor(0,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][4]}
+                                onChange={(event) => handleInputChange(1, 4, event)} style={{ backgroundColor: computeInputColor(1,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][4]}
+                                onChange={(event) => handleInputChange(2, 4, event)} style={{ backgroundColor: computeInputColor(2,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][5]}
+                                onChange={(event) => handleInputChange(0, 5, event)} style={{ backgroundColor: computeInputColor(0,5) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][5]}
+                                onChange={(event) => handleInputChange(1, 5, event)} style={{ backgroundColor: computeInputColor(1,5) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][5]}
+                                onChange={(event) => handleInputChange(2, 5, event)} style={{ backgroundColor: computeInputColor(2,5) }}  />
+                    </div>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[0][6]}
+                                onChange={(event) => handleInputChange(0, 6, event)} style={{ backgroundColor: computeInputColor(0,6) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][6]}
+                                onChange={(event) => handleInputChange(1, 6, event)} style={{ backgroundColor: computeInputColor(1,6) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][6]}
+                                onChange={(event) => handleInputChange(2, 6, event)} style={{ backgroundColor: computeInputColor(2,6) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][7]}
+                                onChange={(event) => handleInputChange(0, 7, event)} style={{ backgroundColor: computeInputColor(0,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][7]}
+                                onChange={(event) => handleInputChange(1, 7, event)} style={{ backgroundColor: computeInputColor(1,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][7]}
+                                onChange={(event) => handleInputChange(2, 7, event)} style={{ backgroundColor: computeInputColor(2,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][8]}
+                                onChange={(event) => handleInputChange(0, 6, event)} style={{ backgroundColor: computeInputColor(0,8) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][8]}
+                                onChange={(event) => handleInputChange(1, 7, event)} style={{ backgroundColor: computeInputColor(1,8) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][8]}
+                                onChange={(event) => handleInputChange(2, 8, event)} style={{ backgroundColor: computeInputColor(2,8) }}  />
+                    </div>   
                   </div>
-                  
-                  
+                  <div className='flex '>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[3][0]}
+                                onChange={(event) => handleInputChange(3, 0, event)} style={{ backgroundColor: computeInputColor(3,0) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][0]}
+                                onChange={(event) => handleInputChange(4, 0, event)} style={{ backgroundColor: computeInputColor(4,0) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][0]}
+                                onChange={(event) => handleInputChange(5, 0, event)} style={{ backgroundColor: computeInputColor(5,0) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[3][1]}
+                                onChange={(event) => handleInputChange(3, 1, event)} style={{ backgroundColor: computeInputColor(3,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][1]}
+                                onChange={(event) => handleInputChange(4, 1, event)} style={{ backgroundColor: computeInputColor(4,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][1]}
+                                onChange={(event) => handleInputChange(5, 1, event)} style={{ backgroundColor: computeInputColor(5,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[3][2]}
+                                onChange={(event) => handleInputChange(3, 2, event)} style={{ backgroundColor: computeInputColor(3,2) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][2]}
+                                onChange={(event) => handleInputChange(4, 2, event)} style={{ backgroundColor: computeInputColor(4,2) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][2]}
+                                onChange={(event) => handleInputChange(5, 2, event)} style={{ backgroundColor: computeInputColor(5,2) }}  />
+                    </div>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[3][3]}
+                                onChange={(event) => handleInputChange(3, 3, event)} style={{ backgroundColor: computeInputColor(3,3) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][3]}
+                                onChange={(event) => handleInputChange(4, 3, event)} style={{ backgroundColor: computeInputColor(4,3) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][3]}
+                                onChange={(event) => handleInputChange(5, 3, event)} style={{ backgroundColor: computeInputColor(5,3) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[3][4]}
+                                onChange={(event) => handleInputChange(3, 4, event)} style={{ backgroundColor: computeInputColor(3,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][4]}
+                                onChange={(event) => handleInputChange(4, 4, event)} style={{ backgroundColor: computeInputColor(4,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][4]}
+                                onChange={(event) => handleInputChange(5, 4, event)} style={{ backgroundColor: computeInputColor(5,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[3][5]}
+                                onChange={(event) => handleInputChange(3, 5, event)} style={{ backgroundColor: computeInputColor(3,5) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][5]}
+                                onChange={(event) => handleInputChange(4, 5, event)} style={{ backgroundColor: computeInputColor(4,5) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][5]}
+                                onChange={(event) => handleInputChange(5, 5, event)} style={{ backgroundColor: computeInputColor(5,5) }}  />
+                    </div>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[3][6]}
+                                onChange={(event) => handleInputChange(3, 6, event)} style={{ backgroundColor: computeInputColor(3,6) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][6]}
+                                onChange={(event) => handleInputChange(4, 6, event)} style={{ backgroundColor: computeInputColor(4,6) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][6]}
+                                onChange={(event) => handleInputChange(5, 6, event)} style={{ backgroundColor: computeInputColor(5,6) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[3][7]}
+                                onChange={(event) => handleInputChange(3, 7, event)} style={{ backgroundColor: computeInputColor(3,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][7]}
+                                onChange={(event) => handleInputChange(4, 7, event)} style={{ backgroundColor: computeInputColor(4,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][7]}
+                                onChange={(event) => handleInputChange(5, 7, event)} style={{ backgroundColor: computeInputColor(5,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[3][8]}
+                                onChange={(event) => handleInputChange(3, 8, event)} style={{ backgroundColor: computeInputColor(3,8) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[4][8]}
+                                onChange={(event) => handleInputChange(4, 8, event)} style={{ backgroundColor: computeInputColor(4,8) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[5][8]}
+                                onChange={(event) => handleInputChange(5, 8, event)} style={{ backgroundColor: computeInputColor(5,8) }}  />
+                    </div>
+                  </div>
+                  <div className='flex '>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[6][0]}
+                                onChange={(event) => handleInputChange(6, 0, event)} style={{ backgroundColor: computeInputColor(6,0) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][0]}
+                                onChange={(event) => handleInputChange(7, 0, event)} style={{ backgroundColor: computeInputColor(7,0) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][0]}
+                                onChange={(event) => handleInputChange(8, 0, event)} style={{ backgroundColor: computeInputColor(8,0) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[6][1]}
+                                onChange={(event) => handleInputChange(6, 2, event)} style={{ backgroundColor: computeInputColor(6,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][1]}
+                                onChange={(event) => handleInputChange(7, 1, event)} style={{ backgroundColor: computeInputColor(7,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][1]}
+                                onChange={(event) => handleInputChange(8, 2, event)} style={{ backgroundColor: computeInputColor(8,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[6][2]}
+                                onChange={(event) => handleInputChange(6, 3, event)} style={{ backgroundColor: computeInputColor(6,2) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][2]}
+                                onChange={(event) => handleInputChange(7, 3, event)} style={{ backgroundColor: computeInputColor(7,2) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][2]}
+                                onChange={(event) => handleInputChange(8, 2, event)} style={{ backgroundColor: computeInputColor(8,2) }}  />
+                    </div>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[6][3]}
+                                onChange={(event) => handleInputChange(6, 3, event)} style={{ backgroundColor: computeInputColor(6,3) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][3]}
+                                onChange={(event) => handleInputChange(7, 3, event)} style={{ backgroundColor: computeInputColor(7,3) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][3]}
+                                onChange={(event) => handleInputChange(8, 3, event)} style={{ backgroundColor: computeInputColor(8,3) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[6][4]}
+                                onChange={(event) => handleInputChange(6, 4, event)} style={{ backgroundColor: computeInputColor(6,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][4]}
+                                onChange={(event) => handleInputChange(7, 4, event)} style={{ backgroundColor: computeInputColor(7,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][4]}
+                                onChange={(event) => handleInputChange(8, 4, event)} style={{ backgroundColor: computeInputColor(8,4) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[6][5]}
+                                onChange={(event) => handleInputChange(6, 5, event)} style={{ backgroundColor: computeInputColor(6,5) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][5]}
+                                onChange={(event) => handleInputChange(7, 5, event)} style={{ backgroundColor: computeInputColor(7,5) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][5]}
+                                onChange={(event) => handleInputChange(8, 5, event)} style={{ backgroundColor: computeInputColor(8,5) }}  />
+                    </div>
+                    <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[6][6]}
+                                onChange={(event) => handleInputChange(6, 6, event)} style={{ backgroundColor: computeInputColor(6,6) }} />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][6]}
+                                onChange={(event) => handleInputChange(7, 6, event)} style={{ backgroundColor: computeInputColor(7,6) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][6]}
+                                onChange={(event) => handleInputChange(8, 6, event)} style={{ backgroundColor: computeInputColor(8,6) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[6][7]}
+                                onChange={(event) => handleInputChange(6, 7, event)} style={{ backgroundColor: computeInputColor(6,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][7]}
+                                onChange={(event) => handleInputChange(7, 7, event)} style={{ backgroundColor: computeInputColor(7,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][7]}
+                                onChange={(event) => handleInputChange(8, 7, event)} style={{ backgroundColor: computeInputColor(8,7) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[6][8]}
+                                onChange={(event) => handleInputChange(6, 8, event)} style={{ backgroundColor: computeInputColor(6,8) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[7][8]}
+                                onChange={(event) => handleInputChange(7, 8, event)} style={{ backgroundColor: computeInputColor(7,8) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[8][8]}
+                                onChange={(event) => handleInputChange(8, 8, event)} style={{ backgroundColor: computeInputColor(8,8) }}  />
+                    </div>
+                  </div>
                 </div>
-                <div className='flex '>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>   
-                </div>
-                <div className='flex '>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>   
-                </div>
-                <div className='flex '>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>
-                  <div class="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                    <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold' name='asd' />
-                  </div>   
-                </div>
+                
                  
                 
               </div>
@@ -416,66 +492,73 @@ const Sudoku = () => {
                   <div>
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none  hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                       <Image src={table} className='h-8 w-8 mr-1'/>
-                      <div class="flex justify-between items-center w-full">
-                        <p class='text-sm text-white'>total Cells:</p>
-                        <p class='text-3xl text-white font-bold'>81</p>
+                      <div className="flex justify-between items-center w-full">
+                        <p className='text-sm text-white'>total Cells:</p>
+                        <p className='text-3xl text-white font-bold'>81</p>
                       </div>
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                       <Image src={logically_solved} className='h-8 w-8 mr-1'/>
-                      <div class="flex justify-between items-center w-full">
-                        <p class='text-sm text-white'>Logically Solved:</p>
-                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
-                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      <div className="flex justify-between items-center w-full">
+                        <p className='text-sm text-white'>Logically Solved:</p>
+                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                       <Image src={solved_using_BFS} className='h-8 w-8 mr-1'/>
-                      <div class="flex justify-between items-center w-full">
-                        <p class='text-sm text-white min-w-fit mr-4'>Solved Using BFS:</p>
-                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
-                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      <div className="flex justify-between items-center w-full">
+                        <p className='text-sm text-white min-w-fit mr-4'>Solved Using BFS:</p>
+                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3]  rounded-md px-4 py-3 flex'>
                       <Image src={nodes} className='h-8 w-8 mr-1'/>
-                      <div class="flex justify-between items-center w-full">
-                        <p class='text-sm text-white'>Nodes Traversed:</p>
-                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
-                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      <div className="flex justify-between items-center w-full">
+                        <p className='text-sm text-white'>Nodes Traversed:</p>
+                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
                       <Image src={time_taken} className='h-8 w-8 mr-1'/>
-                      <div class="flex justify-between items-center w-full">
-                        <p class='text-sm text-white'>Time Taken:</p>
-                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
-                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      <div className="flex justify-between items-center w-full">
+                        <p className='text-sm text-white'>Time Taken:</p>
+                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to none border border-white/[.3] rounded-md px-4 py-3 flex'>
                       <Image src={difficultys} className='h-10 w-10'/>
-                      <div class="flex justify-between items-center w-full">
-                        <p class='text-sm text-white'>Difficulty:</p>
-                        {solved && <p class='text-3xl text-white font-bold'>81</p>}
-                        {!solved && <p class='text-3xl text-white font-bold'>?</p>}
+                      <div className="flex justify-between items-center w-full">
+                        <p className='text-sm text-white'>Difficulty:</p>
+                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
                   </div>
                  
                 
 
-                <p class='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
+                <p className='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
 
                 <div>
+                  
                   {!solved && <p className='cursor-pointer font-bold text-white bg-[#111111] 
                         hover:bg-white/[.3] border-2 border-transparent hover:border-white/[.3] text-center rounded-2xl py-2 my-4 '>
-                     Solve 
+                    {loading &&
+                    <svg aria-hidden="true" role="status" class="inline w-5 h-5 mr-4 text-gray-800 animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                      <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                    </svg>
+                  }
+                    Solve 
                      </p>}
                   {solved && <p className='cursor-pointer font-bold text-white bg-[#111111] 
                   hover:bg-white/[.3] border-2 border-transparent hover:border-white/[.3] text-center rounded-2xl py-2 my-4 '>
