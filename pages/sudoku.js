@@ -29,14 +29,12 @@ const montserrat_normal = Montserrat({
 
 
 const Sudoku = () => {
-
   let url = '';
-
   if (typeof window !== 'undefined') {
     if (window.location.hostname === 'localhost') {
       url = 'https://localhost:5000/api/solve';
     } else {
-      url = 'https://us-central1-portfolio-cec85.cloudfunctions.net/api/solve';
+      url = 'https://us-central1-portfolio-cec85.cloudfunctions.net/solve';
     }
   }  
 
@@ -93,6 +91,7 @@ const Sudoku = () => {
         });
     
         if (response.ok) {
+          console.log(response);
           const data = await response.json();
           if(data.status != 'success'){
             return;
@@ -548,7 +547,7 @@ const Sudoku = () => {
 
                 <p className='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
 
-                <div>
+                <div onClick={sendDataToAPI}>
                   
                   {!solved && <p className='cursor-pointer font-bold text-white bg-[#111111] 
                         hover:bg-white/[.3] border-2 border-transparent hover:border-white/[.3] text-center rounded-2xl py-2 my-4 '>
@@ -571,10 +570,6 @@ const Sudoku = () => {
           </div>
         </div>
       </div>
-    
- 
-   
-
 </div>
 
 
