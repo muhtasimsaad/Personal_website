@@ -1,4 +1,4 @@
-const functions = require("firebase-functions");
+const {onRequest} = require("firebase-functions/v2/https");
 // const admin = require("firebase-admin");
 // const { onRequest } = require("firebase-functions/lib/providers/https");
 // const logger = require("firebase-functions/lib/logger");
@@ -19,51 +19,28 @@ global.startTime = 0;
 global.responseVariable = "";
 global.response = "";
 
-// Create an HTTP request function
-exports.solve = functions.https.onRequest((request, response) => {
-  // Set CORS headers to allow requests from any domain
-  response.set("Access-Control-Allow-Origin", "*");
-  response.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
-  response.set("Access-Control-Allow-Headers", "*");
 
-  // Check if it"s an OPTIONS request (preflight)
-  if (request.method === "OPTIONS") {
-    response.status(204).send("");
-    return;
-  }
+exports.sayHelloSaad = onRequest(
+    {cors: false},
+    (req, res) => {
+      res.set("Access-Control-Allow-Origin", "*");
+      res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
+      res.set("Access-Control-Allow-Headers", "*");
+      res.status(200).send("test yes");
+    },
+);
 
-  global.response = response;
-
-  // Handle the main GET request
-  if (request.method === "POST") {
-    // const mainArray = request.body.mainArray;
-    const mainArray = [
-      ["6", "", "", "8", "", "", "2", "7", ""],
-      ["", "3", "", "", "", "", "9", "4", ""],
-      ["", "", "", "", "", "", "6", "3", ""],
-      ["4", "", "6", "", "7", "", "", "", "3"],
-      ["2", "1", "8", "", "", "9", "7", "", "4"],
-      ["7", "", "", "2", "", "8", "", "6", ""],
-      ["", "", "2", "4", "5", "", "", "", ""],
-      ["1", "", "", "", "3", "", "4", "9", ""],
-      ["", "", "4", "", "", "", "5", "1", "6"],
-    ];
-    global.responseVariable = response;
-    global.startTime = performance.now();
-
-    const possibilitiesArray = convertToPossibilitiesArray(mainArray);
-
-    const solution = solveSudoku(possibilitiesArray);
-
-    const responseData = {
-      message: solution,
-    };
-
-    response.status(200).json(responseData);
-  } else {
-    response.status(405).send("Method not allowed");
-  }
-});
+/**
+ * Returns a string indicating a positive outcome.
+ *
+ * This function returns the string "yes" to indicate a positive outcome.
+ *
+ * @return {string} The string "yes" representing a positive outcome.
+ *
+ * @example
+ * const result = testData();
+ * console.log(result); // Output: "yes"
+ */
 
 /**
  * Solves the puzzle using a guessing algorithm.
@@ -96,9 +73,38 @@ function convertToPossibilitiesArray(mainArray) {
 
   return mainArray;
 }
+exports.sayHelloSaad = onRequest(
+    {cors: false},
+    (req, res) => {
+      res.set("Access-Control-Allow-Origin", "*");
+      res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
+      res.set("Access-Control-Allow-Headers", "*");
+
+      const mainArray = [
+        ["6", "", "", "8", "", "", "2", "7", ""],
+        ["", "3", "", "", "", "", "9", "4", ""],
+        ["", "", "", "", "", "", "6", "3", ""],
+        ["4", "", "6", "", "7", "", "", "", "3"],
+        ["2", "1", "8", "", "", "9", "7", "", "4"],
+        ["7", "", "", "2", "", "8", "", "6", ""],
+        ["", "", "2", "4", "5", "", "", "", ""],
+        ["1", "", "", "", "3", "", "4", "9", ""],
+        ["", "", "4", "", "", "", "5", "1", "6"],
+      ];
+      global.responseVariable = res;
+      global.startTime = performance.now();
+      const possibilitiesArray = convertToPossibilitiesArray(mainArray);
+      const solution = solveSudoku(possibilitiesArray);
+      const responseData = {
+        message: solution,
+      };
+      res.status(200).send(responseData);
+    },
+);
 
 /**
  * Solves a Sudoku puzzle using a combination of logic and guessing techniques.
+ * Returns a string indicating a positive outcome.
  *
  * @param {Array<Array<string>>} mainArray
  */
@@ -124,6 +130,7 @@ function solveSudoku(mainArray) {
 }
 /**
  * Checks if a Sudoku puzzle is solved, i.e., all cells contain a single digit.
+ * This function returns the string "yes" to indicate a positive outcome.
  *
  * @param {Array<Array<string>>} mainArray
  * @return {boolean}
@@ -140,9 +147,11 @@ function checkSolved(mainArray) {
 }
 /**
  * Solves a Sudoku puzzle using logic-based techniques.
+ * @return {string} The string "yes" representing a positive outcome.
  *
  * @param {Array<Array<string>>} mainArray
  * @return {Array<Array<string>>}
+ * @example
  */
 function solveByLogic(mainArray) {
   let mainFlag;

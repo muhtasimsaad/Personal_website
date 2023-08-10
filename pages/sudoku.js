@@ -42,7 +42,7 @@ const Sudoku = () => {
   const [solvedUsingBFS,setsolvedUsingBFS] = useState(10);
   const [nodesTraversed,setnodesTraversed] = useState(10);
   const [timeRequired,settimeRequired] = useState(10);
-  const [difficulty,setDifficulty] = useState(.1);
+  const [difficulty,setDifficulty] = useState();
 
   
 
@@ -82,7 +82,7 @@ const Sudoku = () => {
       try {
         setQuestion(mainArray);
         setLoading(true);
-        const response = await fetch('https://us-central1-portfolio-cec85.cloudfunctions.net/api/solve', {
+        const response = await fetch('https://sayhellosaad-n4bhsztn2a-uc.a.run.app', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -97,7 +97,6 @@ const Sudoku = () => {
             return;
           }
           processResponse(data);
-          setButtonText('Reset');
           setSolved(true);
           setLoading(false);
         } else {
@@ -119,19 +118,17 @@ const Sudoku = () => {
         ['1', '','', '','3', ''  ,'4', '9',''],
         ['', '','4', '','', ''  ,'5', '1','6'],
   
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '',''],
-      // ['', '','', '','', '','', '','']
-       ]);
-
-       setButtonText('Solve');
-          setSolved(false);
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '',''],
+        // ['', '','', '','', '','', '','']
+      ]);
+      setSolved(false);
     }
       
   };
@@ -165,11 +162,20 @@ const Sudoku = () => {
     setnodesTraversed(metadata.nodes_traversed);
     setLogicallySolved(metadata.logically_solved);
     setsolvedUsingBFS(metadata.solved_using_BFS);
-    settimeRequired(metadata.time_required);
-    console.log(parseFloat(metadata.time_required, 10).toFixed(6));
-    setDifficulty(metadata.difficulty);
+    settimeRequired((parseFloat(metadata.time_required)/100).toFixed(2));
     setlogicalArray(metadata.logical_array);
     
+    const difficult_level = parseFloat(metadata.difficulty);
+    console.log(difficult_level);
+    if (difficult_level >= 0.9) {
+      setDifficulty("Extreme");
+    } else if (difficult_level >= 0.66) {
+      setDifficulty("Hard");
+    } else if (difficult_level >= 0.33) {
+      setDifficulty("Medium");
+    } else {
+      setDifficulty("Easy");
+    }
   }
 
 
@@ -185,9 +191,8 @@ const Sudoku = () => {
 
     //solved state
 
-
     if(question[row][column].length == 1 ){
-      return "#22c55e";
+      return "#444444";
     }
 
     if(!logicalArray){
@@ -195,10 +200,10 @@ const Sudoku = () => {
     }
 
     if(logicalArray[row][column].length == 1 ){
-      return "#93c5fd";
+      return "#9DB2BF";
     }
     
-    return "#e879f9";
+    return "#27374D";
   };
 
   return <div className={montserrat_normal.className}>
@@ -501,7 +506,7 @@ const Sudoku = () => {
                       <Image src={logically_solved} className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Logically Solved:</p>
-                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {solved && <p className='text-3xl text-white font-bold'>{logicallySolved}</p>}
                         {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
@@ -510,7 +515,7 @@ const Sudoku = () => {
                       <Image src={solved_using_BFS} className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white min-w-fit mr-4'>Solved Using BFS:</p>
-                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {solved && <p className='text-3xl text-white font-bold'>{solvedUsingBFS}</p>}
                         {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
@@ -519,7 +524,7 @@ const Sudoku = () => {
                       <Image src={nodes} className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Nodes Traversed:</p>
-                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {solved && <p className='text-3xl text-white font-bold'>{nodesTraversed}</p>}
                         {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
@@ -528,7 +533,7 @@ const Sudoku = () => {
                       <Image src={time_taken} className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Time Taken:</p>
-                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {solved && <p className='text-3xl text-white font-bold'>{timeRequired}s</p>}
                         {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
@@ -537,7 +542,7 @@ const Sudoku = () => {
                       <Image src={difficultys} className='h-10 w-10'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Difficulty:</p>
-                        {solved && <p className='text-3xl text-white font-bold'>81</p>}
+                        {solved && <p className='text-3xl text-white font-bold'>{difficulty}</p>}
                         {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
