@@ -19,17 +19,6 @@ global.startTime = 0;
 global.responseVariable = "";
 global.response = "";
 
-
-exports.sayHelloSaad = onRequest(
-    {cors: false},
-    (req, res) => {
-      res.set("Access-Control-Allow-Origin", "*");
-      res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
-      res.set("Access-Control-Allow-Headers", "*");
-      res.status(200).send("test yes");
-    },
-);
-
 /**
  * Returns a string indicating a positive outcome.
  *
@@ -73,7 +62,8 @@ function convertToPossibilitiesArray(mainArray) {
 
   return mainArray;
 }
-exports.sayHelloSaad = onRequest(
+
+exports.generatePuzzle = onRequest(
     {cors: false},
     (req, res) => {
       res.set("Access-Control-Allow-Origin", "*");
@@ -81,16 +71,57 @@ exports.sayHelloSaad = onRequest(
       res.set("Access-Control-Allow-Headers", "*");
 
       const mainArray = [
-        ["6", "", "", "8", "", "", "2", "7", ""],
-        ["", "3", "", "", "", "", "9", "4", ""],
-        ["", "", "", "", "", "", "6", "3", ""],
-        ["4", "", "6", "", "7", "", "", "", "3"],
-        ["2", "1", "8", "", "", "9", "7", "", "4"],
-        ["7", "", "", "2", "", "8", "", "6", ""],
-        ["", "", "2", "4", "5", "", "", "", ""],
-        ["1", "", "", "", "3", "", "4", "9", ""],
-        ["", "", "4", "", "", "", "5", "1", "6"],
+        // [
+        //   ["6", "", "", "8", "", "", "2", "7", ""],
+        //   ["", "3", "", "", "", "", "9", "4", ""],
+        //   ["", "", "", "", "", "", "6", "3", ""],
+        //   ["4", "", "6", "", "7", "", "", "", "3"],
+        //   ["2", "1", "8", "", "", "9", "7", "", "4"],
+        //   ["7", "", "", "2", "", "8", "", "6", ""],
+        //   ["", "", "2", "4", "5", "", "", "", ""],
+        //   ["1", "", "", "", "3", "", "4", "9", ""],
+        //   ["", "", "4", "", "", "", "5", "1", "6"],
+        // ],
+        // [
+        //   ["1", "", "", "5", "", "", "2", "3", ""],
+        //   ["6", "", "", "", "", "1", "8", "", ""],
+        //   ["", "2", "", "7", "", "", "", "5", ""],
+        //   ["", "4", "9", "", "", "", "", "", ""],
+        //   ["5", "", "", "", "", "", "", "", "8"],
+        //   ["", "", "", "", "", "", "7", "6", ""],
+        //   ["", "3", "", "", "", "7", "", "1", ""],
+        //   ["", "", "6", "8", "", "", "", "", "2"],
+        //   ["", "1", "4", "", "", "6", "", "", "5"],
+        // ],
+        [
+          ["6", "", "", "", "", "", "", "3", "9"],
+          ["2", "", "3", "", "", "4", "", "", ""],
+          ["", "", "", "5", "", "", "7", "", ""],
+          ["", "3", "", "", "", "8", "", "", ""],
+          ["9", "", "", "", "", "", "", "", "3"],
+          ["", "", "", "7", "", "", "", "4", ""],
+          ["", "", "5", "", "", "1", "", "", ""],
+          ["", "", "", "4", "", "", "2", "", "6"],
+          ["1", "9", "", "", "", "", "", "", "7"],
+        ],
+        
       ];
+
+      const responseData = {
+        puzzle: mainArray[Math.floor(Math.random() * mainArray.length)],
+      };
+      res.status(200).send(responseData);
+    },
+);
+
+exports.solveSudoku = onRequest(
+    {cors: false},
+    (req, res) => {
+      res.set("Access-Control-Allow-Origin", "*");
+      res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
+      res.set("Access-Control-Allow-Headers", "*");
+
+      const mainArray = req.body.mainArray;
       global.responseVariable = res;
       global.startTime = performance.now();
       const possibilitiesArray = convertToPossibilitiesArray(mainArray);

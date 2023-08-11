@@ -1,9 +1,7 @@
 import React from 'react';
 import { useState } from "react";
-import { CountUp } from 'use-count-up';
 import Image from 'next/image';
 import background from '../app/assets/images/background.png'
-import background_circle2 from '../app/assets/images/background_circle2.svg'
 import '../app/globals.css'
 import { Montserrat } from '@next/font/google';
 import table from '../app/assets/images/Table.svg';
@@ -28,15 +26,7 @@ const montserrat_normal = Montserrat({
 });
 
 
-const Sudoku = () => {
-  let url = '';
-  if (typeof window !== 'undefined') {
-    if (window.location.hostname === 'localhost') {
-      url = 'https://localhost:5000/api/solve';
-    } else {
-      url = 'https://us-central1-portfolio-cec85.cloudfunctions.net/solve';
-    }
-  }  
+const Sudoku = () => {  
 
   const [logicallySolved,setLogicallySolved] = useState(10);
   const [solvedUsingBFS,setsolvedUsingBFS] = useState(10);
@@ -55,25 +45,25 @@ const Sudoku = () => {
   const [question,setQuestion] = useState();
   const [logicalArray,setlogicalArray] = useState();
   const [mainArray, setmainArray] = useState([
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '',''],
-    // ['', '','', '','', '','', '','']
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '',''],
+    ['', '','', '','', '','', '','']
 
-    ['6', '','', '8','', '','2', '7',''],
-    ['', '3','', '','', '','9', '4',''],
-    ['', '','', '','', '','6', '3',''],
-    ['4', '','6', '','7', '','', '','3'],
-    ['2', '1','8', '','', '9','7', '','4'],
-    ['7', '','', '2','', '8','', '6',''],
-    ['', '','2', '4','5', '' ,'', '',''],
-    ['1', '','', '','3', ''  ,'4', '9',''],
-    ['', '','4', '','', ''  ,'5', '1','6'],
+    // ['6', '','', '8','', '','2', '7',''],
+    // ['', '3','', '','', '','9', '4',''],
+    // ['', '','', '','', '','6', '3',''],
+    // ['4', '','6', '','7', '','', '','3'],
+    // ['2', '1','8', '','', '9','7', '','4'],
+    // ['7', '','', '2','', '8','', '6',''],
+    // ['', '','2', '4','5', '' ,'', '',''],
+    // ['1', '','', '','3', ''  ,'4', '9',''],
+    // ['', '','4', '','', ''  ,'5', '1','6'],
    ]);
 
 
@@ -82,7 +72,7 @@ const Sudoku = () => {
       try {
         setQuestion(mainArray);
         setLoading(true);
-        const response = await fetch('https://sayhellosaad-n4bhsztn2a-uc.a.run.app', {
+        const response = await fetch('https://solvesudoku-n4bhsztn2a-uc.a.run.app', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -91,7 +81,6 @@ const Sudoku = () => {
         });
     
         if (response.ok) {
-          console.log(response);
           const data = await response.json();
           if(data.status != 'success'){
             return;
@@ -108,31 +97,47 @@ const Sudoku = () => {
     }
     else{
       setmainArray([
-        ['6', '','', '8','', '','2', '7',''],
-        ['', '3','', '','', '','9', '4',''],
-        ['', '','', '','', '','6', '3',''],
-        ['4', '','6', '','7', '','', '','3'],
-        ['2', '1','8', '','', '9','7', '','4'],
-        ['7', '','', '2','', '8','', '6',''],
-        ['', '','2', '4','5', '' ,'', '',''],
-        ['1', '','', '','3', ''  ,'4', '9',''],
-        ['', '','4', '','', ''  ,'5', '1','6'],
+        // ['6', '','', '8','', '','2', '7',''],
+        // ['', '3','', '','', '','9', '4',''],
+        // ['', '','', '','', '','6', '3',''],
+        // ['4', '','6', '','7', '','', '','3'],
+        // ['2', '1','8', '','', '9','7', '','4'],
+        // ['7', '','', '2','', '8','', '6',''],
+        // ['', '','2', '4','5', '' ,'', '',''],
+        // ['1', '','', '','3', ''  ,'4', '9',''],
+        // ['', '','4', '','', ''  ,'5', '1','6'],
   
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '',''],
-        // ['', '','', '','', '','', '','']
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '',''],
+        ['', '','', '','', '','', '','']
       ]);
       setSolved(false);
     }
       
   };
 
+  const generatePuzzle = async () => {
+    setLoading(true);
+    const response = await fetch('http://127.0.0.1:8001/portfolio-cec85/us-central1/generatePuzzle', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ mainArray }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setmainArray(data.puzzle);
+    }
+    setLoading(false);
+  }
 
   const setInfoModal = (key) => {
     setInfo(key);
@@ -184,7 +189,7 @@ const Sudoku = () => {
      
     if(!solved ){
       if(mainArray[row][column] == ""){
-        return '#e5e5e5';
+        return '';
       }
       return '#444444';
     }
@@ -200,7 +205,7 @@ const Sudoku = () => {
     }
 
     if(logicalArray[row][column].length == 1 ){
-      return "#9DB2BF";
+      return "#161824";
     }
     
     return "#27374D";
@@ -224,7 +229,7 @@ const Sudoku = () => {
             <div className='text-gray-100'>
               <div className='flex'>
               <p className={`${montserrat_bold.className} text-2xl h-fit my-auto`}>Instructions:</p>
-              <Image src={cross} className="h-6 w-6 ml-auto rounded-full cursor-pointer" onClick={() => setInfoModal(false)}/>
+              <Image src={cross} alt="cross" className="h-6 w-6 ml-auto rounded-full cursor-pointer" onClick={() => setInfoModal(false)}/>
               </div>
               
               <p className='mt-4'><span className={`${montserrat_bold.className} underline`}>Input Grid:</span> Enter the initial Sudoku puzzle by filling in the 9x9 grid. Click on each cell to input anumber from 1 to 9. Leave empty cells for the unknown numbers.</p>
@@ -266,7 +271,7 @@ const Sudoku = () => {
               <Link href="/"><p className="text-lg">&#8592; Back to Portfolio</p></Link>
               <div className='flex'>
                 <p className='text-sm ml-auto text-right mt-2'>About Sudoku</p>
-                <Image src={information} className="mt-auto ml-1 cursor-pointer" onClick={() => setInfoModal(true)}/>
+                <Image src={information} alt="info" className="mt-auto ml-1 cursor-pointer" onClick={() => setInfoModal(true)}/>
               </div>
             </div>
           </div>
@@ -282,7 +287,7 @@ const Sudoku = () => {
                     </div>
                     <div className='flex'>
                       <p className='text-xs md:text-lg text-white w-14 md:w-fit'>Logically Solved</p>
-                      <p className="w-4 h-4 rounded-full mt-auto bg-[#9DB2BF] mb-1.5 ml-2"></p>
+                      <p className="w-4 h-4 rounded-full mt-auto bg-[#161824] mb-1.5 ml-2"></p>
                     </div>
                     
                     
@@ -291,20 +296,20 @@ const Sudoku = () => {
                     <div className="grid grid-rows-3 grid-flow-col gap-0 border-2 border-[#AAAAAA]">
                       <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900' disabled={solved} value={mainArray[0][0]}
                                 onChange={(event) => handleInputChange(0, 0, event)} style={{ backgroundColor: computeInputColor(0,0) }} />
-                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][1]}
-                                onChange={(event) => handleInputChange(0, 1, event)} style={{ backgroundColor: computeInputColor(0,1) }}  />
-                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][2]}
-                                onChange={(event) => handleInputChange(0, 2, event)} style={{ backgroundColor: computeInputColor(0,2) }}  />
                       <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][0]}
                                 onChange={(event) => handleInputChange(1, 0, event)} style={{ backgroundColor: computeInputColor(1,0) }}  />
-                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][1]}
-                                onChange={(event) => handleInputChange(1, 1, event)} style={{ backgroundColor: computeInputColor(1,1) }}  />
-                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][2]}
-                                onChange={(event) => handleInputChange(1, 2, event)} style={{ backgroundColor: computeInputColor(1,2) }}  />
                       <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][0]}
                                 onChange={(event) => handleInputChange(2, 0, event)} style={{ backgroundColor: computeInputColor(2,0) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][1]}
+                                onChange={(event) => handleInputChange(0, 1, event)} style={{ backgroundColor: computeInputColor(0,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][1]}
+                                onChange={(event) => handleInputChange(1, 1, event)} style={{ backgroundColor: computeInputColor(1,1) }}  />
                       <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][1]}
                                 onChange={(event) => handleInputChange(2, 1, event)} style={{ backgroundColor: computeInputColor(2,1) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[0][2]}
+                                onChange={(event) => handleInputChange(0, 2, event)} style={{ backgroundColor: computeInputColor(0,2) }}  />
+                      <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[1][2]}
+                                onChange={(event) => handleInputChange(1, 2, event)} style={{ backgroundColor: computeInputColor(1,2) }}  />
                       <input className='bg-none border border-[#AAAAAA] w-7 h-7 md:w-16 md:h-16 text-3xl p-2 text-center  bg-white bg-opacity-0  text-white font-bold caret-gray-900'  disabled={solved} value={mainArray[2][2]}
                                 onChange={(event) => handleInputChange(2, 2, event)} style={{ backgroundColor: computeInputColor(2,2) }}  />
                     </div>
@@ -495,7 +500,7 @@ const Sudoku = () => {
                  
                   <div>
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none  hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                      <Image src={table} className='h-8 w-8 mr-1'/>
+                      <Image src={table} alt="cells" className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>total Cells:</p>
                         <p className='text-3xl text-white font-bold'>81</p>
@@ -503,7 +508,7 @@ const Sudoku = () => {
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                      <Image src={logically_solved} className='h-8 w-8 mr-1'/>
+                      <Image src={logically_solved} alt="logically" className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Logically Solved:</p>
                         {solved && <p className='text-3xl text-white font-bold'>{logicallySolved}</p>}
@@ -512,7 +517,7 @@ const Sudoku = () => {
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                      <Image src={solved_using_BFS} className='h-8 w-8 mr-1'/>
+                      <Image src={solved_using_BFS} alt="bfs" className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white min-w-fit mr-4'>Solved Using BFS:</p>
                         {solved && <p className='text-3xl text-white font-bold'>{solvedUsingBFS}</p>}
@@ -521,7 +526,7 @@ const Sudoku = () => {
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3]  rounded-md px-4 py-3 flex'>
-                      <Image src={nodes} className='h-8 w-8 mr-1'/>
+                      <Image src={nodes} alt="nodes" className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Nodes Traversed:</p>
                         {solved && <p className='text-3xl text-white font-bold'>{nodesTraversed}</p>}
@@ -530,7 +535,7 @@ const Sudoku = () => {
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                      <Image src={time_taken} className='h-8 w-8 mr-1'/>
+                      <Image src={time_taken} alt="time" className='h-8 w-8 mr-1'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Time Taken:</p>
                         {solved && <p className='text-3xl text-white font-bold'>{timeRequired}s</p>}
@@ -539,18 +544,22 @@ const Sudoku = () => {
                     </div>
 
                     <div className='mt-3 bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to none border border-white/[.3] rounded-md px-4 py-3 flex'>
-                      <Image src={difficultys} className='h-10 w-10'/>
+                      <Image src={difficultys} alt="difficulty" className='h-10 w-10'/>
                       <div className="flex justify-between items-center w-full">
                         <p className='text-sm text-white'>Difficulty:</p>
                         {solved && <p className='text-3xl text-white font-bold'>{difficulty}</p>}
                         {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                       </div>
                     </div>
+                    <p onClick={generatePuzzle} className='cursor-pointer text-sm font-bold text-white bg-gradient-to-br from-white/[.3] to-none hover:bg-gradient-to-tl from-white/[.3] to-none text-center rounded-md border border-white/[.3] py-2 my-4 '>
+                      Generate a Puzzle 
+                    </p>
                   </div>
                  
                 
-
-                <p className='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
+                <Link href="https://github.com/muhtasimsaad/Personal_website">
+                  <p className='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
+                </Link>
 
                 <div onClick={sendDataToAPI}>
                   
@@ -569,6 +578,7 @@ const Sudoku = () => {
                   Reset 
                   </p>}
                 </div>
+                
 
 
             </div>
