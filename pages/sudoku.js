@@ -34,13 +34,10 @@ const Sudoku = () => {
   const [timeRequired,settimeRequired] = useState(10);
   const [difficulty,setDifficulty] = useState();
 
-  
-
   // States
   const [solved,setSolved] =useState(false);
   const [info,setInfo] =useState(false);
   const [loading,setLoading] =useState(false);
-   
   
   const [question,setQuestion] = useState();
   const [logicalArray,setlogicalArray] = useState();
@@ -72,7 +69,7 @@ const Sudoku = () => {
       try {
         setQuestion(mainArray);
         setLoading(true);
-        const response = await fetch('https://solvesudoku-n4bhsztn2a-uc.a.run.app', {
+        const response = await fetch('http://127.0.0.1:8001/portfolio-cec85/us-central1/solveSudoku', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -142,7 +139,6 @@ const Sudoku = () => {
   const setInfoModal = (key) => {
     setInfo(key);
   };
-   
 
   const handleInputChange = (rowIndex, columnIndex, event) => {
     let newValue = event.target.value;
@@ -158,11 +154,9 @@ const Sudoku = () => {
     });
   };
 
-
   const processResponse = (data) => {
     
     setmainArray(data.solution);
-
     let metadata = data.metadata;
     setnodesTraversed(metadata.nodes_traversed);
     setLogicallySolved(metadata.logically_solved);

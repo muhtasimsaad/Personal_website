@@ -45,23 +45,6 @@ function sendResults(mainArray, metadata) {
 
   global.responseVariable.status(200).json(responseData);
 }
-/**
- * Converts an incomplete Sudoku puzzle
- *
- * @param {Array<Array<string>>} mainArray
- * @return {Array<Array<string>>}
- */
-function convertToPossibilitiesArray(mainArray) {
-  for (let row = 0; row < 9; row++) {
-    for (let cols = 0; cols < 9; cols++) {
-      if (mainArray[row][cols] === "") {
-        mainArray[row][cols] = "123456789";
-      }
-    }
-  }
-
-  return mainArray;
-}
 
 exports.generatePuzzle = onRequest(
     {cors: false},
@@ -104,7 +87,6 @@ exports.generatePuzzle = onRequest(
           ["", "", "", "4", "", "", "2", "", "6"],
           ["1", "9", "", "", "", "", "", "", "7"],
         ],
-        
       ];
 
       const responseData = {
@@ -117,6 +99,7 @@ exports.generatePuzzle = onRequest(
 exports.solveSudoku = onRequest(
     {cors: false},
     (req, res) => {
+      global.response = res;
       res.set("Access-Control-Allow-Origin", "*");
       res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
       res.set("Access-Control-Allow-Headers", "*");
@@ -124,14 +107,39 @@ exports.solveSudoku = onRequest(
       const mainArray = req.body.mainArray;
       global.responseVariable = res;
       global.startTime = performance.now();
-      const possibilitiesArray = convertToPossibilitiesArray(mainArray);
-      const solution = solveSudoku(possibilitiesArray);
+      const possibilitiesArray = convertToPossibilitiesArray(mainArray[0]);
+      // const solution = solveSudoku(possibilitiesArray);
+      // const responseData = {
+      //   message: solution,
+      // };
+      // res.status(200).send(responseData);
       const responseData = {
-        message: solution,
+        message: mainArray,
+        // possibility: possibilitiesArray,
       };
       res.status(200).send(responseData);
     },
 );
+
+/**
+ * Converts an incomplete Sudoku puzzle
+ *
+ * @param {Array<Array<string>>} mainArray
+ * @return {Array<Array<string>>}
+ */
+function convertToPossibilitiesArray(mainArray) {
+  
+  for (let row = 0; row < 9; row++) {
+    for (let cols = 0; cols < 9; cols++) {
+      console.log('asdasd');
+      if (mainArray[row][cols] === "") {
+        mainArray[row][cols] = "123456789";
+      }
+    }
+  }
+  
+  return mainArray;
+}
 
 /**
  * Solves a Sudoku puzzle using a combination of logic and guessing techniques.
