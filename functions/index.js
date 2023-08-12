@@ -28,7 +28,7 @@ global.response = "";
  *
  * @example
  * const result = testData();
- * console.log(result); // Output: "yes"
+ * 
  */
 
 /**
@@ -104,18 +104,20 @@ exports.solveSudoku = onRequest(
       res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
       res.set("Access-Control-Allow-Headers", "*");
 
-      const mainArray = req.body.mainArray;
+      const mainArray = req.body['mainArray'];
+       
+
+      // for (let rowIndex in req.body['mainArray']) {
+      //   let rowArray = ">>>"+req.body['mainArray'][rowIndex];
+      // }
       global.responseVariable = res;
       global.startTime = performance.now();
-      const possibilitiesArray = convertToPossibilitiesArray(mainArray[0]);
-      // const solution = solveSudoku(possibilitiesArray);
-      // const responseData = {
-      //   message: solution,
-      // };
-      // res.status(200).send(responseData);
+      const possibilitiesArray = convertToPossibilitiesArray(mainArray);
+      console.log(possibilitiesArray);
+      // solveSudoku(possibilitiesArray);
       const responseData = {
-        message: mainArray,
-        // possibility: possibilitiesArray,
+        message: "response from main method",
+        situation : mainArray,
       };
       res.status(200).send(responseData);
     },
@@ -129,16 +131,41 @@ exports.solveSudoku = onRequest(
  */
 function convertToPossibilitiesArray(mainArray) {
   
-  for (let row = 0; row < 9; row++) {
-    for (let cols = 0; cols < 9; cols++) {
-      console.log('asdasd');
-      if (mainArray[row][cols] === "") {
-        mainArray[row][cols] = "123456789";
+    let flag = false;
+    let result = [
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+      ['', '','', '','', '','', '',''],
+    ];
+   
+    for (let rowIndex in mainArray) {
+      let rowArray = mainArray[rowIndex];
+      const eachRow = JSON.stringify(rowArray).replace(/[\[\]"']/g, '').split(',');
+      for (let Columnindex in eachRow){
+        if(eachRow[Columnindex] === ""){
+          result[rowIndex][Columnindex] = "123456789";
+        }
+        else{
+          flag = true;
+          result[rowIndex][Columnindex] = eachRow[Columnindex];
+        }
       }
     }
-  }
-  
-  return mainArray;
+    
+    // if(!flag){
+    //   const responseData = {
+    //     message: "Found blank array",
+    //   };
+    //   global.response.status(400).send(responseData);
+    // }
+
+    return result;
 }
 
 /**
@@ -148,6 +175,7 @@ function convertToPossibilitiesArray(mainArray) {
  * @param {Array<Array<string>>} mainArray
  */
 function solveSudoku(mainArray) {
+
   generateDifficultyLevel(mainArray);
   mainArray = solveByLogic(mainArray);
   global.logical_array = mainArray;
@@ -344,7 +372,6 @@ function singularPossRow(mainArray, row, column) {
           break;
         }
         if (column == 8 && flag) {
-          console.log("its here");
           mainArray[row][counter] = value;
           mainFlag = true;
         }
