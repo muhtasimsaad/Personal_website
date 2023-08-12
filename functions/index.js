@@ -114,7 +114,7 @@ exports.solveSudoku = onRequest(
       global.startTime = performance.now();
       const possibilitiesArray = convertToPossibilitiesArray(mainArray);
       console.log(possibilitiesArray);
-      // solveSudoku(possibilitiesArray);
+      solveSudoku(possibilitiesArray);
       const responseData = {
         message: "response from main method",
         situation : mainArray,
@@ -176,6 +176,8 @@ function convertToPossibilitiesArray(mainArray) {
  */
 function solveSudoku(mainArray) {
 
+  
+
   generateDifficultyLevel(mainArray);
   mainArray = solveByLogic(mainArray);
   global.logical_array = mainArray;
@@ -184,16 +186,16 @@ function solveSudoku(mainArray) {
     global.logicalArray = duplicateArray(mainArray);
     mainArray = solveByGuessing(mainArray);
   }
-  if (checkSolutionIsCorrect(mainArray)) {
-    sendResults(mainArray, null);
-  } else {
-    const response = {
-      status: "failed",
-      reason: "logic failed",
-      result: mainArray,
-    };
-    JSON.stringify(response);
-  }
+  // if (checkSolutionIsCorrect(mainArray)) {
+  //   sendResults(mainArray, null);
+  // } else {
+  //   const response = {
+  //     status: "failed",
+  //     reason: "logic failed",
+  //     result: mainArray,
+  //   };
+  //   JSON.stringify(response);
+  // }
 }
 /**
  * Checks if a Sudoku puzzle is solved, i.e., all cells contain a single digit.
@@ -494,38 +496,40 @@ function checkSolutionIsCorrect(mainArray) {
  * @param {Array} mainArray - The main puzzle array to be solved.
  */
 function solveByGuessing(mainArray) {
-  const mainStack = [];
-  const trashStack = [];
-  const duplicatedArray = duplicateArray(mainArray);
-  mainStack.push(duplicatedArray);
-  do {
-    const element = mainStack.shift();
-    if (element == undefined) {
-      const response = {
-        status: "failed",
-        reason: "Array was empty",
-      };
-      JSON.stringify(response);
-    }
-    const solvedElement = solveByLogic(element);
-    if (!checkSolved(solvedElement)) {
-      trashStack.push(solvedElement);
-      const [row, column] = findSmallestString(solvedElement);
-      const allPossibilities = Array.from(solvedElement[row][column]);
-      for (const eachPossibility of allPossibilities) {
-        const doppleGangerArray = duplicateArray(solvedElement);
-        doppleGangerArray[row][column] = eachPossibility;
-        if (!alreadyInTrash(trashStack, doppleGangerArray)) {
-          mainStack.push(doppleGangerArray);
-          global.nodesTraversed++;
-        }
-      }
-    } else {
-      if (checkSolutionIsCorrect(solvedElement)) {
-        sendResults(solvedElement, getMetadataForGuessing());
-      }
-    }
-  } while (mainStack.length > 0);
+
+  console.log(mainArray);
+  // const mainStack = [];
+  // const trashStack = [];
+  // const duplicatedArray = duplicateArray(mainArray);
+  // mainStack.push(duplicatedArray);
+  // do {
+  //   const element = mainStack.shift();
+  //   if (element == undefined) {
+  //     const response = {
+  //       status: "failed",
+  //       reason: "Array was empty",
+  //     };
+  //     JSON.stringify(response);
+  //   }
+  //   const solvedElement = solveByLogic(element);
+  //   if (!checkSolved(solvedElement)) {
+  //     trashStack.push(solvedElement);
+  //     const [row, column] = findSmallestString(solvedElement);
+  //     const allPossibilities = Array.from(solvedElement[row][column]);
+  //     for (const eachPossibility of allPossibilities) {
+  //       const doppleGangerArray = duplicateArray(solvedElement);
+  //       doppleGangerArray[row][column] = eachPossibility;
+  //       if (!alreadyInTrash(trashStack, doppleGangerArray)) {
+  //         mainStack.push(doppleGangerArray);
+  //         global.nodesTraversed++;
+  //       }
+  //     }
+  //   } else {
+  //     if (checkSolutionIsCorrect(solvedElement)) {
+  //       sendResults(solvedElement, getMetadataForGuessing());
+  //     }
+  //   }
+  // } while (mainStack.length > 0);
 }
 /**
  *
