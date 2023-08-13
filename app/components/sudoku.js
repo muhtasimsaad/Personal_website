@@ -942,7 +942,7 @@ export const Sudoku = () => {
                               <h1 class="w-10 h-10 bg-cyan-500 rounded-full flex-shrink-0 text-center text-gray-700 flex 
                               items-center justify-center">5</h1>
                               <div class="flex-1 ">
-                              <p class="mt-1 text-gray-700 text-md hover:text-lg">You can only place a number in an empty cell if it doesn't violate any of the 
+                              <p class="mt-1 text-gray-700 text-md hover:text-lg">You can only place a number in an empty cell if it doesn`&apos;`t violate any of the 
                               rules mentioned above.</p>
                               </div>
                             </div>
@@ -994,9 +994,9 @@ export const Sudoku = () => {
               <div class="mx-auto m-4 rounded-md p-4 bg-gradient-to-r from-cyan-200 to-blue-200 w-full lg:w-4/5 ">          
                 <div class="lg:flex lg:items-center lg:justify-between">
                   <div class="min-w-0 p-8">
-                    <h1 class='text-5xl text-gray-700 font-bold my-4 bg-gray-300 p-4 rounded-lg'>About Sudoku</h1>
+                    <h1 class="text-5xl text-gray-700 font-bold my-4 bg-gray-300 p-4 rounded-lg">About Sudoku</h1>
   
-                    <p class='my-8'>
+                    <p class="my-8">
                       Sudoku, the internationally acclaimed puzzle game, has become a global obsession that transcends age, culture, and 
                       borders. Originating in Switzerland and gaining popularity in Japan before spreading worldwide, Sudoku has captured 
                       the imagination of millions. Beyond its numerical challenges, Sudoku offers a multitude of benefits, including mental 
@@ -1004,23 +1004,23 @@ export const Sudoku = () => {
                       remarkable rise to fame, and the numerous advantages it provides to enthusiasts around the globe.
                     </p>
   
-                    <p class='my-8'>
-                      While Sudoku's exact origins are somewhat mysterious, its roots can be traced back to Switzerland in the late 
+                    <p class="my-8">
+                      While Sudoku`&apos;`s exact origins are somewhat mysterious, its roots can be traced back to Switzerland in the late 
                       18th century. The Swiss mathematician, Leonard Euler, created a puzzle known as the Latin Square, which laid the 
-                      foundation for modern Sudoku. However, it wasn't until the 1970s that Sudoku gained prominence in Japan. Maki Kaji, 
+                      foundation for modern Sudoku. However, it wasn`&apos;`t until the 1970s that Sudoku gained prominence in Japan. Maki Kaji, 
                       the president of the Japanese puzzle company Nikoli, introduced Sudoku to the nation, giving it the name we know today. 
-                      From there, Sudoku's popularity exploded, captivating the minds of people from all walks of life.
+                      From there, Sudoku`&apos;`s popularity exploded, captivating the minds of people from all walks of life.
                     </p>
   
-                    <p class='my-8'>
+                    <p class="my-8">
                       The allure of Sudoku lies in its simplicity and complexity combined. Each puzzle consists of a 9x9 grid divided into 
                       nine 3x3 subgrids. The objective is to fill the grid with numbers from 1 to 9, ensuring that each row, column, and 
                       subgrid contains all the digits without repetition. What appears as a mere arrangement of numbers is, in fact, a cerebral
-                      challenge that requires logical thinking, pattern recognition, and deductive reasoning. Sudoku's appeal lies in the 
+                      challenge that requires logical thinking, pattern recognition, and deductive reasoning. Sudoku`&apos;`s appeal lies in the 
                       satisfaction derived from solving its intricacies, providing a welcome mental workout for puzzle enthusiasts.
                     </p>
   
-                    <p class='my-8'>
+                    <p class="my-8">
                       Engaging in Sudoku regularly offers a myriad of cognitive benefits. The game enhances critical thinking skills, requiring
                       players to analyze possibilities, eliminate options, and make strategic decisions. This process exercises the brain, 
                       enhancing problem-solving abilities, logical reasoning, and memory retention. The mental stimulation provided by Sudoku 
@@ -1028,7 +1028,7 @@ export const Sudoku = () => {
                       risk of age-related mental decline.
                     </p>
   
-                    <p class='my-8'>
+                    <p class="my-8">
                       Beyond its cognitive advantages, Sudoku also offers a form of relaxation and stress relief. As players immerse 
                       themselves in solving the puzzle, they enter a state of focused concentration, redirecting their attention away 
                       from daily stressors. Sudoku provides a mindful escape, allowing individuals to find solace in the logical challenges 
@@ -1036,17 +1036,17 @@ export const Sudoku = () => {
                       Thus, Sudoku becomes a therapeutic tool that promotes mental well-being and relaxation.
                     </p>
   
-                    <p class='my-8'>
-                      Sudoku's educational value extends beyond the realm of entertainment. Many schools and educational institutions have 
-                      incorporated Sudoku into their curriculum to enhance students' mathematical and logical skills. By encouraging critical
+                    <p class="my-8">
+                      Sudoku`&apos;`s educational value extends beyond the realm of entertainment. Many schools and educational institutions have 
+                      incorporated Sudoku into their curriculum to enhance students`&apos;` mathematical and logical skills. By encouraging critical
                       thinking and problem-solving, Sudoku cultivates important attributes that extend to various academic disciplines. Its 
                       non-threatening nature and enjoyable format make it an ideal tool for introducing complex concepts, fostering a love 
                       for mathematics, and instilling perseverance and resilience in students.
                     </p>
   
-                    <p class='my-8'>
+                    <p class="my-8">
                       Sudoku has not only created a global community of puzzle enthusiasts but has also fostered social connections among
-                       individuals of diverse backgrounds. The puzzle's popularity has led to the establishment of Sudoku clubs, forums, 
+                       individuals of diverse backgrounds. The puzzle`&apos;`s popularity has led to the establishment of Sudoku clubs, forums, 
                        and competitions worldwide. Enthusiasts gather to share strategies, discuss techniques, and challenge each other. 
                        This shared passion for Sudoku transcends age, language barriers, and cultural differences, unifying individuals under the common pursuit of mental stimulation and enjoyment.
                     </p>

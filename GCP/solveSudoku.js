@@ -1,123 +1,55 @@
-const {onRequest} = require("firebase-functions/v2/https");
-// const admin = require("firebase-admin");
-// const { onRequest } = require("firebase-functions/lib/providers/https");
-// const logger = require("firebase-functions/lib/logger");
-// const {onRequest} = require("firebase-functions/v2/https");
-// const nodemailer = require("nodemailer");
-const cors = require("cors");
-const express = require("express");
-const app = express();
-app.use(cors({origin: true}));
-
-
-global.nodesTraversed = 0;
-global.logicallySolved = 0;
-global.solvedUsingBFS = 0;
-global.difficulty = 0;
-global.logicalArray = "";
-global.startTime = 0;
-global.responseVariable = "";
-global.response = "";
-
+const functions = require('@google-cloud/functions-framework');
+const data = { 
+  nodesTraversed : 0,
+  logicallySolved : 0,
+  solvedUsingBFS : 0,
+  difficulty : 0,
+  logicalArray : "",
+  startTime : 0,
+  responseVariable : "",
+  response : "",
+   };
 /**
- * Returns a string indicating a positive outcome.
+ * HTTP function that supports CORS requests.
  *
- * This function returns the string "yes" to indicate a positive outcome.
- *
- * @return {string} The string "yes" representing a positive outcome.
- *
- * @example
- * const result = testData();
- * 
+ * @param {Object} req Cloud Function request context.
+ * @param {Object} res Cloud Function response context.
  */
+functions.http('solveSudoku', (req, res) => {
+  // Set CORS headers for preflight requests
+  // Allows GETs from any origin with the Content-Type header
+  // and caches preflight response for 3600s
+  res.set('Access-Control-Allow-Origin', '*');
 
-/**
- * Solves the puzzle using a guessing algorithm.
- *@param {Array} mainArray
- *@param {Array} metadata
- */
+  // Send response to OPTIONS requests
+  res.set('Access-Control-Allow-Methods', 'GET');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+  res.set('Access-Control-Max-Age', '3600');
 
-function sendResults(mainArray, metadata) {
+  // Get the name variable from query parameters
+  
+  const mainArray = req.query.puzzle || req.body.puzzle || 'default';
+  if(mainArray == 'default'){
+    const responseData = {
+      message: 'No Array Found',
+    };
+    res.status(200).send(responseData);
+  }
+  data.responseVariable = res;
+  data.startTime = performance.now();
+  console.log('-->'+mainArray[0]);
+  const possibilitiesArray = convertToPossibilitiesArray(mainArray);
+
+  solveSudoku(possibilitiesArray);
+
   const responseData = {
-    status: "success",
-    solution: mainArray,
-    metadata: metadata,
+    puzzle: possibilitiesArray,
+    nodes: data.nodes,
   };
+  res.status(200).send(responseData);
+   
+});
 
-  global.responseVariable.status(200).json(responseData);
-}
-
-exports.generatePuzzle = onRequest(
-    {cors: false},
-    (req, res) => {
-      res.set("Access-Control-Allow-Origin", "*");
-      res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
-      res.set("Access-Control-Allow-Headers", "*");
-
-      const mainArray = [
-        // [
-        //   ["6", "", "", "8", "", "", "2", "7", ""],
-        //   ["", "3", "", "", "", "", "9", "4", ""],
-        //   ["", "", "", "", "", "", "6", "3", ""],
-        //   ["4", "", "6", "", "7", "", "", "", "3"],
-        //   ["2", "1", "8", "", "", "9", "7", "", "4"],
-        //   ["7", "", "", "2", "", "8", "", "6", ""],
-        //   ["", "", "2", "4", "5", "", "", "", ""],
-        //   ["1", "", "", "", "3", "", "4", "9", ""],
-        //   ["", "", "4", "", "", "", "5", "1", "6"],
-        // ],
-        // [
-        //   ["1", "", "", "5", "", "", "2", "3", ""],
-        //   ["6", "", "", "", "", "1", "8", "", ""],
-        //   ["", "2", "", "7", "", "", "", "5", ""],
-        //   ["", "4", "9", "", "", "", "", "", ""],
-        //   ["5", "", "", "", "", "", "", "", "8"],
-        //   ["", "", "", "", "", "", "7", "6", ""],
-        //   ["", "3", "", "", "", "7", "", "1", ""],
-        //   ["", "", "6", "8", "", "", "", "", "2"],
-        //   ["", "1", "4", "", "", "6", "", "", "5"],
-        // ],
-        [
-          ["6", "", "", "", "", "", "", "3", "9"],
-          ["2", "", "3", "", "", "4", "", "", ""],
-          ["", "", "", "5", "", "", "7", "", ""],
-          ["", "3", "", "", "", "8", "", "", ""],
-          ["9", "", "", "", "", "", "", "", "3"],
-          ["", "", "", "7", "", "", "", "4", ""],
-          ["", "", "5", "", "", "1", "", "", ""],
-          ["", "", "", "4", "", "", "2", "", "6"],
-          ["1", "9", "", "", "", "", "", "", "7"],
-        ],
-      ];
-
-      const responseData = {
-        puzzle: mainArray[Math.floor(Math.random() * mainArray.length)],
-      };
-      res.status(200).send(responseData);
-    },
-);
-
-exports.solveSudoku = onRequest(
-    {cors: false},
-    (req, res) => {
-      global.response = res;
-      res.set("Access-Control-Allow-Origin", "*");
-      res.set("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
-      res.set("Access-Control-Allow-Headers", "*");
-
-      const mainArray = req.body['mainArray'];
-      global.responseVariable = res;
-      global.startTime = performance.now();
-      const possibilitiesArray = convertToPossibilitiesArray(mainArray);
-      console.log(possibilitiesArray);
-      solveSudoku(possibilitiesArray);
-      const responseData = {
-        message: "response from main method",
-        situation : mainArray,
-      };
-      res.status(200).send(responseData);
-    },
-);
 
 /**
  * Converts an incomplete Sudoku puzzle
@@ -135,7 +67,7 @@ function convertToPossibilitiesArray(mainArray) {
     }
   }
 
-  return result;
+  return mainArray;
 }
 
 /**
@@ -150,10 +82,10 @@ function solveSudoku(mainArray) {
 
   generateDifficultyLevel(mainArray);
   mainArray = solveByLogic(mainArray);
-  global.logical_array = mainArray;
+  data.logical_array = mainArray;
   generateLogicalVsBFS(mainArray);
   if (!checkSolved(mainArray)) {
-    global.logicalArray = duplicateArray(mainArray);
+    data.logicalArray = duplicateArray(mainArray);
     mainArray = solveByGuessing(mainArray);
   }
   if (checkSolutionIsCorrect(mainArray)) {
@@ -167,6 +99,7 @@ function solveSudoku(mainArray) {
     JSON.stringify(response);
   }
 }
+
 /**
  * Checks if a Sudoku puzzle is solved, i.e., all cells contain a single digit.
  * This function returns the string "yes" to indicate a positive outcome.
@@ -280,6 +213,7 @@ function trimByRow(mainArray, row, column) {
 
   return [mainArray, flag];
 }
+
 /**
  * Trims the possibilities of a cell based on grid (box) constraints.
  *
@@ -382,30 +316,7 @@ function singularPossibilityColumn(mainArray, row, column) {
   }
   return [mainArray, mainFlag];
 }
-// function scopeSingularPossibilityGrid(mainArray, row, column) {
-//   let mainFlag = false;
-//   for (let column = 0; column < 9; column++) {
-//     for (let value = 0; value < 9; value++) {
-//       let flag = false;
-//       let counter = -1;
-//       for (let row = 0; row < 9; row++) {
-//         if (mainArray[row][column].includes(value) && !flag) {
-//           flag = true;counter = row;
-//         }
-//         if (mainArray[row][column].includes(value) && flag) {
-//           break;
-//         }
-//         if (row == 8 && flag) {
-//           mainArray[row][counter] = value;
-//           mainFlag = true;
-//         }
-//       }
-//     }
-//   }
 
-//   return [mainArray, mainFlag];
-
-// }
 /**
  *
  * @param {Array<Array<string>>} mainArray
@@ -466,6 +377,7 @@ function checkSolutionIsCorrect(mainArray) {
  * @param {Array} mainArray - The main puzzle array to be solved.
  */
 function solveByGuessing(mainArray) {
+
   const mainStack = [];
   const trashStack = [];
   const duplicatedArray = duplicateArray(mainArray);
@@ -489,7 +401,7 @@ function solveByGuessing(mainArray) {
         doppleGangerArray[row][column] = eachPossibility;
         if (!alreadyInTrash(trashStack, doppleGangerArray)) {
           mainStack.push(doppleGangerArray);
-          global.nodesTraversed++;
+          data.nodesTraversed++;
         }
       }
     } else {
@@ -499,18 +411,29 @@ function solveByGuessing(mainArray) {
     }
   } while (mainStack.length > 0);
 }
+
+function sendResults(mainArray, metadata) {
+  const responseData = {
+    status: "success",
+    solution: mainArray,
+    metadata: metadata,
+  };
+
+  data.responseVariable.status(200).json(responseData);
+}
+
 /**
  *
  * @return {Object}
  */
 function getMetadataForGuessing() {
   return {
-    nodes_traversed: global.nodesTraversed,
-    logically_solved: global.logicallySolved,
-    solved_using_BFS: global.solvedUsingBFS,
-    difficulty: global.difficulty,
-    logical_array: global.logicalArray,
-    time_required: performance.now() - global.startTime,
+    nodes_traversed: data.nodesTraversed,
+    logically_solved: data.logicallySolved,
+    solved_using_BFS: data.solvedUsingBFS,
+    difficulty: data.difficulty,
+    logical_array: data.logicalArray,
+    time_required: performance.now() - data.startTime,
   };
 }
 /**
@@ -544,22 +467,6 @@ function duplicateArray(array) {
   return array.map((innerArray) => [...innerArray]);
 }
 
-// function alreadyInTrashOriginal(trashStack, mainArray) {
-//   for (const eachItem of trashStack) {
-//     for (let row = 0; row < 9; row++) {
-//       for (let column = 0; column < 9; column++) {
-//         if (mainArray[row][column] != eachItem[row][column]) {
-//           break;
-//         } else {
-//           if (row == 8 && column == 8) {
-//             return true;
-//           }
-//         }
-//       }
-//     }
-//   }
-//   return false;
-// }
 /**
  * Checks if a Sudoku puzzle array is already present in the trash stack.
  *
@@ -599,9 +506,9 @@ function generateLogicalVsBFS(mainArray) {
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
       if (mainArray[r][c].length === 1) {
-        global.logicallySolved++;
+        data.logicallySolved++;
       } else {
-        global.solvedUsingBFS++;
+        data.solvedUsingBFS++;
       }
     }
   }
@@ -621,11 +528,11 @@ function generateDifficultyLevel(mainArray) {
   }
 
   if (count >= 36) {
-    global.difficulty = 0.1;
+    data.difficulty = 0.1;
     return;
   }
   if (count <= 20) {
-    global.difficulty = 0.9;
+    data.difficulty = 0.9;
     return;
   }
   count = count - 20;
@@ -633,5 +540,5 @@ function generateDifficultyLevel(mainArray) {
   for (let c = count; c > 0; c--) {
     diff = diff - 0.05;
   }
-  global.difficulty = diff;
+  data.difficulty = diff;
 }

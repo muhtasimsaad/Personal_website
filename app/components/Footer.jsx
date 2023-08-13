@@ -1,5 +1,5 @@
 import React from "react";
-import '@fortawesome/fontawesome-free/css/all.css';
+import "@fortawesome/fontawesome-free/css/all.css";
 
 
 function Footer() {
@@ -7,7 +7,7 @@ function Footer() {
     <>
       <div className="footer bg-theme ">
         <div className="wrap flex justify-between items-center px-12 text-white font-bold py-6 tl:px-4 tl:py-4 ">
-          <h1 className="text-3xl">Saad's</h1>
+          <h1 className="text-3xl">Saad`&#39;`s</h1>
           <div className="flex gap-4 cursor-pointer ">
             <a href="https://github.com/muhtasimsaad" target="_blank">
               <i className="fa-brands fa-github border-[1px] border-white p-2 rounded-[100%] hover:bg-[linear-gradient(90deg,#b004b0,#38097a)]"></i>

@@ -6,6 +6,7 @@ import "./styles.css";
 import { Navigation } from "swiper";
 import { Pagination } from "swiper";
 import img from "../assets/images/meter1.svg";
+import Image from "next/image"
 
 
 function Skills() {
@@ -31,21 +32,21 @@ function Skills() {
               <SwiperSlide className="bg-[#171717]">
                 {" "}
                 <div className=" bg-[#171717]">
-                  <img src={img} alt="" />
+                  <Image src={img} alt="" />
                   <h1 className="font-bold text-2xl my-2">Web Dev</h1>
                 </div>
               </SwiperSlide>
               <SwiperSlide className=" bg-[#171717]">
                 {" "}
                 <div className=" bg-[#171717]">
-                  <img src={img} alt="" />
+                  <Image src={img} alt="" />
                   <h1 className="font-bold text-2xl my-2">Frontend </h1>
                 </div>
               </SwiperSlide>
               <SwiperSlide className=" bg-[#171717]">
                 {" "}
                 <div className=" bg-[#171717]">
-                  <img src={img} alt="" />
+                  <Image src={img} alt="" />
                   <h1 className="font-bold text-2xl my-2">React.js</h1>
                 </div>
               </SwiperSlide>
@@ -53,14 +54,14 @@ function Skills() {
               <SwiperSlide className=" bg-[#171717]">
                 {" "}
                 <div className=" bg-[#171717]">
-                  <img src={img} alt="" />
+                  <Image src={img} alt="" />
                   <h1 className="font-bold text-2xl my-2">Javascript</h1>
                 </div>
               </SwiperSlide>
               <SwiperSlide className=" bg-[#171717]">
                 {" "}
                 <div className=" bg-[#171717]">
-                  <img src={img} alt="" />
+                  <Image src={img} alt="" />
                   <h1 className="font-bold text-2xl my-2">Tailwind</h1>
                 </div>
               </SwiperSlide>
