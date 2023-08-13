@@ -121,18 +121,27 @@ const Sudoku = () => {
 
   const generatePuzzle = async () => {
     setLoading(true);
-    const response = await fetch('http://127.0.0.1:8001/portfolio-cec85/us-central1/generatePuzzle', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ mainArray }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setmainArray(data.puzzle);
+  
+    try {
+      const response = await fetch('https://us-central1-sudokusolver-395713.cloudfunctions.net/generaetPuzzle', { // Update the URL to match your function's endpoint
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: 'John' }), // Update the data you want to send
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setmainArray(data.puzzle);
+        console.log(data); // Log the response data for debugging
+      } else {
+        console.error('Error:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
     }
+  
     setLoading(false);
   }
 
