@@ -134,7 +134,6 @@ const Sudoku = () => {
       if (response.ok) {
         const data = await response.json();
         setmainArray(data.puzzle);
-        console.log(data); // Log the response data for debugging
       } else {
         console.error('Error:', response.statusText);
       }
@@ -175,7 +174,6 @@ const Sudoku = () => {
     setlogicalArray(metadata.logical_array);
     
     const difficult_level = parseFloat(metadata.difficulty);
-    console.log(difficult_level);
     if (difficult_level >= 0.9) {
       setDifficulty("Extreme");
     } else if (difficult_level >= 0.66) {
@@ -567,7 +565,7 @@ const Sudoku = () => {
                   </p>
                 </div>
                   
-                <Link className="flex" href="/">
+                <Link className="flex" href="https://github.com/muhtasimsaad/Personal_website/blob/main/pages/sudoku.js">
                   
                     <p className="text-sm text-white cursor-pointer my-auto mr-1 hover:mr-2 ease-in-out duration-300">
                     View on Github
