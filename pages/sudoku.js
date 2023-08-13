@@ -264,7 +264,7 @@ const Sudoku = () => {
 
         
   
-        <div className='mx-auto pb-12 max-w-fit bg-red-500'>
+        <div className='mx-auto pb-12 max-w-fit'>
           
           
           <div className='block w-full min-w-fit '>
@@ -274,7 +274,14 @@ const Sudoku = () => {
                 <p className='text-xs lg:text-sm'>Made By Yours Truly</p>
               </div>
               <div className='ml-auto text-lg lg:text-3xl text-white pt-10 mb-4 justify-end'>
-                <Link href="/"><p className="text-lg">&#8592; Back to Portfolio</p></Link>
+                <Link className="flex" href="/">
+                  <p className="text-lg hover:mr-1 ease-in-out duration-300 pr-1">
+                    &#8592;
+                  </p>
+                  <p className="text-lg hover:ml-1 ease-in-out duration-300">
+                    Back to Portfolio
+                  </p>
+                </Link>
                 <div className='flex'>
                   <p className='text-xs lg:text-sm ml-auto text-right'>About Sudoku</p>
                   <Image src={information} alt="info" className="mt-auto ml-1 cursor-pointer" onClick={() => setInfoModal(true)}/>
@@ -551,7 +558,7 @@ const Sudoku = () => {
                     <Image src={difficultys} alt="difficulty" className='h-10 w-10'/>
                     <div className="flex justify-between items-center w-full">
                       <p className='text-sm text-white'>Difficulty:</p>
-                      {solved && <p className='text-3xl text-white font-bold'>{difficulty}</p>}
+                      {solved && <p className='text-xl text-white font-bold'>{difficulty}</p>}
                       {!solved && <p className='text-3xl text-white font-bold'>?</p>}
                     </div>
                   </div>
@@ -560,9 +567,16 @@ const Sudoku = () => {
                   </p>
                 </div>
                   
+                <Link className="flex" href="/">
                   
-                <Link href="https://github.com/muhtasimsaad/Personal_website">
-                  <p className='text-sm text-white mt-6 cursor-pointer'>View on Github &#10230;</p>
+                    <p className="text-sm text-white cursor-pointer my-auto mr-1 hover:mr-2 ease-in-out duration-300">
+                    View on Github
+                    </p>
+                    <p className="text-lg hover:ml-1 text-white ease-in-out duration-300">
+                      &#10230;
+                    </p>
+                
+                  
                 </Link>
 
                 <div onClick={sendDataToAPI}>
