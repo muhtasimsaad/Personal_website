@@ -228,7 +228,7 @@ const Sudoku = () => {
           {/* This element is to trick the browser into centering the modal contents. */}
           <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
           <div className="inline-block align-bottom bg-[#1E1E1E] rounded-lg px-4 pt-5 pb-4 text-left
-            overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
             <div className='text-gray-100'>
               <div className='flex'>
               <p className={`${montserrat_bold.className} text-2xl h-fit my-auto`}>Instructions:</p>
