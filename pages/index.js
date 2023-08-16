@@ -13,6 +13,7 @@ import about from '../app/assets/images/about.png';
 import Button from '@/app/components/Button';
 import AutoCarousol from '@/app/components/AutoCarousol';
 import contact from "../app/assets/images/contact.png";
+import { useEffect, useState } from 'react';
 
 const montserrat_bold = Montserrat({
   subsets:['latin'],
@@ -43,28 +44,62 @@ const lobster = Lobster({
   weight:'400',
 });
 
+
+
 const Index = () => {
+
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
+  const projectsOverviewRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
+  var [activeWindow, setActiveWindow] = useState(0);
+
+  useEffect(() => {
+    const container = document.querySelector('.scroll-container');
+    const handleScrollUp = (e) => {
+      e.preventDefault();
+      const deltaY = e.deltaY; 
+      const scrollKeys = ['home','about','projectsOverview','projects','contact'];
+      if (deltaY > 0 && activeWindow < (scrollKeys.length-1)) {
+        setActiveWindow(activeWindow++);
+        scrollToView(scrollKeys[activeWindow]);
+      } else if (deltaY < 0 && activeWindow > 0) {
+        setActiveWindow(activeWindow--);
+        scrollToView(scrollKeys[activeWindow]);
+      }
+
+      
+
+    };
+
+    container.addEventListener('wheel', handleScrollUp, { passive: false });
+
+    return () => {
+      container.removeEventListener('wheel', handleScrollUp);
+    };
+  }, []);
 
   const scrollToView = (key) => {
 
-    console.log('-->'+key);
     if (key == 'home') {
       homeRef.current.scrollIntoView({ behavior: 'smooth' });
     }
     if (key == 'about') {
       aboutRef.current.scrollIntoView({ behavior: 'smooth' });
     }
+    if (key == 'projectsOverview') {
+      projectsOverviewRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
     if (key == 'projects') {
       projectsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
     if (key == 'contact') {
-      projectsRef.current.scrollIntoView({ behavior: 'smooth' });
+      contactRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+
 
   return <div className='bg-background'>
 
@@ -95,7 +130,7 @@ const Index = () => {
 
 
     <div className='w-full px-2'>
-      <div className='h-screen overflow-auto snap-mandatory snap-y'>
+      <div className='h-screen overflow-auto snap-mandatory snap-y scroll-container'>
         <div ref={homeRef} className='flex h-screen my-auto snap-start'>
           <div className='w-2/3 m-auto'>
             <div className='flex my-auto'>
@@ -140,7 +175,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-        <div className='flex h-screen my-auto snap-start'>
+        <div ref={projectsOverviewRef} className='flex h-screen my-auto snap-start'>
           <div className='w-2/3 m-auto'>
             <div className='flex my-auto'>
               <div className='flex w-1/2'>
@@ -171,25 +206,34 @@ const Index = () => {
             <Projects />
           </div>
         </div>
-        <div ref={aboutRef} className='flex h-screen my-auto snap-start '>
+        <div ref={contactRef} className='flex h-screen my-auto snap-start '>
           <div className='w-2/3 m-auto'>
             <div className='flex my-auto'>
               <div className='w-1/2 px-4'>
                 <Image src = {contact} alt="about" className="w-full rounded-lg" />
               </div>
-              <div className='flex w-1/2 bg-red-100'>
-                <div className='w-2/3 mx-auto my-auto bg-red-400 h-fit'>
-                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
+              <div className='flex w-1/2'>
+                <div className='w-3/5 mx-auto h-fit'>
+                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md text-gray-100`}>
                       GET IN TOUCH
                   </p>
-                  <p className='pr-0 text-sm text-gray-100 xl:pr-12'>I would like to hear about your ideas,
-                  let&apos;s have some coffee.</p>
+                  <p className={`${poppins_normal.className} pr-0 text-sm text-gray-100 xl:pr-12 mt-2`}>I would like to hear about your ideas,
+                      let&apos;s have some coffee.
+                  </p>
 
-                  <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
-                    in the creativity and immersive experiences that video games offer, which drives me to create engaging and 
-                    interactive digital solutions.</p>
+                  <p className='mt-4 text-gray-100'>Name</p>
 
-                  <Button buttonText="See My Work" />
+                  <input placeholder='John Doe' className={`${poppins_normal.className} mt-2 w-full rounded-lg text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
+                  
+                  <p className='mt-4 text-gray-100'>Email</p>
+
+                  <input placeholder='John@gmail.com' className={`${poppins_normal.className} mt-2 w-full rounded-lg text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
+
+                  <p className='mt-4 text-gray-100'>Email</p>
+
+                  <input placeholder='John@gmail.com' className={`${poppins_normal.className} mt-2 w-full rounded-lg text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
+
+                  
                 </div>
               </div>
             </div>
