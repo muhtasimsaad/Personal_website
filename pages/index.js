@@ -10,6 +10,8 @@ import { Poppins } from '@next/font/google';
 import { Lobster } from '@next/font/google';
 import home from '../app/assets/images/home.png';
 import about from '../app/assets/images/about.png';
+import Button from '@/app/components/Button';
+import AutoCarousol from '@/app/components/AutoCarousol';
 
 const montserrat_bold = Montserrat({
   subsets:['latin'],
@@ -102,12 +104,9 @@ const Index = () => {
                 <p className={`${poppins_normal.className} w-full text-secondary`}>Full Stack Developer</p>
                 <p className='pr-0 text-sm text-gray-100 xl:pr-12'>With expertise in designing and developing web applications, I love creating seamless
                     user experice and tackling complex challenges.</p>
-
-                <div className='mt-4 w-fit'>
-                  <p className={`${montserrat_bold_600.className} rounded-2xl px-12 py-2 text-background hover:text-secondary bg-secondary 
-                      hover:bg-background text-sm border-2 border-transparent hover:border-secondary cursor-pointer`}>Get In Touch</p>
-                </div>
+                <Button buttonText="Get In Touch" />
               </div>
+              
               
               <div className='w-1/2'>
                 <Image src = {home} className="" alt="home"/>
@@ -120,21 +119,18 @@ const Index = () => {
             <div className='flex my-auto'>
               <div className='flex w-1/2'>
                 <div className='my-auto h-fit'>
-            <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
-                MORE<br />ON <span className='text-secondary'>ME</span>.
-              </p>
-              <p className='pr-0 text-sm text-gray-100 xl:pr-12'>Programming isn&apos;t just a job for me, it&apos;s a true passion.
-                I constantly explore new technologies to stay ahead of the curve, whether it&apos;s diving into backend systems 
-                or crafting beautiful front-end interfaces.</p>
+                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
+                      MORE<br />ON <span className='text-secondary'>ME</span>.
+                  </p>
+                  <p className='pr-0 text-sm text-gray-100 xl:pr-12'>Programming isn&apos;t just a job for me, it&apos;s a true passion.
+                    I constantly explore new technologies to stay ahead of the curve, whether it&apos;s diving into backend systems 
+                    or crafting beautiful front-end interfaces.</p>
 
-              <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
-                in the creativity and immersive experiences that video games offer, which drives me to create engaging and 
-                interactive digital solutions.</p>
+                  <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
+                    in the creativity and immersive experiences that video games offer, which drives me to create engaging and 
+                    interactive digital solutions.</p>
 
-              <div className='mt-4 w-fit'>
-                <p className={`${montserrat_bold_600.className} rounded-2xl px-12 py-2 text-background hover:text-secondary bg-secondary 
-                    hover:bg-background text-sm border-2 border-transparent hover:border-secondary cursor-pointer`}>See My Work</p>
-              </div>
+                  <Button buttonText="See My Work" />
                 </div>
               </div>
               <div className='w-1/2 px-4'>
@@ -148,25 +144,23 @@ const Index = () => {
             <div className='flex my-auto'>
               <div className='flex w-1/2'>
                 <div className='my-auto h-fit'>
-            <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
-                MORE<br />ON <span className='text-secondary'>ME</span>.
-              </p>
-              <p className='pr-0 text-sm text-gray-100 xl:pr-12'>Programming isn&apos;t just a job for me, it&apos;s a true passion.
-                I constantly explore new technologies to stay ahead of the curve, whether it&apos;s diving into backend systems 
-                or crafting beautiful front-end interfaces.</p>
+                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
+                    MY BEST<br />PROJECTS <span className='text-secondary'>.</span>
+                  </p>
+                  <p className='pr-0 text-sm text-gray-100 xl:pr-12'>On this website, you&apos;ll find a showcase of my best 
+                    projects that demonstrate my skills, problem-solving abilities, and attention to detail tackling all things:
+                  </p>
 
-              <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
-                in the creativity and immersive experiences that video games offer, which drives me to create engaging and 
-                interactive digital solutions.</p>
+                  <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>I invite you to explore my work and see how I can bring
+                    your ideas to life. If you're looking for a dedicated professional who is passionate about delivering 
+                    high-quality solutions.
+                  </p>
 
-              <div className='mt-4 w-fit'>
-                <p className={`${montserrat_bold_600.className} rounded-2xl px-12 py-2 text-background hover:text-secondary bg-secondary 
-                    hover:bg-background text-sm border-2 border-transparent hover:border-secondary cursor-pointer`}>See My Work</p>
-              </div>
+                  <Button buttonText="Check Out My Projects" />
                 </div>
               </div>
-              <div className='w-1/2 px-4'>
-                <Image src = {about} alt="about" className="w-full rounded-lg" />
+              <div className='flex w-1/2 px-4'>
+                <AutoCarousol />
               </div>
             </div>
           </div>
