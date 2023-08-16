@@ -12,6 +12,7 @@ import home from '../app/assets/images/home.png';
 import about from '../app/assets/images/about.png';
 import Button from '@/app/components/Button';
 import AutoCarousol from '@/app/components/AutoCarousol';
+import contact from "../app/assets/images/contact.png";
 
 const montserrat_bold = Montserrat({
   subsets:['latin'],
@@ -139,13 +140,13 @@ const Index = () => {
             </div>
           </div>
         </div>
-        <div ref={projectsRef} className='flex h-screen my-auto snap-start'>
+        <div className='flex h-screen my-auto snap-start'>
           <div className='w-2/3 m-auto'>
             <div className='flex my-auto'>
               <div className='flex w-1/2'>
                 <div className='my-auto h-fit'>
                   <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
-                    MY BEST<br />PROJECTS <span className='text-secondary'>.</span>
+                    MY BEST<br />PROJECTS<span className='text-secondary'>.</span>
                   </p>
                   <p className='pr-0 text-sm text-gray-100 xl:pr-12'>On this website, you&apos;ll find a showcase of my best 
                     projects that demonstrate my skills, problem-solving abilities, and attention to detail tackling all things:
@@ -161,6 +162,35 @@ const Index = () => {
               </div>
               <div className='flex w-1/2 px-4'>
                 <AutoCarousol />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ref={projectsRef} className='flex h-screen my-auto snap-start'>
+          <div className='w-2/3 m-auto'>
+            <Projects />
+          </div>
+        </div>
+        <div ref={aboutRef} className='flex h-screen my-auto snap-start '>
+          <div className='w-2/3 m-auto'>
+            <div className='flex my-auto'>
+              <div className='w-1/2 px-4'>
+                <Image src = {contact} alt="about" className="w-full rounded-lg" />
+              </div>
+              <div className='flex w-1/2 bg-red-100'>
+                <div className='w-2/3 mx-auto my-auto bg-red-400 h-fit'>
+                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
+                      GET IN TOUCH
+                  </p>
+                  <p className='pr-0 text-sm text-gray-100 xl:pr-12'>I would like to hear about your ideas,
+                  let&apos;s have some coffee.</p>
+
+                  <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
+                    in the creativity and immersive experiences that video games offer, which drives me to create engaging and 
+                    interactive digital solutions.</p>
+
+                  <Button buttonText="See My Work" />
+                </div>
               </div>
             </div>
           </div>
