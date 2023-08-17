@@ -1,85 +1,101 @@
 import React from "react";
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useRef } from "react";
+import contactImage from "../assets/images/contact.png";
+import { Montserrat } from '@next/font/google';
+import Image from "next/image";
+import { Poppins } from '@next/font/google';
+import Button from "../components/Button"
+import emailjs from '@emailjs/browser';
+import AlertMessage from "./AlertMessage";
+
+
+
+const montserrat_700 = Montserrat({
+  subsets:['latin'],
+  weight:'700',
+});
+const poppins_normal = Poppins({
+  subsets:['latin'],
+  weight:'400',
+});
 
 const Contact = () => {
-
 
   const [email,setEmail] = useState('');
   const [name,setName] = useState('');
   const [message,setMessage] = useState('');
+  const [showAlert,setshowAlert] = useState(false);
+  const [showAlertType,setshowAlertType] = useState('');
+  const form = useRef();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    
-    
-
-    try {
-      const response = await axios.post(
-        'https://your-cloud-function-url',
-        { email, name, message }
-      );
-
-      console.log(response.data); // Success message
-      // Reset form fields
-      setEmail('');
-      setName('');
-      setMessage('');
-    } catch (error) {
-      console.error(error);
-      // Handle error
-    }
+  const handleSubmit = () => {
+    // e.preventDefault();
+    emailjs.sendForm('service_2vi4rhx', 'template_rsnprx4', form.current, 'W0TOAJvKckCIRxOkN')
+    .then((result) => {
+        if(result.text == "OK"){
+          setshowAlertType("green");
+          setshowAlert(true);
+        }
+    }, (error) => {
+      setshowAlertType("red");
+      setshowAlert(true);
+    });
   };
 
   const handleChange = (event) => {
     switch (event.target.name) {
       case "name":
-        setName(event.target.name);
+        setName(event.target.value);
         break;
       case "email":
-        setEmail(event.target.email);
+        setEmail(event.target.value);
         break;
       case "message":
-        setMessage(event.target.message);
+        setMessage(event.target.value);
         break;
        
     }
+
   };
 
   return (
-    <>
-      <section className="bg-theme bg-opacity-95 mt-12 w-4/5 mx-auto rounded-lg">
-        <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-white">Lets Talk</h2>
-            <p className="mb-8 lg:mb-16 font-light text-center text-whie sm:text-xl w-full">Getting in touch has never been easier!</p>
-            <form action="#" className="space-y-8" onSubmit={handleSubmit}>
-                <div>
-                    <label for="name" className="block mb-2 text-sm font-medium text-white mt-4">Your Name</label>
-                    <input type="name" id="email" className="shadow-sm bg-theme border border-white border-4 text-white text-sm 
-                    rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5" name="name" placeholder="name@example.com" onChange={handleChange} required/>
-                 
-                    <label for="email" className="block mb-2 text-sm font-medium text-white mt-4">Your email</label>
-                    <input type="email" id="email" className="shadow-sm bg-theme border border-white border-4 text-white text-sm 
-                    rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5"
-                     name="email" placeholder="name@example.com" onChange={handleChange} required/>
-                 
-                    <label for="message" className="block mb-2 text-sm font-medium text-white mt-4">Your message</label>
-                    <textarea id="message" rows="6" className="shadow-sm bg-theme border border-white border-4 text-white text-sm 
-                    rounded-lg focus:ring-purple-600 hover:border-purple-400 focus:border-purple-600 block w-full p-2.5" name="message"
-                    placeholder="Leave a comment..." onChange={handleChange} ></textarea>
-                </div>
-                <div className="w-2/3 lg:w-1/3 mx-auto ">
-                  <button type="submit" className="shadow-sm border bg-[linear-gradient(90deg,#b004b0,#38097a)] 
-                  border-white hover:border-gray-700 border-4 text-white text-sm
-                      rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5">Send message</button>
-                </div>
-                
-                
+    <div className='flex h-screen my-auto snap-start'>
+      
+      <div className='w-2/3 m-auto'>
+        {showAlert && <AlertMessage type={showAlertType} />}
+        <div className='flex my-auto'>
+          <div className='flex w-1/2 px-4'>
+            <Image src = {contactImage} alt="about" className="w-full my-auto rounded-lg" />
+          </div>
+          <div className='flex w-1/2'>
+            <form className='w-3/5 mx-auto h-fit' ref={form}>
+              <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md text-gray-100`}>
+                  GET IN TOUCH
+              </p>
+              <p className={`${poppins_normal.className} pr-0 text-sm text-gray-100 mt-2`}>I would like to hear about your ideas,
+                  let&apos;s have some coffee.
+              </p>
+              <p className='mt-4 text-gray-100'>Name</p>
+              <input name="name" placeholder='John Doe' value={name} onChange={handleChange} className={`${poppins_normal.className} mt-2 w-full rounded-lg 
+                text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
+              <p className='mt-4 text-gray-100'>Email</p>
+              <input name="email" placeholder='John@gmail.com' value={email} onChange={handleChange} className={`${poppins_normal.className} mt-2 w-full rounded-lg
+                  text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
+              <p className='mt-4 text-gray-100'>Message</p>
+              <textarea name="message" rows={5} placeholder='Message' value={message} onChange={handleChange} className={`${poppins_normal.className} mt-2 w-full rounded-lg text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
+              <div onClick={handleSubmit}>
+                <Button buttonText={"Send Message"} />
+              </div>
+              
             </form>
+
+            
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
+   
   );
 }
 

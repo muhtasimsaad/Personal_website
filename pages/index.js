@@ -1,7 +1,4 @@
 import React, { useRef } from 'react';
-import Header from "../app/components/Header"
-import Contact from "../app/components/Contact"
-import Footer from "../app/components/Footer"
 import Navbar from '@/app/components/Navbar';
 import Projects from "../app/components/Projects"
 import '../app/globals.css'
@@ -13,8 +10,9 @@ import home from '../app/assets/images/home.png';
 import about from '../app/assets/images/about.png';
 import Button from '@/app/components/Button';
 import AutoCarousol from '@/app/components/AutoCarousol';
-import contact from "../app/assets/images/contact.png";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Contact from '@/app/components/Contact';
+
 
 const montserrat_bold = Montserrat({
   subsets:['latin'],
@@ -57,6 +55,10 @@ const Index = () => {
   const scrollReferences = [homeRef,aboutRef,projectsOverviewRef,projectsRef,contactRef];
   var [activeWindow, setActiveWindow] = useState(0);
 
+  const handleSubmit = () => {
+
+  }
+
   const handleScroll = (event) => {
     const scrollTop = event.target.scrollTop;
     setActiveWindow(Math.floor(scrollTop/(window.innerHeight-2)));
@@ -64,7 +66,7 @@ const Index = () => {
 
   return <div className='bg-background'>
 
-    <Navbar references={scrollReferences} activeWindow={activeWindow}/>
+    <Navbar references={scrollReferences} activeWindow={activeWindow} />
 
 
     <div className='w-full px-2'>
@@ -145,33 +147,8 @@ const Index = () => {
             <Projects />
           </div>
         </div>
-        <div ref={contactRef} className='flex h-screen my-auto snap-start '>
-          <div className='w-2/3 m-auto'>
-            <div className='flex my-auto'>
-              <div className='flex w-1/2 px-4'>
-                <Image src = {contact} alt="about" className="w-full my-auto rounded-lg" />
-              </div>
-              <div className='flex w-1/2'>
-                <div className='w-3/5 mx-auto h-fit'>
-                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md text-gray-100`}>
-                      GET IN TOUCH
-                  </p>
-                  <p className={`${poppins_normal.className} pr-0 text-sm text-gray-100 mt-2`}>I would like to hear about your ideas,
-                      let&apos;s have some coffee.
-                  </p>
-                  <p className='mt-4 text-gray-100'>Name</p>
-                  <input placeholder='John Doe' className={`${poppins_normal.className} mt-2 w-full rounded-lg 
-                    text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
-                  <p className='mt-4 text-gray-100'>Email</p>
-                  <input placeholder='John@gmail.com' className={`${poppins_normal.className} mt-2 w-full rounded-lg
-                      text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
-                  <p className='mt-4 text-gray-100'>Message</p>
-                  <textarea rows={5} placeholder='Message' className={`${poppins_normal.className} mt-2 w-full rounded-lg text-gray-200 px-5 py-2 text-sm bg-[#111111] border-2 border-[#959595] rounded-md'`}/>
-                  <Button buttonText={"Send Message"} />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div ref={contactRef} >
+          <Contact />
         </div>
       </div>
     </div>

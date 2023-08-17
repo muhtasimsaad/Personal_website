@@ -8,22 +8,7 @@ const montserrat_bold = Montserrat({
   subsets:['latin'],
   weight:'900',
 });
-const montserrat_bold_600 = Montserrat({
-  subsets:['latin'],
-  weight:'600',
-});
-const montserrat_normal = Montserrat({
-  subsets:['latin'],
-  weight:'400',
-});
-const montserrat_700 = Montserrat({
-  subsets:['latin'],
-  weight:'700',
-});
-const poppins_bold = Poppins({
-  subsets:['latin'],
-  weight:'700',
-});
+
 const poppins_normal = Poppins({
   subsets:['latin'],
   weight:'400',
@@ -57,7 +42,7 @@ function Navbar({activeWindow,references}) {
 
   return (
     <nav className="fixed w-screen  text-3xl bg-[#1E1E1] h-fit border-secondary">
-      <div className="w-2/3 py-4 mx-auto bg-background">
+      <div className="w-2/3 py-4 mx-auto bg-background ">
         <div className="mx-auto max-w-7xl">
           <div className="relative flex items-center justify-between h-16">
             <div className="flex w-full">
