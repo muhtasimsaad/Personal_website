@@ -8,52 +8,43 @@ import Button from "./button";
 import about from "../assets/images/about.png"
 import backendImage from "../assets/images/backendTest.png";
 import genofaxImage from "../assets/images/genofax.png";
+import downArrow from "../assets/images/down_arrow.svg"
+import carouselNext from "../assets/images/carouselNext.svg";
 
 import "./styles.css";
 import ProjectCard from "./ProjectCard";
+import { act } from "react-dom/test-utils";
 
 const montserrat_700 = Montserrat({
   subsets:['latin'],
   weight:'700',
 });
 
+
+
+
 function Projects() {
-  const [durum, setDurum] = useState(1);
+  let [active, setActive] = useState(1);
+  let [activeSlot, setActiveSlot] = useState([]);
 
-  
+  const handleProjectChange = (key) => {
+    const act = (active+1);
+    const data = (act%projectArray.length);
+    setActive(data);
+    console.log(data);
+  }
 
-  
-
-  const personal = [
+  const projectArray = [
     {
-      id: 1,
-      title: "Personal 1",
-      description: "Design & Development",
-      backend:["asd1","asd2","asd32"],
-      frontend:["asd1","asd32","asd3"],
-      img: img1,
-    },
-    {
-      id: 2,
-      title: "Personal 2",
-      description: "Design & Development",
-      backend:["asd1","asd2","asd32"],
-      frontend:["asd1","asd32","asd3"],
-      img: img1,
-    },
-    
-  ];
-
-  const professional = [
-    {
-      id: 1,
+      id: 0,
       title: "Genofax",
       description: "Genofax specializes in understanding the genome and the microbiome using" +
-        " artificial intelligence and big data analytics to develop futuristic medical interventions." +
+        " artificial intelligence and big data analytics and machine learning techniques to develop futuristic medical interventions." +
         " Our existing medical and healthcare sector usually focuses on disease symptom management" +
-        " rather than prevention and cure.",
-      backend:["Laravel","DomPDF"],
-      frontend:["Next.js","Axios","Tailwind css"],
+        " rather than prevention and cure. Please visit genofax for more information.",
+      category:"Professional Project",
+      backend:[backendImage,backendImage],
+      frontend:[backendImage,backendImage],
       url:"https://genofax.com",
       img: genofax,
     },
@@ -61,11 +52,12 @@ function Projects() {
       id: 1,
       title: "Anfactor",
       description: "Anfactor offers plug and play installation of a chatbot that users can easily custom tailor"+
-      "according to their specific business needs.Anfactor offers reliable reports to track and optimize your chatbot`&#39;`s performance." +
+      "according to their specific business needs.Anfactor offers reliable reports to track and optimize your chatbot's performance." +
       "You can improve customer experience using past chats. Use this knowledge to build better chatbot "+
       "stories and improve customer satisfaction.",
-      backend:["Django",],
-      frontend:["Django","Alpine.js","Tailwind css", "Vue.js"],
+      category:"Professional Project",
+      backend:[backendImage,backendImage],
+      frontend:[backendImage,backendImage],
       url:"https://anfactor.com",
       img: anfactor,
     },
@@ -75,7 +67,7 @@ function Projects() {
 
   return (
     <>
-      <div className='flex h-screen my-auto snap-start'>
+      <div className='flex h-screen my-auto pt-1/3'>
           <div className='w-5/6 m-auto'>
             <div className='flex my-auto'>
               <div className='flex w-1/2'>
@@ -83,34 +75,43 @@ function Projects() {
                   <p className={`${montserrat_700.className} w-full text-4xl rounded-md pb-2 text-gray-100`}>
                       PROJECT:
                   </p>
-                  <p className='pr-0 text-sm text-gray-100 xl:pr-12'>
-                    Genofax specializes in understanding the genome and the microbiome using artificial 
-                    intelligence and big data analytics to develop futuristic medical interventions. Our 
-                    existing medical and healthcare sector usually focuses on disease symptom management 
-                    rather than prevention and cure.  
+                  <p className='pr-0 overflow-hidden text-sm text-gray-100 h-42 xl:pr-12'>
+                    {projectArray[active].description} 
                   </p>
                   <div className="">
                     <div className="flex mt-6">
                       <p className="mr-3 text-lg text-secondary">Category:</p>
-                      <p className="my-auto text-md h-fit">Professional Project</p>
+                      <p className="my-auto text-md h-fit">{projectArray[active].category}</p>
                     </div>
                     <div className="flex mt-6">
                       <p className="mr-3 text-lg text-secondary">Frontend:</p>
-                      <Image src={backendImage}  alt="backend"/>
+                        {projectArray[active].frontend.map((image, index) => (
+                          <Image key={index} src={image} alt={`Image ${index}`} className="mr-2" />
+                        ))}
                     </div>
                     <div className="flex mt-6">
                       <p className="mr-3 text-lg text-secondary">Backend:</p>
-                      <Image src={backendImage}  alt="backend"/>
+                        {projectArray[active].backend.map((image, index) => (
+                          <Image key={index} src={image} alt={`Image ${index}`} className="mr-2"/>
+                        ))}
                     </div>
                     <div className="mt-6">
-                      <Button buttonText={"Visit Genofax"} />
+                      <Button buttonText={`Visit ${projectArray[active].title}`} />
                     </div>
                     
                   </div>
                 </div>
               </div>
-              <div className='w-1/2 px-4 mt-2'>
-                <Image src = {genofax} alt="about" className="object-scale-down rounded-lg" />
+              <div className='relative flex w-1/2 p-4 mt-2 ml-4 bg-gray-100'>
+                <Image src={projectArray[active].img} alt="about" className="object-scale-down bg-gray-400 rounded-lg" />
+                <div className="absolute inset-0 flex items-center justify-between">
+                  <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">
+                    <Image src={carouselNext} alt="next" className="mx-auto rotate-[180deg] rounded-full w-4" />
+                  </div>
+                  <div onClick={() => handleProjectChange("positive")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">
+                    <Image src={carouselNext} alt="next" className="mx-auto rotate-[0deg] rounded-full w-4" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

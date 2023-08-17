@@ -1,57 +1,89 @@
 import React, { useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import "./styles.css";
+import { Montserrat } from '@next/font/google';
+import { Poppins } from '@next/font/google';
 
-function Navbar() {
+const montserrat_bold = Montserrat({
+  subsets:['latin'],
+  weight:'900',
+});
+const montserrat_bold_600 = Montserrat({
+  subsets:['latin'],
+  weight:'600',
+});
+const montserrat_normal = Montserrat({
+  subsets:['latin'],
+  weight:'400',
+});
+const montserrat_700 = Montserrat({
+  subsets:['latin'],
+  weight:'700',
+});
+const poppins_bold = Poppins({
+  subsets:['latin'],
+  weight:'700',
+});
+const poppins_normal = Poppins({
+  subsets:['latin'],
+  weight:'400',
+});
+
+
+
+function Navbar({activeWindow,references}) {
   const [durum, setDurum] = useState(true);
-  console.log(durum);
+  
+  const scrollToView = (key) => {
 
-  // window.onscroll = function () {
-  //   scrollFunction();
-  // };
-
-  function scrollFunction() {
-    if (
-      document.body.scrollTop > 50 ||
-      document.documentElement.scrollTop > 50
-    ) {
-      document.querySelector(".navbarcon").style.background = "linear-gradient(to right, #171717, #44403c)";
-    } else {
-      document.querySelector(".navbarcon").style.background =
-        "rgba(0, 0, 0, 0)";
-      document.querySelector(".tl").style.background = "rgba(100, 0, 0, 0)";
+    if (key == 'home') {
+      references[0].current.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (key == 'about') {
+      references[1].current.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (key == 'projectsOverview') {
+      references[2].current.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (key == 'projects') {
+      references[3].current.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (key == 'contact') {
+      references[4].current.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
+  
+
   return (
-    <>
-      <div className="navbarcon flex justify-between items-center px-4 lg:px-6  bg-transparent z-40 text-white  fixed w-full">
-        <h1 className="text-4xl font-bold">Saad`&#39;`s</h1>
-        
-        <div className="gap-10 hidden lg:flex h-full py-1">
-          <h1 className="text-lg font-bold cursor-pointer border-2 border-transparent hover:border-white hover:bg-theme rounded-2xl px-6 py-4">Projects</h1>
-          <h1 className="text-lg font-bold cursor-pointer border-2 border-transparent hover:border-white hover:bg-theme rounded-2xl px-6 py-4">Let`&#39;`s Connect</h1>
-          <div className="flex">
-            <a href="https://github.com/muhtasimsaad" className="my-auto" target="_blank">
-              <i className="fa-brands fa-github border-[1px] border-white p-2 rounded-[100%] hover:bg-[linear-gradient(90deg,#b004b0,#38097a)]"></i>
-            </a>
-          </div>
-          <div className="flex">
-            <a href="https://www.linkedin.com/in/muhtasim-saad-512606120/" className="my-auto" target="_blank">
-              <i className="fa-brands fa-linkedin border-[1px] border-white p-2 rounded-[100%] hover:hover:bg-[linear-gradient(90deg,#b004b0,#38097a)]"></i>
-            </a>
-          </div>
-          <div className="flex">
-            <a href="https://www.facebook.com/muhtasim.billah" className="my-auto" target="_blank">
-              <i className="fa-brands fa-facebook border-[1px] border-white p-2 rounded-[100%] hover:hover:bg-[linear-gradient(90deg,#b004b0,#38097a)]"></i>
-            </a>
+    <nav className="fixed w-screen  text-3xl bg-[#1E1E1] h-fit border-secondary">
+      <div className="w-2/3 py-4 mx-auto bg-background">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative flex items-center justify-between h-16">
+            <div className="flex w-full">
+              <div className="">
+                <div className="flex">
+                  {/* className={`w-12 h-12 px-4 py-1 ml-auto ${active == 1 ? 'bg-secondary' : 'bg-none'}`} */}
+                  <a href="#" className={`${montserrat_bold.className} w-full text-3xl h-fit my-auto rounded-md py-2 text-xl text-secondary`} aria-current="page">MSO</a>
+                </div>
+              </div>
+              <div className="flex w-full mx-auto">
+                <div className={`${poppins_normal.className} flex space-x-4 m-auto justify-center`}>
+                  <div onClick={() => scrollToView('home')} className={`flex items-center px-3 py-2 text-sm text-gray-100 cursor-pointer hover:text-secondary ${activeWindow == 0 ? 'underline text-secondary' : ''} `} aria-current="page">Home</div>
+                  <div onClick={() => scrollToView('about')} className={`flex items-center px-3 py-2 text-sm text-gray-100 cursor-pointer hover:text-secondary ${activeWindow == 1 ? 'underline text-secondary' : ''} `} aria-current="page">About</div>
+                  <div onClick={() => scrollToView('projectsOverview')} className={`flex items-center px-3 py-2 text-sm text-gray-100 cursor-pointer hover:text-secondary ${(activeWindow == 2 || activeWindow == 3 ) ? 'underline text-secondary' : ''} `} aria-current="page">Projects</div>
+                </div>
+              </div>
+              <div className="flex ml-auto">
+                <div className={`${poppins_normal.className} flex space-x-4 my-auto justify-center`}>
+                  <div onClick={() => scrollToView('contact')} className={`flex items-center px-12 py-2 text-lg transition border border-transparent rounded-md cursor-pointer text-background bg-secondary hover:border-secondary hover:bg-background hover:text-secondary ${activeWindow == 4 ? 'animate-bounce' : ''}`} aria-current="page">Contact</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        
-
-        
       </div>
-    </>
+    </nav>
   );
 }
 
