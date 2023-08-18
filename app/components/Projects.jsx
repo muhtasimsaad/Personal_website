@@ -73,21 +73,32 @@ function Projects() {
 
   return (
     <>
-      <div className='flex h-screen my-auto pt-1/3 '>
-          <div className='w-5/6 m-auto '>
-            <div className='flex my-auto'>
-              <div className='flex w-1/2'>
-                <div className='h-fit'>
-                  <p className={`${montserrat_700.className} w-full text-4xl rounded-md pb-2 text-gray-100`}>
+      <div className='flex h-screen p-8 my-auto'>
+          <div className='w-full mx-auto lg:w-5/6 '>
+            <div className='block my-auto lg:flex'>
+              <div className='block w-full lg:flex lg:w-1/2'>
+                <div className='my-4 h-fit'>
+                  <p className={`${montserrat_700.className} w-full text-4xl rounded-md text-gray-100`}>
                        {projectArray[active].title } 
                   </p>
+                  <div className='relative flex w-full h-32 my-4 bg-gray-300 rounded-lg lg:hidden'>
+                    <Image src={projectArray[active].img} alt="about" className="mx-auto bg-gray-400 rounded-lg w-fit" />
+                    <div className="absolute inset-0 flex items-center justify-between">
+                      <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">
+                        <Image src={carouselNext} alt="next" className="mx-auto rotate-[180deg] rounded-full w-4" />
+                      </div>
+                      <div onClick={() => handleProjectChange("positive")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">
+                        <Image src={carouselNext} alt="next" className="mx-auto rotate-[0deg] rounded-full w-4" />
+                      </div>
+                    </div>
+                  </div>
                   <p className='pr-0 overflow-hidden text-sm text-gray-100 h-42 xl:pr-12'>
                     {projectArray[active].description} 
                   </p>
                   <div className="">
                     <div className="flex mt-6">
                       <p className="mr-3 text-lg text-secondary">Category:</p>
-                      <p className="my-auto text-md h-fit text-gray-100">{projectArray[active].category}</p>
+                      <p className="my-auto text-gray-100 text-md h-fit">{projectArray[active].category}</p>
                     </div>
                     <div className="flex mt-6">
                       <p className="mr-3 text-lg text-secondary">Frontend:</p>
@@ -108,7 +119,7 @@ function Projects() {
                   </div>
                 </div>
               </div>
-              <div className='relative flex w-96 p-4 mt-2 ml-4 bg-gray-100'>
+              <div className='relative hidden p-4 mt-2 ml-4 bg-gray-100 lg:flex w-96'>
                 <Image src={projectArray[active].img} alt="about" className="object-scale-down bg-gray-400 rounded-lg" />
                 <div className="absolute inset-0 flex items-center justify-between">
                   <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">

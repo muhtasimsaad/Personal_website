@@ -12,8 +12,8 @@ function Button({ buttonText }) {
 
   
   return (
-    <div className='mt-4 w-fit'>
-      <p className={`${montserrat_bold_600.className} rounded-3xl px-12 py-2 text-background hover:text-secondary bg-secondary 
+    <div className='w-full mt-4 lg:w-fit'>
+      <p className={`${montserrat_bold_600.className} text-center rounded-3xl px-12 py-2 text-background hover:text-secondary bg-secondary 
           hover:bg-background text-sm border-2 border-transparent hover:border-secondary cursor-pointer`}>{buttonText}</p>
     </div>
   );

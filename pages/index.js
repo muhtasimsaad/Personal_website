@@ -6,17 +6,28 @@ import Image from 'next/image';
 import { Montserrat } from '@next/font/google';
 import { Poppins } from '@next/font/google';
 import { Lobster } from '@next/font/google';
+import { Owswald } from '@next/font/google';
 import home from '../app/assets/images/home.png';
 import about from '../app/assets/images/about.png';
 import Button from '@/app/components/Button';
 import AutoCarousol from '@/app/components/AutoCarousol';
 import { useState } from 'react';
 import Contact from '@/app/components/Contact';
+import { Oswald } from 'next/font/google';
+import heroImage from "../app/assets/images/heroImage.png";
+import heroImage2 from "../app/assets/images/heroImage2.png";
+import heroImage3 from "../app/assets/images/heroImage3.png";
+import heroImage4 from "../app/assets/images/heroImage4.png";
+import path from "../app/assets/images/path.png";
 
 
 const montserrat_bold = Montserrat({
   subsets:['latin'],
   weight:'900',
+});
+const oswald = Oswald({
+  subsets:['latin'],
+  weight:'400',
 });
 const montserrat_bold_600 = Montserrat({
   subsets:['latin'],
@@ -66,84 +77,140 @@ const Index = () => {
 
   return <div className='bg-background'>
 
-    <Navbar references={scrollReferences} activeWindow={activeWindow} />
+    <div className='hidden lg:block'>
+      <Navbar references={scrollReferences} activeWindow={activeWindow} />
+    </div>
+    
 
 
     <div className='w-full px-2'>
       <div className='h-screen overflow-auto snap-mandatory snap-y' onScroll={handleScroll}>
-        <div ref={homeRef} className='flex h-screen my-auto snap-start'>
-          <div className='w-2/3 m-auto'>
-            <div className='flex my-auto'>
-              <div className='w-1/2'>
-                <p className={`${montserrat_bold.className} text-gray-100 text-8xl h-fit my-auto rounded-md py-2`}> Hello<span className='text-secondary'>.</span></p>
-                <p className={`${lobster.className} w-full text-6xl h-fit my-auto rounded-md py-2 text-gray-100`}> This is Saad</p>
-                <p className={`${poppins_normal.className} w-full text-secondary`}>Full Stack Developer</p>
-                <p className='pr-0 text-sm text-gray-100 xl:pr-12'>With expertise in designing and developing web applications, I love creating seamless
+        <div ref={homeRef} className='flex h-screen m-auto snap-start'>
+          <div className='w-full px-3 py-10 mx-auto lg:m-auto lg:px-0 lg:w-2/3'>
+            <div className='block h-full my-auto lg:flex'>
+              <div className='w-full lg:w-1/2'>
+                <p className={`${montserrat_bold.className} text-gray-100 text-7xl lg:text-8xl h-fit my-3 lg:my-0 rounded-md`}>
+                   Hello<span className='text-secondary'>.</span></p>
+                <p className={`${lobster.className} w-full text-5xl lg:text-6xl h-fit my-3 lg:my-0 rounded-md text-gray-100`}>
+                   This is Saad</p>
+                <p className={`${poppins_normal.className} w-full text-xl lg:text-lg text-secondary my-3 lg:my-0`}>
+                  Full Stack Developer</p>
+                <p className='pr-0 my-3 text-sm text-gray-100 xl:pr-12 lg:my-0'>With expertise in designing and developing web applications, I love creating seamless
                     user experice and tackling complex challenges.</p>
-                <Button buttonText="Get In Touch" />
+                <div className='my-3 lg:my-0'>
+                  <Button buttonText="Get In Touch" />
+                </div>
+                
               </div>
               
               
-              <div className='w-1/2'>
-                <Image src = {home} className="" alt="home"/>
+              <div className="block w-full h-full my-auto lg:flex lg:w-1/2">
+                <Image src = {home} className="hidden lg:block" alt="home"/>
+                <div className="text-2xl w-full h-fit mx-auto block lg:hidden p-4 mt-6 bg-[#292929]">
+                  <div className='py-4 mx-auto max-w-fit'>
+                    <div  className='flex mb-2 max-w-fit'>
+                      <p className={` ${oswald.className}  uppercase`}>
+                        creativity is 
+                      </p>
+                      <Image className='ml-4' src={heroImage} />
+                    </div>
+                    <div  className='flex mb-2 max-w-fit'>
+                      <div className='px-3 mr-3 rounded-full bg-secondary'></div>
+                      <p className={` ${oswald.className}  uppercase`}>
+                        allowing yourself
+                      </p>
+                    </div>
+                    <div  className='flex mb-2 max-w-fit'>
+                      <p className={` ${oswald.className}  uppercase`}>
+                        to make mistakes
+                      </p>
+                      <Image className='ml-4' src={heroImage3} />
+                    </div>
+                    <div  className='flex mb-2 max-w-fit'>
+                      <p className={` ${oswald.className}  uppercase`}>
+                        art is knowing
+                      </p>
+                      <Image className='ml-4' src={heroImage2} />
+                    </div>
+                    <div  className='flex mb-2 max-w-fit'>
+                      <Image className='mr-2' src={heroImage4} />
+                      <p className={` ${oswald.className}  uppercase`}>
+                        which ones to keep
+                      </p>
+                    </div>
+                  </div>
+                  
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div ref={aboutRef} className='flex h-screen my-auto snap-start'>
-          <div className='w-2/3 m-auto'>
-            <div className='flex my-auto'>
-              <div className='flex w-1/2'>
+          <div className='w-full m-auto lg:w-2/3'>
+            <div className='block p-8 my-auto lg:flex lg:px-0'>
+              <div className='flex w-full lg:w-1/2'>
                 <div className='my-auto h-fit'>
-                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
+                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md text-gray-100`}>
                       MORE<br />ON <span className='text-secondary'>ME</span>.
                   </p>
                   <p className='pr-0 text-sm text-gray-100 xl:pr-12'>Programming isn&apos;t just a job for me, it&apos;s a true passion.
                     I constantly explore new technologies to stay ahead of the curve, whether it&apos;s diving into backend systems 
                     or crafting beautiful front-end interfaces.</p>
-
-                  <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
+                  
+                  <div className='flex my-2 lg:hidden'>
+                    <Image src={path} className="w-6 mx-auto"/>
+                  </div>
+                 
+                  <p className='pr-0 mt-0 text-sm text-gray-100 xl:mt-8 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
                     in the creativity and immersive experiences that video games offer, which drives me to create engaging and 
                     interactive digital solutions.</p>
+
+                  <div className='block w-full mt-2 lg:hidden'>
+                    <Image src = {about} alt="about" className="w-full rounded-lg" />
+                  </div>
 
                   <Button buttonText="See My Work" />
                 </div>
               </div>
-              <div className='w-1/2 px-4'>
+              <div className='hidden w-1/2 px-4 lg:block'>
                 <Image src = {about} alt="about" className="w-full rounded-lg" />
               </div>
             </div>
           </div>
         </div>
         <div ref={projectsOverviewRef} className='flex h-screen my-auto snap-start'>
-          <div className='w-2/3 m-auto'>
-            <div className='flex my-auto'>
-              <div className='flex w-1/2'>
-                <div className='my-auto h-fit'>
-                  <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
+          <div className='w-full h-full m-auto lg:w-2/3 '>
+            <div className='flex h-full'>
+              <div className='flex g:w-1/2 '>
+                <div className='p-4 mx-auto lg:m-auto h-fit'>
+                  <p className={`${montserrat_700.className} mt-8 w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
                     MY BEST<br />PROJECTS<span className='text-secondary'>.</span>
                   </p>
                   <p className='pr-0 text-sm text-gray-100 xl:pr-12'>On this website, you&apos;ll find a showcase of my best 
                     projects that demonstrate my skills, problem-solving abilities, and attention to detail tackling all things:
                   </p>
 
+                  <div className='flex w-full my-8 lg:hidden lg:block'>
+                    <AutoCarousol />
+                  </div>
+
                   <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>I invite you to explore my work and see how I can bring
                     your ideas to life. If you're looking for a dedicated professional who is passionate about delivering 
                     high-quality solutions.
                   </p>
-                  <div onClick={() => projectsRef.current.scrollIntoView({ behavior: 'smooth' })}>
+                  <div className='my-6 lg:my-0' onClick={() => projectsRef.current.scrollIntoView({ behavior: 'smooth' })}>
                     <Button buttonText="Check Out My Projects" />
                   </div>
                 </div>
               </div>
-              <div className='flex w-1/2 px-4'>
+              <div className='flex hidden w-1/2 px-4 my-auto lg:block'>
                 <AutoCarousol />
               </div>
             </div>
           </div>
         </div>
         <div ref={projectsRef} className='flex h-screen my-auto snap-start'>
-          <div className='w-2/3 m-auto'>
+          <div className='w-full m-auto lg:w-2/3'>
             <Projects />
           </div>
         </div>
