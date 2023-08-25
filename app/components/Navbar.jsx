@@ -41,7 +41,7 @@ function Navbar({activeWindow,references}) {
   
 
   return (
-    <nav className="fixed w-screen  text-3xl bg-[#1E1E1] h-fit border-secondary">
+    <nav className="fixed w-screen  text-3xl bg-background h-fit border-secondary z-20">
       <div className="w-2/3 py-4 mx-auto bg-background ">
         <div className="mx-auto max-w-7xl">
           <div className="relative flex items-center justify-between h-16">

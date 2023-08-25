@@ -74,14 +74,14 @@ function Projects() {
   return (
     <>
       <div className='flex h-screen p-8 my-auto'>
-          <div className='w-full mx-auto lg:w-5/6 '>
+          <div className='w-full m-auto lg:w-5/6'>
             <div className='block my-auto lg:flex'>
               <div className='block w-full lg:flex lg:w-1/2'>
                 <div className='my-4 h-fit'>
                   <p className={`${montserrat_700.className} w-full text-4xl rounded-md text-gray-100`}>
                        {projectArray[active].title } 
                   </p>
-                  <div className='relative flex w-full h-32 my-4 bg-gray-300 rounded-lg lg:hidden'>
+                  <div className='relative flex w-full h-32 my-8 bg-gray-300 rounded-lg lg:hidden'>
                     <Image src={projectArray[active].img} alt="about" className="mx-auto bg-gray-400 rounded-lg w-fit" />
                     <div className="absolute inset-0 flex items-center justify-between">
                       <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">
@@ -92,7 +92,7 @@ function Projects() {
                       </div>
                     </div>
                   </div>
-                  <p className='pr-0 overflow-hidden text-sm text-gray-100 h-42 xl:pr-12'>
+                  <p className='pr-0 h-auto lg:h-32 overflow-hidden text-sm text-gray-100 xl:pr-12'>
                     {projectArray[active].description} 
                   </p>
                   <div className="">
@@ -119,13 +119,13 @@ function Projects() {
                   </div>
                 </div>
               </div>
-              <div className='relative hidden p-4 mt-2 ml-4 bg-gray-100 lg:flex w-96'>
+              <div className='relative hidden p-4 mt-2 ml-4 bg-gray-100 lg:flex w-96 z-0'>
                 <Image src={projectArray[active].img} alt="about" className="object-scale-down bg-gray-400 rounded-lg" />
                 <div className="absolute inset-0 flex items-center justify-between">
-                  <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">
+                  <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 hover:bg-secondary">
                     <Image src={carouselNext} alt="next" className="mx-auto rotate-[180deg] rounded-full w-4" />
                   </div>
-                  <div onClick={() => handleProjectChange("positive")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary">
+                  <div onClick={() => handleProjectChange("positive")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 hover:bg-secondary">
                     <Image src={carouselNext} alt="next" className="mx-auto rotate-[0deg] rounded-full w-4" />
                   </div>
                 </div>
