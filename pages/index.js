@@ -80,7 +80,6 @@ const Index = () => {
     <div className='hidden lg:block'>
       <Navbar references={scrollReferences} activeWindow={activeWindow} />
     </div>
-    
 
 
     <div className='w-full'>
@@ -88,7 +87,6 @@ const Index = () => {
         <div ref={homeRef} className='flex h-screen m-auto snap-start'>
           <div className='flex w-full px-3 py-10 mx-auto lg:m-auto lg:px-0 lg:w-2/3'>
             <div className='block lg:flex h-fit my-auto'>
-               
                 <div className='w-full lg:w-1/2 '>
                   <p className={`${montserrat_bold.className} text-gray-100 text-7xl lg:text-8xl h-fit my-3 lg:my-0 rounded-md`}>
                     Hello<span className='text-secondary'>.</span></p>
@@ -101,7 +99,6 @@ const Index = () => {
                   <div className='my-8 lg:my-0'>
                     <Button buttonText="Get In Touch" />
                   </div>
-                  
                 </div>
                 <div className="block w-full lg:my-auto lg:flex lg:w-1/2 h-fit ">
                   <Image src = {home} className="hidden lg:block" alt="home"/>
@@ -109,7 +106,7 @@ const Index = () => {
                     <div className='py-4 mx-auto max-w-fit'>
                       <div  className='flex mb-2 max-w-fit'>
                         <p className={` ${oswald.className}  uppercase`}>
-                          creativity is 
+                          creativity is
                         </p>
                         <Image className='ml-4' alt="heroImage" src={heroImage} />
                       </div>
@@ -137,11 +134,9 @@ const Index = () => {
                           which ones to keep
                         </p>
                       </div>
-                    </div> 
+                    </div>
                   </div>
                 </div>
-               
-                
             </div>
           </div>
         </div>
@@ -156,11 +151,11 @@ const Index = () => {
                   <p className='pr-0 text-sm text-gray-100 xl:pr-12'>Programming isn&apos;t just a job for me, it&apos;s a true passion.
                     I constantly explore new technologies to stay ahead of the curve, whether it&apos;s diving into backend systems 
                     or crafting beautiful front-end interfaces.</p>
-                  
+
                   <div className='flex my-2 lg:hidden'>
                     <Image alt="heroImage" src={path} className="w-6 mx-auto"/>
                   </div>
-                 
+
                   <p className='pr-0 mt-0 text-sm text-gray-100 xl:mt-8 xl:pr-12'>Beyond coding, I&apos;m also an avid gamer. I find inspiration 
                     in the creativity and immersive experiences that video games offer, which drives me to create engaging and 
                     interactive digital solutions.</p>
