@@ -102,7 +102,7 @@ const Index = () => {
                 </div>
                 <div className="block w-full lg:my-auto lg:flex lg:w-1/2 h-fit ">
                   <Image src = {home} className="hidden lg:block" alt="home"/>
-                  <div className="text-2xl w-full h-fit mx-auto block lg:hidden p-4 mt-6 bg-[#292929]">
+                  <div className="text-2xl w-full h-fit mx-auto block lg:hidden p-4 mt-6 bg-[#292929] text-white">
                     <div className='py-4 mx-auto max-w-fit'>
                       <div  className='flex mb-2 max-w-fit'>
                         <p className={` ${oswald.className}  uppercase`}>
