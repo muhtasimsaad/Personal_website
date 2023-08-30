@@ -61,7 +61,7 @@ function Projects() {
       description: "Introducing my advanced Sudoku solver! This powerful tool adeptly cracks any Sudoku puzzle you feed it." +
        "Simply input your puzzle, and watch as the solver employs smart algorithms to swiftly unveil the solution. Say goodbye" +
        " to puzzling frustrations and hello to solved Sudokus, thanks to this efficient solver.",
-      category:"Professional Project",
+      category:"Personal Project",
       backend:"Node.js, Google Cloud",
       frontend:"Next.js, Tailwind CSS",
       url:"https://muhtasimsaad.online/sudoku",
@@ -71,6 +71,9 @@ function Projects() {
     
   ];
 
+  const handleVisit = (key) => {
+    window.open(key, '_blank');
+  }
 
   return (
     <>
@@ -94,29 +97,26 @@ function Projects() {
                         </div>
                       </div>
                     </div>
-                    <p className='pr-0 h-auto lg:h-32 overflow-hidden text-sm text-gray-100 xl:pr-12'>
-                      {projectArray[active].description} 
+                    <p className='mt-0 lg:mt-4 pr-0 h-auto lg:h-40 overflow-hidden text-sm lg:text-lg text-gray-100 xl:pr-12'>
+                      {projectArray[active].description}
                     </p>
                     <div className="">
                       <div className="flex mt-6">
-                        <p className="mr-3 text-lg text-secondary">Category:</p>
-                        <p className="my-auto text-gray-100 text-md h-fit">{projectArray[active].category}</p>
+                        <p className="mr-3 text-lg text-secondary">Category: <span className="text-gray-100">{projectArray[active].category}</span></p>
                       </div>
                       <div className="flex mt-6">
                         <p className="mr-3 text-lg text-secondary">Frontend: <span className="text-gray-100">{projectArray[active].frontend}</span></p>
-                           
                       </div>
                       <div className="flex mt-6">
                         <p className="mr-3 text-lg text-secondary">Backend: <span className="text-gray-100">{projectArray[active].backend}</span></p>
                       </div>
-                      <div className="mt-6">
+                      <div className="mt-6" onClick={() => handleVisit(projectArray[active].url)}>
                         <Button buttonText={`Visit ${projectArray[active].title}`} />
                       </div>
-                      
                     </div>
                   </div>
                 </div>
-                <div className='relative hidden p-4 mt-2 ml-4 bg-gray-400 rounded-md lg:flex w-96 z-30'>
+                <div className='relative hidden p-4 mt-2 ml-4 bg-gray-400 rounded-md lg:flex w-96 z-0'>
                   <Image src={projectArray[active].img} alt="about" className="object-scale-down bg-gray-400 rounded-lg" />
                   <div className="absolute inset-0 flex items-center justify-between">
                     <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary/[.2] hover:bg-secondary">
@@ -128,7 +128,6 @@ function Projects() {
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
       </div>
