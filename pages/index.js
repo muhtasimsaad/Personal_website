@@ -11,6 +11,7 @@ import home from '../app/assets/images/home.png';
 import about from '../app/assets/images/about.png';
 import Button from '@/app/components/Button';
 import AutoCarousol from '@/app/components/AutoCarousol';
+import Slider from '@/app/components/Slider';
 import { useState } from 'react';
 import Contact from '@/app/components/Contact';
 import { Oswald } from 'next/font/google';
@@ -79,6 +80,7 @@ const Index = () => {
 
     <div className='hidden lg:block'>
       <Navbar references={scrollReferences} activeWindow={activeWindow} />
+      
     </div>
 
 
@@ -174,34 +176,41 @@ const Index = () => {
           </div>
         </div>
         <div ref={projectsOverviewRef} className='flex h-screen my-auto snap-start'>
-          <div className='w-full h-full m-auto lg:w-2/3 '>
-            <div className='flex h-full'>
-              <div className='flex g:w-1/2 '>
-                <div className='p-4 mx-auto lg:m-auto h-fit'>
-                  <p className={`${montserrat_700.className} mt-8 w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
-                    MY BEST<br />PROJECTS<span className='text-secondary'>.</span>
-                  </p>
-                  <p className='pr-0 text-sm text-gray-100 xl:pr-12'>On this website, you&apos;ll find a showcase of my best 
-                    projects that demonstrate my skills, problem-solving abilities, and attention to detail tackling all things:
-                  </p>
+          <div className='flex w-full h-full m-auto lg:w-2/3 '>
+            <div className='h-fit my-auto'>
+              <div className='flex'>
+                <div className='flex g:w-1/2 '>
+                  <div className='p-4 mx-auto lg:m-auto h-fit'>
+                    <p className={`${montserrat_700.className} mt-8 w-full text-4xl h-fit my-auto rounded-md py-2 text-gray-100`}>
+                      MY BEST<br />PROJECTS<span className='text-secondary'>.</span>
+                    </p>
+                    <p className='pr-0 text-sm text-gray-100 xl:pr-12'>On this website, you&apos;ll find a showcase of my best 
+                      projects that demonstrate my skills, problem-solving abilities, and attention to detail tackling all things:
+                    </p>
 
-                  <div className='flex w-full my-8 lg:hidden lg:block'>
-                    <AutoCarousol />
-                  </div>
+                    <div className='flex w-full my-8 lg:hidden lg:block'>
+                      <AutoCarousol />
+                    </div>
 
-                  <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>I invite you to explore my work and see how I can bring
-                    your ideas to life. If you&apos;re looking for a dedicated professional who is passionate about delivering 
-                    high-quality solutions.
-                  </p>
-                  <div className='my-6 lg:my-0' onClick={() => projectsRef.current.scrollIntoView({ behavior: 'smooth' })}>
-                    <Button buttonText="Check Out My Projects" />
+                    <p className='pr-0 mt-8 text-sm text-gray-100 xl:pr-12'>I invite you to explore my work and see how I can bring
+                      your ideas to life. If you&apos;re looking for a dedicated professional who is passionate about delivering 
+                      high-quality solutions.
+                    </p>
+                    <div className='my-6 lg:my-0' onClick={() => projectsRef.current.scrollIntoView({ behavior: 'smooth' })}>
+                      <Button buttonText="Check Out My Projects" />
+                    </div>
                   </div>
                 </div>
+                <div className='flex hidden w-full px-4 my-auto lg:block'>
+                  <AutoCarousol />
+                </div>
               </div>
-              <div className='flex hidden w-full px-4 my-auto lg:block'>
-                <AutoCarousol />
+              <div className='lg:mt-12'>
+                <Slider />
               </div>
+              
             </div>
+            
           </div>
         </div>
         <div ref={projectsRef} className='flex h-screen my-auto snap-start'>

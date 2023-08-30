@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import genofax from "../assets/images/genofax.png";
 import anfactor from "../assets/images/anfactor.png";
+import sudoku from "../assets/images/sudoku.png";
 import Image from "next/image"
 import { Montserrat } from '@next/font/google';
 import Button from "./button";
-import backendImage from "../assets/images/backendTest.png";
 import carouselNext from "../assets/images/carouselNext.svg";
+
 import "./styles.css";
 
 
@@ -36,8 +37,8 @@ function Projects() {
       "You can improve customer experience using past chats. Use this knowledge to build better chatbot "+
       "stories and improve customer satisfaction.",
       category:"Professional Project",
-      backend:[backendImage,backendImage],
-      frontend:[backendImage,backendImage],
+      backend:"Django, Python, PostgreSQL",
+      frontend:"Django, Tailwind CSS",
       url:"https://anfactor.com",
       img: anfactor,
     },
@@ -49,8 +50,8 @@ function Projects() {
         " Our existing medical and healthcare sector usually focuses on disease symptom management" +
         " rather than prevention and cure. Please visit genofax for more information.",
       category:"Professional Project",
-      backend:[backendImage,backendImage],
-      frontend:[backendImage,backendImage],
+      backend:"Laravel, MySQL",
+      frontend:"Next.js, Tailwind CSS",
       url:"https://genofax.com",
       img: genofax,
     },
@@ -61,10 +62,10 @@ function Projects() {
        "Simply input your puzzle, and watch as the solver employs smart algorithms to swiftly unveil the solution. Say goodbye" +
        " to puzzling frustrations and hello to solved Sudokus, thanks to this efficient solver.",
       category:"Professional Project",
-      backend:[backendImage,backendImage],
-      frontend:[backendImage,backendImage],
-      url:"https://genofax.com",
-      img: genofax,
+      backend:"Node.js, Google Cloud",
+      frontend:"Next.js, Tailwind CSS",
+      url:"https://muhtasimsaad.online/sudoku",
+      img: sudoku,
     },
     
     
@@ -102,16 +103,11 @@ function Projects() {
                         <p className="my-auto text-gray-100 text-md h-fit">{projectArray[active].category}</p>
                       </div>
                       <div className="flex mt-6">
-                        <p className="mr-3 text-lg text-secondary">Frontend:</p>
-                          {projectArray[active].frontend.map((image, index) => (
-                            <Image key={index} src={image} alt={`Image ${index}`} className="mr-2" />
-                          ))}
+                        <p className="mr-3 text-lg text-secondary">Frontend: <span className="text-gray-100">{projectArray[active].frontend}</span></p>
+                           
                       </div>
                       <div className="flex mt-6">
-                        <p className="mr-3 text-lg text-secondary">Backend:</p>
-                          {projectArray[active].backend.map((image, index) => (
-                            <Image key={index} src={image} alt={`Image ${index}`} className="mr-2"/>
-                          ))}
+                        <p className="mr-3 text-lg text-secondary">Backend: <span className="text-gray-100">{projectArray[active].backend}</span></p>
                       </div>
                       <div className="mt-6">
                         <Button buttonText={`Visit ${projectArray[active].title}`} />
@@ -120,13 +116,13 @@ function Projects() {
                     </div>
                   </div>
                 </div>
-                <div className='relative hidden p-4 mt-2 ml-4 bg-gray-400 rounded-md lg:flex w-96 z-0'>
+                <div className='relative hidden p-4 mt-2 ml-4 bg-gray-400 rounded-md lg:flex w-96 z-30'>
                   <Image src={projectArray[active].img} alt="about" className="object-scale-down bg-gray-400 rounded-lg" />
                   <div className="absolute inset-0 flex items-center justify-between">
-                    <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 hover:bg-secondary">
+                    <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary/[.2] hover:bg-secondary">
                       <Image src={carouselNext} alt="next" className="mx-auto rotate-[180deg] rounded-full w-4" />
                     </div>
-                    <div onClick={() => handleProjectChange("positive")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 hover:bg-secondary">
+                    <div onClick={() => handleProjectChange("positive")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary/[.2] hover:bg-secondary">
                       <Image src={carouselNext} alt="next" className="mx-auto rotate-[0deg] rounded-full w-4" />
                     </div>
                   </div>
