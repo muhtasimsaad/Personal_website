@@ -88,7 +88,7 @@ const Index = () => {
       <div className='h-screen overflow-auto snap-mandatory snap-y' onScroll={handleScroll}>
         <div ref={homeRef} className='flex h-screen m-auto snap-start'>
           <div className='flex w-full px-3 py-10 mx-auto lg:m-auto lg:px-0 lg:w-2/3'>
-            <div className='block lg:flex h-fit my-auto'>
+            <div className='block lg:flex h-fit m-auto'>
                 <div className='w-full lg:w-1/2 '>
                   <p className={`${montserrat_bold.className} text-gray-100 text-7xl lg:text-8xl h-fit my-3 lg:my-0 rounded-md`}>
                     Hello<span className='text-secondary'>.</span></p>
