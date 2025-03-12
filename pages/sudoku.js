@@ -13,6 +13,7 @@ import difficultys from '../app/assets/images/difficulty.svg';
 import cross from "../app/assets/images/close.svg";
 import information from "../app/assets/images/info.svg";
 import Link from 'next/link';
+import axios from "axios";
 // import { generatePuzzle2 } from '@/functions';
 // import { solveSudoku } from '@/functions';
 import { generator, solvePuzzle } from '@/functions/solver';
@@ -127,10 +128,32 @@ const Sudoku = () => {
   }
 
   const generatePuzzle = () => {
+        sendEmail();
         const data = generator();
         resetBoard();
         setmainArray(data.puzzle);
   }
+
+  const [emailData, setEmailData] = useState({
+    to: "muhtasimsaad@gmail.com",
+    subject: "test",
+    message: "test",
+});
+
+const sendEmail = async () => {
+    try {
+        const response = await fetch("/api/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(emailData),
+        });
+
+        const result = await response.json();
+        alert(result.message);
+    } catch (error) {
+        alert("Error sending email: " + error.message);
+    }
+};
 
   const setInfoModal = (key) => {
     setInfo(key);
