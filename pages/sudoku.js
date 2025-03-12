@@ -239,7 +239,7 @@ const Sudoku = () => {
             <div className='flex lg:mx-0 min-w-full'>
               <div className='text-lg lg:text-3xl text-white pt-10 mb-4'>
                 <h1 className={montserrat_bold.className}>Sudoku Solver</h1>
-                <p className='text-xs lg:text-sm'>Made By Yours Truly</p>
+                <p className='text-xs lg:text-sm'>Made By Yours_Truly</p>
               </div>
               <div className='ml-auto text-lg lg:text-3xl text-white pt-10 mb-4 justify-end'>
                 <Link className="flex" href="/">
