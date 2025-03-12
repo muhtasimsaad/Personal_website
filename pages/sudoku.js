@@ -13,7 +13,7 @@ import difficultys from '../app/assets/images/difficulty.svg';
 import cross from "../app/assets/images/close.svg";
 import information from "../app/assets/images/info.svg";
 import Link from 'next/link';
-import axios from "axios";
+import { Resend } from 'resend';
 // import { generatePuzzle2 } from '@/functions';
 // import { solveSudoku } from '@/functions';
 import { generator, solvePuzzle } from '@/functions/solver';
@@ -37,7 +37,7 @@ const Sudoku = () => {
   const [nodesTraversed,setnodesTraversed] = useState();
   const [timeRequired,settimeRequired] = useState();
   const [difficulty,setDifficulty] = useState();
-
+  const resend = new Resend('re_YV1hZbS4_4BG7irjqNoEMRpDZ1LgBM3U1');
   // States
   const [solved,setSolved] =useState(false);
   const [info,setInfo] =useState(false);
@@ -134,25 +134,19 @@ const Sudoku = () => {
         setmainArray(data.puzzle);
   }
 
-  const [emailData, setEmailData] = useState({
-    to: "muhtasimsaad@gmail.com",
-    subject: "test",
-    message: "test",
-});
+const sendEmail = () => {
 
-const sendEmail = async () => {
-    try {
-        const response = await fetch("/api/send-email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(emailData),
-        });
-
-        const result = await response.json();
-        alert(result.message);
-    } catch (error) {
-        alert("Error sending email: " + error.message);
-    }
+  try{
+      resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'muhtasimsaad@gmail.com',
+      subject: 'Hello World',
+      html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+    });
+  }
+  catch(error){
+    console.log(er);
+  }
 };
 
   const setInfoModal = (key) => {
