@@ -4,7 +4,7 @@ import anfactor from "../assets/images/anfactor.png";
 import sudoku from "../assets/images/sudoku.png";
 import Image from "next/image"
 import { Montserrat } from '@next/font/google';
-import Button from "./Button";
+import Button from "./Button";d
 import carouselNext from "../assets/images/carouselNext.svg";
 
 import "./styles.css";
