@@ -13,11 +13,12 @@ import difficultys from '../app/assets/images/difficulty.svg';
 import cross from "../app/assets/images/close.svg";
 import information from "../app/assets/images/info.svg";
 import Link from 'next/link';
-import { Resend } from 'resend';
+import { sendEmail } from '@/functions/solver';
+
 // import { generatePuzzle2 } from '@/functions';
 // import { solveSudoku } from '@/functions';
 import { generator, solvePuzzle } from '@/functions/solver';
-
+import { validatePuzzle } from '@/functions/solver';
 
 //  fonts
 const montserrat_bold = Montserrat({
@@ -37,7 +38,7 @@ const Sudoku = () => {
   const [nodesTraversed,setnodesTraversed] = useState();
   const [timeRequired,settimeRequired] = useState();
   const [difficulty,setDifficulty] = useState();
-  const resend = new Resend('re_YV1hZbS4_4BG7irjqNoEMRpDZ1LgBM3U1');
+  const [status,setStatus] = useState('Unsolved');
   // States
   const [solved,setSolved] =useState(false);
   const [info,setInfo] =useState(false);
@@ -45,72 +46,77 @@ const Sudoku = () => {
   
   const [question,setQuestion] = useState();
   const [logicalArray,setlogicalArray] = useState();
-  const [mainArray, setmainArray] = useState([
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '',''],
-    ['', '','', '','', '','', '','']
-   ]);
+  const [mainArray, setMainArray] = useState(Array(9).fill(Array(9).fill('')));
+  const [errorArray, setErrorArray] = useState(Array(9).fill(Array(9).fill(false)));
+
 
 
   const sendDataToAPI = async () => {
     if(!solved){
-      // response = solvePuzzle(mainArray.map(row => [...row]));
+      setErrorArray(Array(9).fill(Array(9).fill(false)));
       const puzzle = mainArray.map(row => [...row]);
       const qstn = puzzle.map(row => [...row]);
+      const errors = validatePuzzle(qstn);
+
+      //checking if puzzle has minimum inputs
+
+
+
+      //checking if puzzle is invalid
+      if (errors.length > 0) {
+
+        const tempErrorArray = Array(9).fill(null).map(() => Array(9).fill(false));
+
+        errors.forEach(element => {
+          const [row, col] = element.toString().split('-').map(Number);
+          tempErrorArray[row][col] = true;
+          console.log(tempErrorArray);
+        });
+
+        setStatus('Error Found');
+        setErrorArray(tempErrorArray);
+        return;
+      } 
+
+       
+
       setQuestion(qstn);
       const response = solvePuzzle(puzzle);
-      setmainArray(response[0]);
-     
-      setnodesTraversed(response[4]);
-      setLogicallySolved(response[2]);
-      setsolvedUsingBFS(response[3]);
-      settimeRequired((parseFloat(response[5])).toFixed(1));
-      setlogicalArray(response[1]);
+      if(response){
+          setMainArray(response[0]);
       
-      const difficult_level = response[6];
-      if (difficult_level >= 0.9) {
-        setDifficulty("Extreme");
-      } else if (difficult_level >= 0.66) {
-        setDifficulty("Hard");
-      } else if (difficult_level >= 0.33) {
-        setDifficulty("Medium");
-      } else {
-        setDifficulty("Easy");
+          setnodesTraversed(response[4]);
+          setLogicallySolved(response[2]);
+          setsolvedUsingBFS(response[3]);
+          settimeRequired((parseFloat(response[5])).toFixed(1));
+          setlogicalArray(response[1]);
+          
+          const difficult_level = response[6];
+          if (difficult_level >= 0.9) {
+            setDifficulty("Extreme");
+          } else if (difficult_level >= 0.66) {
+            setDifficulty("Hard");
+          } else if (difficult_level >= 0.33) {
+            setDifficulty("Medium");
+          } else {
+            setDifficulty("Easy");
+          }
+          setSolved(true);
+          setStatus('Solved');
+          sendEmail('A user solved a puzzle');
+        }
+        else{
+          // setMainArray(Array(9).fill(null).map(() => Array(9).fill('')));
+          // resetBoard();
+          setStatus('Failed to solve');
+          sendEmail('A user failed to a puzzle');
+          // console.log('failed to solve');
+        }
       }
-      setSolved(true);
-    }
-    else{
-      setmainArray([
-        // ['6', '','', '8','', '','2', '7',''],
-        // ['', '3','', '','', '','9', '4',''],
-        // ['', '','', '','', '','6', '3',''],
-        // ['4', '','6', '','7', '','', '','3'],
-        // ['2', '1','8', '','', '9','7', '','4'],
-        // ['7', '','', '2','', '8','', '6',''],
-        // ['', '','2', '4','5', '' ,'', '',''],
-        // ['1', '','', '','3', ''  ,'4', '9',''],
-        // ['', '','4', '','', ''  ,'5', '1','6'],
-  
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '',''],
-        ['', '','', '','', '','', '','']
-      ]);
-
-        resetBoard();
-
-    }
+      else{
+        console.log('error');
+      }
+      
       
   };
 
@@ -125,29 +131,15 @@ const Sudoku = () => {
     setnodesTraversed();
     setsolvedUsingBFS();
     setLogicallySolved();
+    setErrorArray(Array(9).fill(Array(9).fill(false)));
   }
 
   const generatePuzzle = () => {
-        sendEmail();
+        sendEmail('A user generated a puzzle');
         const data = generator();
         resetBoard();
-        setmainArray(data.puzzle);
+        setMainArray(data.puzzle);
   }
-
-const sendEmail = () => {
-
-  try{
-      resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'muhtasimsaad@gmail.com',
-      subject: 'Hello World',
-      html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
-    });
-  }
-  catch(error){
-    console.log(er);
-  }
-};
 
   const setInfoModal = (key) => {
     setInfo(key);
@@ -160,26 +152,31 @@ const sendEmail = () => {
       newValue = '';
     }
 
-    setmainArray((prevState) => {
+    setMainArray((prevState) => {
       const newState = [...prevState]; // Create a copy of the 2D array
       newState[rowIndex][columnIndex] = newValue; // Update the specified element
       return newState; // Return the updated array
     });
   };
 
- 
-
-
   const computeInputColor = (row,column) => {
     // Your logic to compute the background color dynamically
      
     if(!solved){
+
+
+      if(errorArray[row][column]){
+        return "#e3381c";
+      }
+
       if(mainArray[row][column] == ""){
         return '';
       }
       return '#444444';
     }
     else{
+      
+
       if(question[row][column].length == 1 ){
         return "#444444";
       }
@@ -305,6 +302,7 @@ const sendEmail = () => {
                         )}
                       </div>
                     </div>
+ 
 
                   </div>
                   
@@ -316,12 +314,12 @@ const sendEmail = () => {
                   border border-white/[.3] to-none rounded-xl px-8 w-full min-w-fit ml-0 xl:ml-12 mt-12 xl:mt-0'>
                   
                 {/* Dashboard */}
-                <div className='w-full mx-auto'>
+                <div className='w-full mx-auto '>
                   <p className='text-white text-xl font-bold mt-12'>Dashboard</p>
-                  <p className='text-white text-sm mt-2'>Status: 
-                    { solved &&<span className='text-[#14FF00] ml-2'>Solved</span>}
-                    {!solved &&<span className='text-yellow-300 ml-2'>Unsolved</span>}
-                  </p>
+                  <div className='flex-row flex gap-x-4'>
+                    <p className='text-white text-sm '>Status:</p>
+                    <p className={` ${status=='Unsolved'? 'text-yellow-300':''} ${status=='Solved'? 'text-green-300':''} ${(status=='Error Found' || status == 'Failed to solve')? 'text-red-500':''}`}>{status}</p>
+                  </div>
                 </div>
                   
                 <div>
@@ -365,7 +363,7 @@ const sendEmail = () => {
                     <div className="flex justify-between items-center w-full">
                       <p className='text-sm text-white'>Time Taken:</p>
                       {solved && <p className='text-3xl text-white font-bold ml-2'>{timeRequired}ms</p>}
-                      {!solved && <p className='text-3xl text-white font-bold'>?</p>}
+                      {!solved && <p className='text-3xl text-white font-bold mx-4'>?</p>}
                     </div>
                   </div>
 

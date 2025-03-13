@@ -12,7 +12,7 @@ import about from '../app/assets/images/about.png';
 import Button from '@/app/components/Button';
 import AutoCarousol from '@/app/components/AutoCarousol';
 import Slider from '@/app/components/Slider';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Contact from '@/app/components/Contact';
 import { Oswald } from 'next/font/google';
 import heroImage from "../app/assets/images/heroImage.png";
@@ -20,7 +20,7 @@ import heroImage2 from "../app/assets/images/heroImage2.png";
 import heroImage3 from "../app/assets/images/heroImage3.png";
 import heroImage4 from "../app/assets/images/heroImage4.png";
 import path from "../app/assets/images/path.png";
-
+import { sendEmail } from '@/functions/solver';
 
 const montserrat_bold = Montserrat({
   subsets:['latin'],
@@ -67,14 +67,19 @@ const Index = () => {
   const scrollReferences = [homeRef,aboutRef,projectsOverviewRef,projectsRef,contactRef];
   var [activeWindow, setActiveWindow] = useState(0);
 
-  const handleSubmit = () => {
-
-  }
 
   const handleScroll = (event) => {
     const scrollTop = event.target.scrollTop;
     setActiveWindow(Math.floor(scrollTop/(window.innerHeight-2)));
   };
+
+   
+  useEffect(() => {
+    sendEmail('You got a new visitor');
+  }, []);  
+  
+  
+   
 
   return <div className='bg-background'>
 

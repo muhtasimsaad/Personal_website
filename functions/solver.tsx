@@ -9,6 +9,29 @@
 // global.response = "";
 
 
+  export const sendEmail = async(text:String ) => {
+
+    console.log(process.env.REACT_APP_API_BASE_URL);
+    const response = await fetch( "/api/email", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+           message : text
+        })
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Error sending email: ${errorText}`);
+        return;
+    }
+
+    const result = await response.json();
+    console.log("Email sent successfully:", result);
+  }
+
 export const generator = () => {
     const puzzles = [
         [
@@ -66,17 +89,7 @@ export const generator = () => {
             ["", "4", "", "", "5", "", "", "3", "6"],
             ["7", "", "3", "", "1", "8", "", "", ""],
           ],
-          [
-            ["", "", "", "7", "", "6", "", "9", "3"],
-            ["5", "", "9", "", "", "", "", "", ""],
-            ["", "8", "", "", "5", "9", "", "", ""],
-            ["", "", "", "5", "3", "", "", "8", ""],
-            ["", "4", "", "", "6", "", "", "7", ""],
-            ["", "6", "", "", "1", "2", "", "", ""],
-            ["", "", "", "6", "8", "", "", "4", ""],
-            ["", "", "", "", "", "", "2", "", "1"],
-            ["3", "9", "", "4", "", "7", "", "", ""],
-          ],
+          
           [
             ["", "1", "", "", "2", "8", "", "", "6"],
             ["", "", "9", "", "", "", "8", "", ""],
@@ -129,8 +142,14 @@ function solveSudoku(draft : string[][]) {
     if (!checkSolved(draft)) {
       [draft,nodes] = solveByGuessing(draft);
     }
-    const finish_time = performance.now();
-    return [draft, logically_solved_puzzle, logically_solved_cells, NumberOfCellsSolvedByBFS(logically_solved_puzzle) ,nodes, (finish_time - start_time), difficulty];
+    if(draft && checkSolutionIsCorrect(draft)){
+        const finish_time = performance.now();
+        return [draft, logically_solved_puzzle, logically_solved_cells, NumberOfCellsSolvedByBFS(logically_solved_puzzle) ,nodes, (finish_time - start_time), difficulty];
+    }
+    else{
+        return null;
+    }
+     
 }
 function NumberOfCellsSolvedByBFS (logically_solved_array:string[][]) : number{
     let counter = 0;
@@ -410,6 +429,9 @@ function solveByGuessing(draft : string[][]) : [string[][],number]{
         if (!checkSolved(solvedElement)) {
             trashStack.push(solvedElement);
             const [row, column] = findSmallestString(solvedElement);
+            if(row == -1 || column == -1){
+                return [null,null];
+            }
             const allPossibilities = Array.from(solvedElement[row][column]);
             for (const eachPossibility of allPossibilities) {
                 const doppleGangerArray = solvedElement.map(row => [...row]);
@@ -519,4 +541,58 @@ function checkSolutionIsCorrect(mainArray:String [][]) : boolean {
         }
     }
     return true;
+}
+
+export const validatePuzzle = (puzzle: String [][]) : string[] => {
+
+    let result = [];
+    for (let row = 0; row < 9; row++) {
+        for (let column = 0; column < 9; column++) {
+            if(puzzle[row][column] === ''){continue;}
+            // Checking row
+            for (let c = 0; c < 9; c++) {
+                if (puzzle[row][c] == puzzle[row][column] && c != column) {
+                    result.push(row+'-'+c);
+                }
+            }
+  
+            // Checking column
+            for (let r = 0; r < 9; r++) {
+                if (puzzle[r][column] == puzzle[row][column] && r != row) {
+                    result.push(r+'-'+column);
+                }
+            }
+  
+            // Checking grid
+            let rows = [];
+            let columns = [];
+    
+            if (row < 3) {
+                rows = [0, 1, 2];
+            } else if (row < 6) {
+                rows = [3, 4, 5];
+            } else {
+                rows = [6, 7, 8];
+            }
+  
+            if (column < 3) {
+                columns = [0, 1, 2];
+            } else if (column < 6) {
+                columns = [3, 4, 5];
+            } else {
+                columns = [6, 7, 8];
+            }
+  
+            for (const r of rows) {
+                for (const c of columns) {
+                    if (puzzle[r][c] === puzzle[row][column] &&
+                        (c !== column || r !== row)) {
+                            result.push(r+'-'+c);
+                    }
+                }
+            }
+        }
+    }
+
+    return result;
 }

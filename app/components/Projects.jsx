@@ -64,7 +64,7 @@ function Projects() {
       category:"Personal Project",
       backend:"Node.js, Google Cloud",
       frontend:"Next.js, Tailwind CSS",
-      url:"https://muhtasimsaad.online/sudoku",
+      url:"/sudoku",
       img: sudoku,
     },
     

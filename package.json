@@ -53,6 +53,7 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@google-cloud/functions-framework": "^3.3.0"
+    "@google-cloud/functions-framework": "^3.3.0",
+    "dotenv": "^16.4.7"
   }
 }
