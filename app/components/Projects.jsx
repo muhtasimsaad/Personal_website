@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import genofax from "../assets/images/genofax.png";
 import anfactor from "../assets/images/anfactor.png";
+import logo from "../assets/images/logo.png";
 import sudoku from "../assets/images/sudoku.png";
 import Image from "next/image"
 import { Montserrat } from '@next/font/google';
@@ -67,6 +68,17 @@ function Projects() {
       url:"/sudoku",
       img: sudoku,
     },
+    {
+      id: 3,
+      title: "ohFridge !!",
+      description: "ohFridge is your ultimate inventory management app designed to keep track of your fridge and pantry effortlessly."+
+        "With built-in quantity control and family sharing you can easily manipulate items and monitor stock levels in real-time.",
+      category:"Personal Project",
+      backend:"Laravel, AWS, vercel",
+      frontend:"react native",
+      url:"/ohFridge",
+      img: logo,
+    },
     
     
   ];
@@ -97,7 +109,7 @@ function Projects() {
                         </div>
                       </div>
                     </div>
-                    <p className='mt-0 lg:mt-4 pr-0 h-auto lg:h-40 overflow-hidden text-sm lg:text-lg text-gray-100 xl:pr-12'>
+                    <p className='mt-0 lg:mt-4 pr-0 h-auto lg:h-42 overflow-hidden text-sm lg:text-lg text-gray-100 xl:pr-12'>
                       {projectArray[active].description}
                     </p>
                     <div className="">
@@ -117,7 +129,7 @@ function Projects() {
                   </div>
                 </div>
                 <div className='relative hidden p-4 mt-2 ml-4 bg-gray-400 rounded-md lg:flex w-96 z-0'>
-                  <Image src={projectArray[active].img} alt="about" className="object-scale-down bg-gray-400 rounded-lg" />
+                  <Image src={projectArray[active].img} alt="about" className="object-scale-down bg-gray-400 rounded-lg max-h-96 my-auto" />
                   <div className="absolute inset-0 flex items-center justify-between">
                     <div onClick={() => handleProjectChange("negative")} className="flex px-3 py-2 mx-1 border-2 border-transparent rounded-full cursor-pointer hover:border-gray-900 bg-secondary/[.2] hover:bg-secondary">
                       <Image src={carouselNext} alt="next" className="mx-auto rotate-[180deg] rounded-full w-4" />

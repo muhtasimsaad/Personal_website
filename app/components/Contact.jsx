@@ -9,6 +9,7 @@ import Button from "../components/Button"
 import emailjs from '@emailjs/browser';
 import AlertMessage from "./AlertMessage";
 import Footer from "./Footer";
+import { sendEmail } from "@/functions/solver";
 
 
 
@@ -26,22 +27,23 @@ const Contact = () => {
   const [email,setEmail] = useState('');
   const [name,setName] = useState('');
   const [message,setMessage] = useState('');
-  const [showAlert,setshowAlert] = useState(false);
-  const [showAlertType,setshowAlertType] = useState('');
+  const [showAlert,setShowAlert] = useState(false);
+  const [showAlertType,setShowAlertType] = useState('');
   const form = useRef();
 
   const handleSubmit = () => {
     // e.preventDefault();
-    emailjs.sendForm('service_2vi4rhx', 'template_rsnprx4', form.current, 'W0TOAJvKckCIRxOkN')
-    .then((result) => {
-        if(result.text == "OK"){
-          setshowAlertType("green");
-          setshowAlert(true);
-        }
-    }, (error) => {
-      setshowAlertType("red");
-      setshowAlert(true);
-    });
+    const result = 'Someone wanted to keep in touch. Name: '+name+' ,Email: '+email+' , message : '+message;
+    try{
+      sendEmail(result);
+      setShowAlertType('green');
+      setShowAlert(true);
+    }
+    catch(exception){
+      setShowAlertType('red');
+      setShowAlert(true);
+    }
+    
   };
 
   const handleChange = (event) => {
