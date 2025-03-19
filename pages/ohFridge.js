@@ -1,19 +1,8 @@
 import React from 'react';
-import { useState } from "react";
-import Image from 'next/image';
 import background from '../app/assets/images/background.png'
 import '../app/globals.css'
 import { Montserrat } from '@next/font/google';
-import table from '../app/assets/images/Table.svg';
-import logically_solved from '../app/assets/images/logcally_solved.svg';
-import solved_using_BFS from '../app/assets/images/solved_using_bfs.svg';
-import nodes from '../app/assets/images/nodes.svg';
-import time_taken from '../app/assets/images/Time.svg';
-import difficultys from '../app/assets/images/difficulty.svg';
-import cross from "../app/assets/images/close.svg";
-import information from "../app/assets/images/info.svg";
 import Link from 'next/link';
-import { sendEmail } from '@/functions/solver';
 
 // import { generatePuzzle2 } from '@/functions';
 // import { solveSudoku } from '@/functions';
@@ -32,100 +21,9 @@ const montserrat_normal = Montserrat({
 
 
 const ohFridge = () => {  
-
-  const [logicallySolved,setLogicallySolved] = useState();
-  const [solvedUsingBFS,setsolvedUsingBFS] = useState();
-  const [nodesTraversed,setnodesTraversed] = useState();
-  const [timeRequired,settimeRequired] = useState();
-  const [difficulty,setDifficulty] = useState();
-  const [status,setStatus] = useState('Unsolved');
   // States
-  const [solved,setSolved] =useState(false);
-  const [info,setInfo] =useState(false);
-  const [loading,setLoading] =useState(false);
-  
-  const [question,setQuestion] = useState();
-  const [logicalArray,setlogicalArray] = useState();
-  const [mainArray, setMainArray] = useState(Array(9).fill(Array(9).fill('')));
-  const [errorArray, setErrorArray] = useState(Array(9).fill(Array(9).fill(false)));
-
-
-
-  const sendDataToAPI = async () => {
-    if(!solved){
-      setErrorArray(Array(9).fill(Array(9).fill(false)));
-      const puzzle = mainArray.map(row => [...row]);
-      const qstn = puzzle.map(row => [...row]);
-      const errors = validatePuzzle(qstn);
-
-      //checking if puzzle has minimum inputs
-
-
-
-      //checking if puzzle is invalid
-      if (errors.length > 0) {
-
-        const tempErrorArray = Array(9).fill(null).map(() => Array(9).fill(false));
-
-        errors.forEach(element => {
-          const [row, col] = element.toString().split('-').map(Number);
-          tempErrorArray[row][col] = true;
-          console.log(tempErrorArray);
-        });
-
-        setStatus('Error Found');
-        setErrorArray(tempErrorArray);
-        return;
-      } 
-
-       
-
-      setQuestion(qstn);
-      const response = solvePuzzle(puzzle);
-      if(response){
-          setMainArray(response[0]);
-      
-          setnodesTraversed(response[4]);
-          setLogicallySolved(response[2]);
-          setsolvedUsingBFS(response[3]);
-          settimeRequired((parseFloat(response[5])).toFixed(1));
-          setlogicalArray(response[1]);
-          
-          const difficult_level = response[6];
-          if (difficult_level >= 0.9) {
-            setDifficulty("Extreme");
-          } else if (difficult_level >= 0.66) {
-            setDifficulty("Hard");
-          } else if (difficult_level >= 0.33) {
-            setDifficulty("Medium");
-          } else {
-            setDifficulty("Easy");
-          }
-          setSolved(true);
-          setStatus('Solved');
-          sendEmail('A user solved a puzzle');
-        }
-        else{
-          // setMainArray(Array(9).fill(null).map(() => Array(9).fill('')));
-          // resetBoard();
-          setStatus('Failed to solve');
-          sendEmail('A user failed to a puzzle');
-          // console.log('failed to solve');
-        }
-      }
-      else{
-        console.log('error');
-      }
-      
-      
-  };
-
- 
 
   return <div className={montserrat_normal.className}>
-
-  
-
     {/* starts with background */}
     <div style={{
         backgroundImage: `url(${background.src})`,
