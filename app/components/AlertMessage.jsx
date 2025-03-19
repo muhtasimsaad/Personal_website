@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 function AlertMessage({ type }) {
 
   return (
-    <div class={`mb-32 rounded-md p-3 w-full lg:w-1/2 z-50 flex mx-auto ${type == 'green' ? 'bg-green-100' : 'bg-red-200'}  `}>
+    <div class={`mb-16 3xl:mb-32 rounded-md p-3 w-full lg:w-1/2 z-50 flex mx-auto ${type == 'green' ? 'bg-green-100' : 'bg-red-200'}  `}>
       <div className="flex w-fit mx-auto">
         { type =="green" && <svg
             class="stroke-2 stroke-current text-green-600 h-8 w-8 mr-2 flex-shrink-0"
