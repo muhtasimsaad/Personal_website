@@ -61,7 +61,9 @@ function Navbar({activeWindow,references}) {
               </div>
               <div className="flex ml-auto">
                 <div className={`${poppins_normal.className} flex space-x-4 my-auto justify-center`}>
-                  <div onClick={() => scrollToView('contact')} className={`flex items-center px-12 py-2 text-lg transition border border-transparent rounded-md cursor-pointer text-background bg-secondary hover:border-secondary hover:bg-background hover:text-secondary ${activeWindow == 4 ? 'animate-bounce' : ''}`} aria-current="page">Contact</div>
+                  <div onClick={() => scrollToView('contact')} className={`flex items-center px-12 py-2 text-lg transition border 
+                    border-transparent rounded-md cursor-pointer text-background bg-secondary hover:border-secondary hover:bg-background 
+                    hover:text-secondary pt-2.5 ${activeWindow == 4 ? 'animate-bounce' : ''}`} aria-current="page">Contact</div>
                 </div>
               </div>
             </div>
