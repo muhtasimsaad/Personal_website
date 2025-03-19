@@ -168,24 +168,24 @@ const ohFridge = () => {
                      
                     
                     <div className=''>
-                    <p className='my-4'> ohFridge is a expo application designed for iOS, Android and web platform. It uses a Laravel backend 
+                      <p className='my-4'> ohFridge is a expo application designed for iOS, Android and web platform. It uses a Laravel backend 
                         and mySQL database in the backend for its operations. 
                         </p>
                       <p className='my-4'> ohFridge is your ultimate inventory management app designed to keep track of your fridge and pantry effortlessly. 
                         With built-in quantity control, you can easily add, update, or delete items and monitor stock levels in real-time.
-                        </p>
-                        <p className='my-4'>
+                      </p>
+                      <p className='my-4'>
                         The app features family sharing, allowing multiple members to access and manage a shared inventory seamlessly. Any changes made—whether 
                             adding groceries, updating quantities, or removing expired items—are instantly synced, ensuring everyone stays informed.
-                        </p>
-                        <p className='my-4'>
+                      </p>
+                      <p className='my-4'>
                         Stay connected with real-time updates and instant notifications whenever an item is modified. Never run out of essentials again—ohFridge helps you organize, 
                             reduce food waste, and simplify grocery shopping like never before!
-                        </p>
-                        <p className='my-4 text-red-400'>
+                      </p>
+                      <p className='my-4 text-red-400'>
                         The application is still under active developement. You can visit my github for more information from <span className=' underline text-blue-200 hover:text-blue-500'>
                             <Link href="https://github.com/muhtasimsaad/ohFridge">here</Link></span>. 
-                        </p>
+                      </p>
                     </div>
  
 

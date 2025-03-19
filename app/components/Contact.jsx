@@ -1,12 +1,10 @@
 import React from "react";
-import axios from 'axios';
 import { useState, useRef } from "react";
 import contactImage from "../assets/images/contact.png";
 import { Montserrat } from '@next/font/google';
 import Image from "next/image";
 import { Poppins } from '@next/font/google';
 import Button from "../components/Button"
-import emailjs from '@emailjs/browser';
 import AlertMessage from "./AlertMessage";
 import Footer from "./Footer";
 import { sendEmail } from "@/functions/solver";
@@ -32,7 +30,6 @@ const Contact = () => {
   const form = useRef();
 
   const handleSubmit = () => {
-    // e.preventDefault();
     const result = 'Someone wanted to keep in touch. Name: '+name+' ,Email: '+email+' , message : '+message;
     try{
       sendEmail(result);
@@ -72,7 +69,7 @@ const Contact = () => {
               <Image src = {contactImage} alt="about" className="w-full my-auto rounded-lg" />
             </div>
             <div className='flex w-full mt-6 lg:w-1/2 lg:mt-0'>
-              <form className='mx-auto lg:w-3/5 h-fit' ref={form}>
+              <div className='mx-auto lg:w-3/5 h-fit' ref={form}>
                 <p className={`${montserrat_700.className} w-full text-4xl h-fit my-auto rounded-md text-gray-100`}>
                     GET IN TOUCH
                 </p>
@@ -91,7 +88,7 @@ const Contact = () => {
                   <Button buttonText={"Send Message"} />
                 </div>
                 
-              </form>
+              </div>
 
             
             </div>
