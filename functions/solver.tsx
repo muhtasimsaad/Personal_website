@@ -1,15 +1,16 @@
-// Function 1: A simple utility function
-// global.nodesTraversed = 0;
-// global.logicallySolved = 0;
-// global.solvedUsingBFS = 0;
-// global.difficulty = 0;
-// global.logicalArray = "";
-// global.startTime = 0;
-// global.responseVariable = "";
-// global.response = "";
-
+async function getIP() {
+    try {
+      let res = await fetch("https://api64.ipify.org?format=json");
+      let data = await res.json();
+      return data.ip; // ✅ Returns the IP correctly
+    } catch (err) {
+      console.error("Error fetching IP:", err);
+      return null; // Handle errors gracefully
+    }
+  }
 
   export const sendEmail = async(text:String ) => {
+
 
     const response = await fetch( "/api/email", {
         method: "POST",
@@ -17,18 +18,18 @@
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-           message : text
+           message : text + "From IP: "+await getIP()
         })
     });
 
     if (!response.ok) {
         const errorText = await response.text();
-        console.error(`Error sending email: ${errorText}`);
+        // console.error(`Error sending email: ${errorText}`);
         return;
     }
 
     const result = await response.json();
-    console.log("Email sent successfully:", result);
+    // console.log("Email sent successfully:", result);
   }
 
 export const generator = () => {
