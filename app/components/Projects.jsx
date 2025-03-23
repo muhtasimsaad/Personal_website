@@ -7,6 +7,7 @@ import Image from "next/image"
 import { Montserrat } from '@next/font/google';
 import Button from "./Button";
 import carouselNext from "../assets/images/carouselNext.svg";
+import { sendEmail } from "@/functions/solver";
 
 import "./styles.css";
 
@@ -23,10 +24,11 @@ function Projects() {
   let [active, setActive] = useState(1);
 
   const handleProjectChange = (key) => {
+    sendEmail('Someone came to Projects');
     const act = (active+1);
     const data = (act%projectArray.length);
     setActive(data);
-    console.log(data);
+    // console.log(data);
   }
 
   const projectArray = [
